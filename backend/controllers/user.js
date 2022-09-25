@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
 
 // Controleur pour la creation du compte utilisateur
@@ -34,7 +35,7 @@ exports.login = (req, res, next) => {
                                 userId: user._id,
                                 token: jwt.sign(
                                     {userId: user._id},
-                                    'LLAATToken225873Hs7177',
+                                    process.env.token,
                                     {expiresIn: '24h'}
                                 )
                             });

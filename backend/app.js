@@ -5,13 +5,14 @@ const helmet = require('helmet');
 const mysql = require('mysql2');
 const postsRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
+require('dotenv').config();
 
 
 // Configuration de la base de données mysql
 const db = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "devmarion7169$"
+  user: process.env.userMysql,
+  password: process.env.passwordMysql
 });
 
 db.connect(function(err) {
