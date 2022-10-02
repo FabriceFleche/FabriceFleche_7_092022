@@ -5,15 +5,24 @@ exports.createPost = (req, res, next) => {
     const postObject = JSON.parse(req.body.post);
     delete postObject._id;
     delete postObject._userId;
-    const post = new Post({
+    db.query(
+      'INSERT INTO  posts(user_id, names, title, content) VALUES (?,?,?,?)',
+      [req.auth.userId, postObject._name, postObject._title, postObject._content],
+      function(err, results) {
+        console.log(err)
+        console.log(results);
+      }
+    )
+    .then(() => { res.status(201).json({message: 'Post enregistré'})})
+    .catch((error) => {res.status(400).json({ error })});
+    };  
+    /*const post = new Post({
       ...postObject,
       userId: req.auth.userId,
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     post.save()
-      .then(() => { res.status(201).json({message: 'Post enregistré'})})
-      .catch((error) => {res.status(400).json({ error })});
-  };
+*/
 
 // Controleur pour la modification d'un post  
 exports.modifyPost = (req, res, next) => {
@@ -36,36 +45,48 @@ exports.modifyPost = (req, res, next) => {
 
 // Controleur pour la suppression d'un post 
 exports.deletePost = (req, res, next) => {
-    Post.findOne({ _id: req.params.id })
+  db.query(
+    "SELECT * FROM posts WHERE user_id= ?",
+    [req.params.id],)
       .then((post) => {
         if (post.userId != req.auth.userId) {
           res.status(401).json({ message: 'Non autorisé' });
         } else {
+          db.query(
+            "DELETE FROM posts WHERE user_id= ?",
+            [req.params.id],
+          )
+          .then(() => res.status(200).json({ message: 'Post supprimé !'}))
+          .catch((error) => {res.status(401).json({ error })})
+        }
+      })  
+      .catch((error) => {res.status(400).json({ error })});
+};
+/*
           const filename = post.imageUrl.split('/images/')[1];
           fs.unlink(`images/${filename}`, () => {
             Post.deleteOne({ _id: req.params.id })
               .then(() => res.status(200).json({ message: 'Post supprimé !'}))
               .catch((error) => {res.status(401).json({ error })})
-          })
-        }
-      })  
-      .catch((error) => {res.status(400).json({ error })});
-};
+          })*/
+
 
 // Controleur pour la selection d'un post
 exports.getOnePost = (req, res, next) => {
-    Post.findOne({ _id: req.params.id })
-      .then((post) => {
-        res.status(200).json(post)
-      })
-      .catch((error) => {
-        res.status(404).json({ error })
-      });
-};
+  db.query(
+    "SELECT * FROM posts WHERE user_id= ?",
+    [req.params.id],)
+    .then((post) => {
+      res.status(200).json(post)
+    })
+    .catch((error) => {
+      res.status(404).json({ error })
+    });
+  };
 
 // Controleur pour la récupération de toute les posts
 exports.getAllPost = (req, res, next) => {
-    Post.find()
+  db.query("SELECT names,title,content FROM posts")
       .then((posts) => {
         res.status(200).json(posts)
       })

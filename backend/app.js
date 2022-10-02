@@ -12,13 +12,23 @@ require('dotenv').config();
 const db = mysql.createConnection({
   host: "localhost",
   user: process.env.userMysql,
-  password: process.env.passwordMysql
+  password: process.env.passwordMysql,
+  database:"groupomania"
 });
 
 db.connect(function(err) {
   if (err) throw err;
   console.log("Connecté à la base de données MySql");
 });
+
+/*db.query(
+  'INSERT INTO  user(email, password) VALUES (?,?)',
+  ['Fabrice', 'Test'],
+  function(err, results) {
+    console.log(err)
+    console.log(results);
+  }
+);*/
 
 // Accès au corps de la requête de Json en JS
 app.use(express.json());
