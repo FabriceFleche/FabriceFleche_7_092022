@@ -2,24 +2,11 @@ const express = require('express');
 const app = express();
 const path = require("path");
 const helmet = require('helmet');
-const mysql = require('mysql2');
+
 const postsRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
 require('dotenv').config();
 
-
-// Configuration de la base de données mysql
-const db = mysql.createConnection({
-  host: "localhost",
-  user: process.env.userMysql,
-  password: process.env.passwordMysql,
-  database:"groupomania"
-});
-
-db.connect(function(err) {
-  if (err) throw err;
-  console.log("Connecté à la base de données MySql");
-});
 
 /*db.query(
   'INSERT INTO  user(email, password) VALUES (?,?)',
@@ -45,7 +32,7 @@ app.use((req, res, next) => {
 });
 
 // Mise en place des routes
-app.use('/images', express.static(path.join(__dirname, 'images')));
+//app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/posts', postsRoutes);
 app.use('/api/auth', userRoutes);
 

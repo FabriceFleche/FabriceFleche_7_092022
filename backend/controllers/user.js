@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+const db = require("../middleware/dbConnection.js");
 require('dotenv').config();
 
 
@@ -32,15 +33,18 @@ exports.login = (req, res, next) => {
         "SELECT password FROM user WHERE email= ?",
         [email],);
     if (passwordSql != null) {
+        const userIdSql = db.query(
+            "SELECT user_id FROM user WHERE email= ?",
+            [email]);
         bcrypt.compare(req.body.password, passwordSql)
         .then(valid => {
             if (!valid) {
                 res.status(401).json({message: 'Paire identifiant/mot de passe incorrecte'})
             } else {
                 res.status(200).json({
-                    userId: user_id,
+                    userId: userIdSql,
                     token: jwt.sign(
-                        {userId: user_id},
+                        {userId: userIdSql},
                         process.env.token,
                         {expiresIn: '24h'}
                     )
