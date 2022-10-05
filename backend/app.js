@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const path = require("path");
 const helmet = require('helmet');
-
 const postsRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
 require('dotenv').config();

@@ -12,9 +12,10 @@ exports.signup = (req, res, next) => {
             const name = req.body.name;
             const email = req.body.email;
             const password = hash;
+            console.log(password);
             db.query(
-                'INSERT INTO user(name, email, password) VALUES (?,?,?)',
-                [name, email, password],
+                'INSERT INTO user(name, email, password, isAdmin) VALUES (?,?,?)',
+                [name, email, password, 0],
                 function(err, results) {
                   console.log(err)
                   console.log(results);
@@ -29,22 +30,20 @@ exports.signup = (req, res, next) => {
 // Controleur pour la connexion de l'utilisateur
 exports.login = (req, res, next) => {
     const email = req.body.email;
-    const passwordSql = db.query(
-        "SELECT password FROM user WHERE email= ?",
-        [email],);
-    if (passwordSql != null) {
-        const userIdSql = db.query(
-            "SELECT user_id FROM user WHERE email= ?",
-            [email]);
-        bcrypt.compare(req.body.password, passwordSql)
+    db.query(
+        "SELECT user_id, password FROM user WHERE email= ?",
+        [email],
+        function (err, results) {
+            console.log(results[0].password, req.body.password);
+         bcrypt.compare(req.body.password, results[0].password)
         .then(valid => {
             if (!valid) {
                 res.status(401).json({message: 'Paire identifiant/mot de passe incorrecte'})
             } else {
                 res.status(200).json({
-                    userId: userIdSql,
+                    userId: results[0].user_id,
                     token: jwt.sign(
-                        {userId: userIdSql},
+                        {userId: results[0].user_id},
                         process.env.token,
                         {expiresIn: '24h'}
                     )
@@ -54,5 +53,4 @@ exports.login = (req, res, next) => {
         .catch(error => {
             res.status(500).json({ error });
         });
-    } else res.status(401).json({message: 'Paire identifiant/mot de passe incorrecte'});
-};
+})};

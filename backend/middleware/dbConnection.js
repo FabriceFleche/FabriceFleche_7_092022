@@ -13,4 +13,4 @@ const db = mysql.createConnection({
     console.log("Connecté à la base de données MySql");
   });
   
-  exports.db = db;
+  module.exports = db;

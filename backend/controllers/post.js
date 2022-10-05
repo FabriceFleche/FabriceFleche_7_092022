@@ -1,10 +1,12 @@
 const fs = require('fs');
+//const db = require("../middleware/dbConnection.js");
 
 // Controleur pour la création d'un post
 exports.createPost = (req, res, next) => {
     const postObject = JSON.parse(req.body.post);
     delete postObject._id;
-    delete postObject._userId;
+    delete postObject._user_id;
+    console.log(postObject);
     db.query(
       'INSERT INTO  posts(user_id, names, title, content) VALUES (?,?,?,?)',
       [req.auth.userId, postObject._name, postObject._title, postObject._content],
