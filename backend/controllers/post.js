@@ -1,30 +1,22 @@
-const fs = require('fs');
-//const db = require("../middleware/dbConnection.js");
+require('dotenv').config();
+//const fs = require('fs');
+const db = require("../middleware/dbConnection.js");
 
 // Controleur pour la création d'un post
 exports.createPost = (req, res, next) => {
     const postObject = JSON.parse(req.body.post);
     delete postObject._id;
-    delete postObject._user_id;
+    delete postObject._userId;
     console.log(postObject);
     db.query(
       'INSERT INTO  posts(user_id, names, title, content) VALUES (?,?,?,?)',
       [req.auth.userId, postObject._name, postObject._title, postObject._content],
       function(err, results) {
-        console.log(err)
-        console.log(results);
+        if (results) {res.status(201).json({ message: 'Post enregistré' })
+        } else {res.status(400).json({ err })};
       }
     )
-    .then(() => { res.status(201).json({message: 'Post enregistré'})})
-    .catch((error) => {res.status(400).json({ error })});
-    };  
-    /*const post = new Post({
-      ...postObject,
-      userId: req.auth.userId,
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    });
-    post.save()
-*/
+};  
 
 // Controleur pour la modification d'un post  
 exports.modifyPost = (req, res, next) => {
@@ -49,21 +41,37 @@ exports.modifyPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   db.query(
     "SELECT * FROM posts WHERE user_id= ?",
-    [req.params.id],)
-      .then((post) => {
-        if (post.userId != req.auth.userId) {
-          res.status(401).json({ message: 'Non autorisé' });
-        } else {
-          db.query(
-            "DELETE FROM posts WHERE user_id= ?",
+    [req.params.id],
+    function(err, results) {
+      if (results.userId != req.auth.userId) {
+            res.status(401).json({ message: 'Non autorisé' });
+      } else {
+        db.query(
+          "DELETE FROM posts WHERE user_id= ?",
             [req.params.id],
-          )
-          .then(() => res.status(200).json({ message: 'Post supprimé !'}))
-          .catch((error) => {res.status(401).json({ error })})
-        }
-      })  
-      .catch((error) => {res.status(400).json({ error })});
+            function(err, results) {
+              if (results) {res.status(201).json({ message: 'Post supprimé !' })
+              } else {res.status(400).json({ err })};
+            }
+        )
+      }
+    }        
+  )
 };
+      // .then((post) => {
+      //   if (post.userId != req.auth.userId) {
+      //     res.status(401).json({ message: 'Non autorisé' });
+      //   } else {
+      //     db.query(
+      //       "DELETE FROM posts WHERE user_id= ?",
+      //       [req.params.id],
+      //     )
+      //     .then(() => res.status(200).json({ message: 'Post supprimé !'}))
+      //     .catch((error) => {res.status(401).json({ error })})
+      //   }
+      // })  
+      //.catch((error) => {res.status(400).json({ error })});
+
 /*
           const filename = post.imageUrl.split('/images/')[1];
           fs.unlink(`images/${filename}`, () => {
@@ -77,27 +85,26 @@ exports.deletePost = (req, res, next) => {
 exports.getOnePost = (req, res, next) => {
   db.query(
     "SELECT * FROM posts WHERE user_id= ?",
-    [req.params.id],)
-    .then((post) => {
-      res.status(200).json(post)
-    })
-    .catch((error) => {
-      res.status(404).json({ error })
-    });
-  };
+    [req.params.id],
+    function(err, results) {
+      if (results) {res.status(200).json(results)
+      } else {res.status(404).json({ err })};
+    }
+  )
+};
 
 // Controleur pour la récupération de toute les posts
 exports.getAllPost = (req, res, next) => {
-  db.query("SELECT names,title,content FROM posts")
-      .then((posts) => {
-        res.status(200).json(posts)
-      })
-      .catch((error) => {
-        res.status(400).json({ error })
-      });
+  db.query(
+    "SELECT names,title,content FROM posts",
+    function(err, results) {
+      if (results) {res.status(200).json(results)
+      } else {res.status(404).json({ err })};
+    }
+  )
 };
 
-// Controleur pour la gestion du like
+//Controleur pour la gestion du like
 exports.postLike = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {

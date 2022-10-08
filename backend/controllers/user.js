@@ -14,14 +14,14 @@ exports.signup = (req, res, next) => {
             const password = hash;
             console.log(password);
             db.query(
-                'INSERT INTO user(name, email, password, isAdmin) VALUES (?,?,?)',
+                'INSERT INTO user(name, email, password, isAdmin) VALUES (?,?,?,?)',
                 [name, email, password, 0],
                 function(err, results) {
-                  console.log(err)
+                  if (results) {res.status(201).json({ message: 'Utilisateur créé !' })
+                  } else {res.status(400).json({ err })};
+                  console.log(err);
                   console.log(results);
                 }
-                .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-                .catch(error => res.status(400).json({ error }))
             );
         })
         .catch(error => {res.status(500).json({ error })});
