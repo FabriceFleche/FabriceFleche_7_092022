@@ -4,13 +4,13 @@ const db = require("../middleware/dbConnection.js");
 
 // Controleur pour la création d'un post
 exports.createPost = (req, res, next) => {
-    const postObject = JSON.parse(req.body.post);
-    delete postObject._id;
-    delete postObject._userId;
+    const postObject = req.body;
+    //delete postObject._id;
+    //delete postObject._userId;
     console.log(postObject);
     db.query(
       'INSERT INTO  posts(user_id, names, title, content) VALUES (?,?,?,?)',
-      [req.auth.userId, postObject._name, postObject._title, postObject._content],
+      [req.auth.userId, postObject.name, postObject.title, postObject.content],
       function(err, results) {
         if (results) {res.status(201).json({ message: 'Post enregistré' })
         } else {res.status(400).json({ err })};
@@ -20,66 +20,30 @@ exports.createPost = (req, res, next) => {
 
 // Controleur pour la modification d'un post  
 exports.modifyPost = (req, res, next) => {
-    const sauceObject = req.file ? {
-      ...JSON.parse(req.body.post),
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-    } : { ...req.body };
-    Post.findOne({ _id: req.params.id })
-      .then((post) => {
-        if (post.userId != req.auth.userId) {
-          res.status(401).json({ message: 'Non autorisé' });
-        } else {
-          Post.updateOne({ _id: req.params.id}, {...postObject, _id: req.params.id})
-          .then(() => res.status(200).json({ message: 'Post modifié !'}))
-          .catch((error) => {res.status(401).json({ error })});
-        }
-      })
-      .catch((error) => {res.status(400).json({ error })});
-  };      
+  const postObject = req.body;
+  const id = req.params.id;
+  db.query(
+    "UPDATE posts SET title= ?, content=? WHERE user_id=?",
+        [postObject.title,postObject.content, id],
+            function(err, results) {
+              if (results) {res.status(201).json({ message: 'Post modifié !' })
+              } else {res.status(401).json({ message: 'Non autorisé' })};
+            }
+  )
+};
 
 // Controleur pour la suppression d'un post 
 exports.deletePost = (req, res, next) => {
+  const id = req.params.id;
   db.query(
-    "SELECT * FROM posts WHERE user_id= ?",
-    [req.params.id],
-    function(err, results) {
-      if (results.userId != req.auth.userId) {
-            res.status(401).json({ message: 'Non autorisé' });
-      } else {
-        db.query(
-          "DELETE FROM posts WHERE user_id= ?",
-            [req.params.id],
-            function(err, results) {
-              if (results) {res.status(201).json({ message: 'Post supprimé !' })
-              } else {res.status(400).json({ err })};
-            }
-        )
+    "DELETE FROM posts WHERE id_post= ?",
+      [id],
+      function(err, results) {
+        if (results) {res.status(201).json({ message: 'Post supprimé !' })
+        } else {res.status(400).json({ message: 'Non autorisé'})};
       }
-    }        
   )
 };
-      // .then((post) => {
-      //   if (post.userId != req.auth.userId) {
-      //     res.status(401).json({ message: 'Non autorisé' });
-      //   } else {
-      //     db.query(
-      //       "DELETE FROM posts WHERE user_id= ?",
-      //       [req.params.id],
-      //     )
-      //     .then(() => res.status(200).json({ message: 'Post supprimé !'}))
-      //     .catch((error) => {res.status(401).json({ error })})
-      //   }
-      // })  
-      //.catch((error) => {res.status(400).json({ error })});
-
-/*
-          const filename = post.imageUrl.split('/images/')[1];
-          fs.unlink(`images/${filename}`, () => {
-            Post.deleteOne({ _id: req.params.id })
-              .then(() => res.status(200).json({ message: 'Post supprimé !'}))
-              .catch((error) => {res.status(401).json({ error })})
-          })*/
-
 
 // Controleur pour la selection d'un post
 exports.getOnePost = (req, res, next) => {
