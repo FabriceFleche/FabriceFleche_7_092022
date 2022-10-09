@@ -20,6 +20,6 @@ routerPost.put('/:id', auth, multer, postCtrl.modifyPost);
 routerPost.delete('/:id', auth, postCtrl.deletePost);
 
 // Creation de la route pour donner son avis sur un post avec verif du token
-routerPost.post('/:id/like', auth, postCtrl.postLike);
+//routerPost.post('/:id/like', auth, postCtrl.postLike);
   
 module.exports = routerPost;

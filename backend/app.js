@@ -4,6 +4,7 @@ const path = require("path");
 const helmet = require('helmet');
 const postsRoutes = require('./routes/post');
 const userRoutes = require('./routes/user');
+const likeRoutes = require('./routes/like');
 require('dotenv').config();
 
 
@@ -31,8 +32,9 @@ app.use((req, res, next) => {
 });
 
 // Mise en place des routes
-//app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/posts', postsRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/api/like', likeRoutes);
 
 module.exports = app;
