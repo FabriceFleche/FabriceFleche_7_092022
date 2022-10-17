@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-//import axios from "axios";
+
 function UserLogin() {
     const baseURL = "http://localhost:3000/api/auth/login"
     const [data, setData] = useState([]);
@@ -9,11 +9,16 @@ function UserLogin() {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: "" })
+            body: JSON.stringify({ email: "timeo.fleche@free.fr", password: "Test" })
         };
         fetch(baseURL, requestOptions)
             .then(response => response.json())
-            .then(data => setData(data));
+            .then((data) => {
+
+                console.log(data)
+                setData(data)
+
+            });
     }, []);
 
 
@@ -25,7 +30,8 @@ function UserLogin() {
                         <li>Se connecter</li>
                     </NavLink>
                 </ul>
-                <div>User Id : {data}</div>
+                <div>User Id : {data.userId}</div>
+                <div>Token : {data.token}</div>
             </div>
         </div >
 

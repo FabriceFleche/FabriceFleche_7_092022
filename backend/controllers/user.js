@@ -16,15 +16,16 @@ exports.signup = (req, res, next) => {
             db.query(
                 'INSERT INTO user(name, email, password, isAdmin) VALUES (?,?,?,?)',
                 [name, email, password, 0],
-                function(err, results) {
-                  if (results) {res.status(201).json({ message: 'Utilisateur créé !' })
-                  } else {res.status(400).json({ err })};
-                  console.log(err);
-                  console.log(results);
+                function (err, results) {
+                    if (results) {
+                        res.status(201).json({ message: 'Utilisateur créé !' })
+                    } else { res.status(400).json({ err }) };
+                    console.log(err);
+                    console.log(results);
                 }
             );
         })
-        .catch(error => {res.status(500).json({ error })});
+        .catch(error => { res.status(500).json({ error }) });
 };
 
 // Controleur pour la connexion de l'utilisateur
@@ -34,23 +35,24 @@ exports.login = (req, res, next) => {
         "SELECT user_id, password FROM user WHERE email= ?",
         [email],
         function (err, results) {
-            console.log(results[0].password, req.body.password);
-         bcrypt.compare(req.body.password, results[0].password)
-        .then(valid => {
-            if (!valid) {
-                res.status(401).json({message: 'Paire identifiant/mot de passe incorrecte'})
-            } else {
-                res.status(200).json({
-                    userId: results[0].user_id,
-                    token: jwt.sign(
-                        {userId: results[0].user_id},
-                        process.env.token,
-                        {expiresIn: '24h'}
-                    )
+
+            bcrypt.compare(req.body.password, results[0].password)
+                .then(valid => {
+                    if (!valid) {
+                        res.status(401).json({ message: 'Paire identifiant/mot de passe incorrecte' })
+                    } else {
+                        res.status(200).json({
+                            userId: results[0].user_id,
+                            token: jwt.sign(
+                                { userId: results[0].user_id },
+                                process.env.token,
+                                { expiresIn: '24h' }
+                            )
+                        })
+                    };
                 })
-            };
-        })     
-        .catch(error => {
-            res.status(500).json({ error });
-        });
-})};
+                .catch(error => {
+                    res.status(500).json({ error });
+                });
+        })
+};
