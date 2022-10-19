@@ -14,13 +14,15 @@ function UserLogin() {
         fetch(baseURL, requestOptions)
             .then(response => response.json())
             .then((data) => {
-
                 console.log(data)
                 setData(data)
-
             });
+
     }, []);
 
+    const token = data.token
+    sessionStorage.setItem("token", token);
+    console.log(data.token);
 
     return (
         < div >
