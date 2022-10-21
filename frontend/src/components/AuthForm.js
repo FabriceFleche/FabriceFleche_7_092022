@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { NavLink } from 'react-router-dom';
 
 const AuthForm = () => {
     const emailImput = useRef();
@@ -8,7 +9,7 @@ const AuthForm = () => {
     const submitHandler = (event) => {
         event.preventDefault()
 
-        // Pmert de stocker les données saisies dans email et password
+        // Permet de stocker les données saisies dans email et password
         const enteredEmail = emailImput.current.value;
         console.log(enteredEmail)
         const enteredPassword = passwordImput.current.value;
@@ -30,9 +31,12 @@ const AuthForm = () => {
                 <input type="text" id="password" ref={passwordImput} required />
             </div>
             <div className='group'>
-                <button>Connexion</button>
+                <NavLink to="/home">
+                    <button>Connexion</button>
+                </NavLink>
             </div>
         </form>
+
     )
 
 }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import AuthForm from './AuthForm';
 
 function UserLogin() {
     const baseURL = "http://localhost:3000/api/auth/login"
     const [data, setData] = useState([]);
-
+    console.log(AuthForm.enteredEmail);
     useEffect(() => {
         const requestOptions = {
             method: 'POST',
