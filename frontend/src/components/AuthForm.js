@@ -1,8 +1,7 @@
 import { useRef } from "react";
 import { NavLink } from 'react-router-dom';
-import UserLogin from './UserLogin';
-var enteredEmail;
-var enteredPassword;
+import userLogin from './UserLogin';
+
 
 const AuthForm = () => {
     const emailImput = useRef();
@@ -13,9 +12,9 @@ const AuthForm = () => {
         event.preventDefault()
 
         // Permet de stocker les données saisies dans email et password
-        enteredEmail = emailImput.current.value;
-        enteredPassword = passwordImput.current.value;
-
+        const enteredEmail = emailImput.current.value;
+        const enteredPassword = passwordImput.current.value;
+        userLogin(enteredEmail, enteredPassword);
         // Pour vider les champs après clic connecter si Ok
         //emailImput.current.value="";
         //passwordImput.current.value="";
@@ -29,13 +28,13 @@ const AuthForm = () => {
             </div>
             <div className='group'>
                 <label htmlFor='password'>Mot de passe</label>
-                <input type="text" id="password" ref={passwordImput} required />
+                <input type="password" id="password" ref={passwordImput} required />
             </div>
-            {/* <div className='group'>
-                <NavLink to="/home">
-                    <button>Connexion</button>
-                </NavLink>
-            </div> */}
+            <div className='group'>
+
+                <button >Connexion</button>
+
+            </div>
         </form>
 
     )
@@ -43,5 +42,3 @@ const AuthForm = () => {
 }
 
 export default AuthForm;
-export { enteredEmail };
-export { enteredPassword };

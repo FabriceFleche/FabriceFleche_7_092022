@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-//import { NavLink } from 'react-router-dom';
-import enteredEmail from './AuthForm.js';
-import enteredPassword from './AuthForm.js';
+// import React, { useEffect, useState } from 'react';
 
-
-function UserLogin() {
+function userLogin(enteredEmail, enteredPassword) {
+    console.log("Test");
     const baseURL = "http://localhost:3000/api/auth/login"
-    const [data, setData] = useState([]);
-
+    // const [data, setData] = useState([]);
+    console.log(enteredEmail);
+    console.log(enteredPassword);
 
     const requestOptions = {
         method: 'POST',
@@ -18,11 +16,12 @@ function UserLogin() {
         .then(response => response.json())
         .then((data) => {
             console.log(data)
-            setData(data)
+            // setData(data)
+            const token = data.token
+            localStorage.setItem("token", token);
         });
 
-    const token = data.token
-    sessionStorage.setItem("token", token);
+
 }
 
-export default UserLogin;
+export default userLogin;

@@ -14,7 +14,7 @@ const Connection = () => {
 
 
             <p><AuthForm /></p>
-            <p><Button /></p>
+
 
         </div>
     );
