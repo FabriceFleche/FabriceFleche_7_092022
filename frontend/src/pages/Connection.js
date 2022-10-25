@@ -1,8 +1,7 @@
 import React from 'react';
 import Banner from '../components/Banner';
-//import UserLogin from '../components/UserLogin';
 import AuthForm from '../components/AuthForm';
-import Button from '../components/Button';
+import { NavLink } from 'react-router-dom';
 import '../styles/connection.css';
 
 const Connection = () => {
@@ -14,9 +13,15 @@ const Connection = () => {
 
 
             <p><AuthForm /></p>
-
-
+            <div>
+                <NavLink to="/CreateAccount">
+                    Créer un compte
+                </NavLink>
+            </div>
         </div>
+
+
+
     );
 };
 

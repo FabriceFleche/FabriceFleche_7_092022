@@ -1,7 +1,8 @@
 import { useRef } from "react";
-import userLogin from './UserLogin';
+import userCreate from './UserCreate';
 
-const AuthForm = () => {
+const CreateForm = () => {
+    const nameImput = useRef();
     const emailImput = useRef();
     const passwordImput = useRef();
 
@@ -9,10 +10,11 @@ const AuthForm = () => {
     const submitHandler = (event) => {
         event.preventDefault()
 
-        // Permet de stocker les données saisies dans email et password
+        // Permet de stocker les données saisies dans name, email et password
+        const enteredName = nameImput.current.value;
         const enteredEmail = emailImput.current.value;
         const enteredPassword = passwordImput.current.value;
-        userLogin(enteredEmail, enteredPassword);
+        userCreate(enteredName, enteredEmail, enteredPassword);
 
         // Pour vider les champs après clic connecter si Ok
         //emailImput.current.value="";
@@ -21,6 +23,10 @@ const AuthForm = () => {
 
     return (
         <form onSubmit={submitHandler}>
+            <div className='group'>
+                <label htmlFor='text'>Name</label>
+                <input type="text" id="text" ref={nameImput} required />
+            </div>
             <div className='group'>
                 <label htmlFor='email'>Email</label>
                 <input type="email" id="email" ref={emailImput} required />
@@ -38,4 +44,4 @@ const AuthForm = () => {
 
 }
 
-export default AuthForm;
+export default CreateForm;

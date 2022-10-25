@@ -1,9 +1,9 @@
-function userLogin(enteredEmail, enteredPassword) {
-    const baseURL = "http://localhost:3000/api/auth/login"
+function userCreate(enteredName, enteredEmail, enteredPassword) {
+    const baseURL = "http://localhost:3000/api/auth/signup"
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: enteredEmail, password: enteredPassword })
+        body: JSON.stringify({ name: enteredName, email: enteredEmail, password: enteredPassword })
     };
     fetch(baseURL, requestOptions)
         .then(response => response.json())
@@ -14,4 +14,4 @@ function userLogin(enteredEmail, enteredPassword) {
         });
 }
 
-export default userLogin;
+export default userCreate;
