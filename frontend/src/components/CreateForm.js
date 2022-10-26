@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import userCreate from './UserCreate';
+import UserLogin from "./UserLogin";
 
 const CreateForm = () => {
     const nameImput = useRef();
@@ -35,6 +36,7 @@ const CreateForm = () => {
                 <label htmlFor='password'>Mot de passe</label>
                 <input type="password" id="password" ref={passwordImput} required />
             </div>
+            <UserLogin />
             <div className='group'>
                 <button>Connexion</button>
             </div>

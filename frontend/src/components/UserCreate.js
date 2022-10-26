@@ -11,6 +11,7 @@ function userCreate(enteredName, enteredEmail, enteredPassword) {
             console.log(data)
             const token = data.token
             localStorage.setItem("token", token);
+            window.location = '../home';
         });
 }
 
