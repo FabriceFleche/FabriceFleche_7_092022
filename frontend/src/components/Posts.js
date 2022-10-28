@@ -1,20 +1,16 @@
-const textFromStorage = localStorage.getItem("token");
-console.log(textFromStorage);
+import postsImport from "./PostsImport"
 
-function posts() {
-    const baseURL = "http://localhost:3000/api/posts/"
-    const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        authorization: textFromStorage
-    };
-    fetch(baseURL, requestOptions)
-        .then(response => response.json())
-        .then((data) => {
-            console.log(data)
-
-        });
-
+function Posts() {
+    const posts = postsImport.data;
+    console.log(posts)
+    return (
+        <ul>
+            {/* {postsImport.map((post) => (
+                <li>{post}</li>
+            ))} */}
+            <li>'coucouc'</li>
+        </ul>
+    )
 }
 
-export default posts;
+export default Posts

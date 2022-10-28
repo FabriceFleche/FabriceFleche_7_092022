@@ -9,9 +9,10 @@ function userCreate(enteredName, enteredEmail, enteredPassword) {
         .then(response => response.json())
         .then((data) => {
             console.log(data)
-            const token = data.token
-            localStorage.setItem("token", token);
-            window.location = '../home';
+            //const token = data.token
+            //localStorage.setItem("token", token);
+            alert('Votre compte à été créé, vous pouvez maintenant vous connecter avec votre email et votre mot de passe')
+            window.location = '../Connection';
         });
 }
 
