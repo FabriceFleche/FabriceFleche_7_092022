@@ -10,7 +10,9 @@ function userLogin(enteredEmail, enteredPassword) {
         .then((data) => {
             console.log(data)
             const token = data.token
+            const id = data.userId
             localStorage.setItem("token", token);
+            localStorage.setItem("id", id);
             window.location = '../home';
         });
 }

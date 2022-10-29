@@ -1,19 +1,18 @@
 import React from 'react';
 import Banner from '../components/Banner';
 import Navigation from '../components/Navigation';
-import PostImport from '../components/Post/PostImport';
+import CreatePost from '../components/CreatePost';
 
 
-const MyPosts = () => {
+const CreatePostId = () => {
     return (
         <div>
             <Banner />
             <Navigation />
-            <h1>Mes posts</h1>
-            <PostImport />
-
+            <h1>Créé un nouveau post</h1>
+            <CreatePost />
         </div>
     );
 };
 
-export default MyPosts;
+export default CreatePostId;

@@ -1,40 +1,41 @@
 import React, { useEffect, useState } from "react";
 
 const textFromStorage = localStorage.getItem("token");
-console.log(textFromStorage);
+const idFromStorage = localStorage.getItem("id");
 
 
-const PostsImport = () => {
-    const [posts, setPosts] = useState([])
+const PostImport = () => {
+    const [post, setPost] = useState([])
 
-    const postsFetch = () => {
-        const baseURL = "http://localhost:3000/api/posts/"
+    const postFetch = () => {
+        const baseURL = "http://localhost:3000/api/posts/:id"
         const requestOptions = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                Params: `KEY:'id', VALUE: ${idFromStorage}`,
                 Authorization: `Bearer ${textFromStorage}`
             }
         };
         fetch(baseURL, requestOptions)
             .then(response => { return response.json() })
-            .then((data) => { setPosts(data) })
+            .then((data) => { setPost(data) })
             .catch((err) => console.log(err));
 
     }
 
     useEffect(() => {
-        postsFetch()
+        postFetch()
     }, [])
-    console.log(posts);
+    console.log(post);
     return (
         <div>
-            {posts.map((posts, index) => {
+            {post.map((post, index) => {
                 return (
                     <div key={index}>
-                        <h2>Post de {posts.names}</h2>
-                        <h2>{posts.title}</h2>
-                        <p>{posts.content}</p>
+                        <h2>Post de {post.names}</h2>
+                        <h2>{post.title}</h2>
+                        <p>{post.content}</p>
                     </div>
                 );
             })}
@@ -43,4 +44,4 @@ const PostsImport = () => {
 
 }
 
-export default PostsImport;
+export default PostImport;

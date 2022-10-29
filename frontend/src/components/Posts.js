@@ -1,16 +1,15 @@
-import postsImport from "./PostsImport"
+// import PostsImport from "./PostsImport"
 
-function Posts() {
-    const posts = postsImport.data;
-    console.log(posts)
-    return (
-        <ul>
-            {/* {postsImport.map((post) => (
-                <li>{post}</li>
-            ))} */}
-            <li>'coucouc'</li>
-        </ul>
-    )
-}
+// function Posts(posts) {
 
-export default Posts
+//     return (
+//         <div>
+
+//             {posts.map(post => <p>[{post.names}]</p>)}
+
+
+//         </div>
+//     )
+// }
+
+// export default Posts

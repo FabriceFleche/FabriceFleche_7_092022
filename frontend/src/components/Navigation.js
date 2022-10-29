@@ -15,6 +15,9 @@ const Navigation = () => {
                     <NavLink to="/myPosts">
                         <li>Mes posts</li>
                     </NavLink>
+                    <NavLink to="/createPost">
+                        <li>Créé un nouveau post</li>
+                    </NavLink>
                 </ul>
             </div>
         </div>
