@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 const textFromStorage = localStorage.getItem("token");
-const idFromStorage = localStorage.getItem("id");
-
 
 const PostImport = () => {
     const [post, setPost] = useState([])
@@ -13,7 +11,7 @@ const PostImport = () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                Params: `KEY:'id', VALUE: ${idFromStorage}`,
+                Params: { id: 4 },
                 Authorization: `Bearer ${textFromStorage}`
             }
         };
