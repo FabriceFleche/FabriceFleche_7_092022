@@ -1,10 +1,12 @@
-function postDelete() {
-    const baseURL = "http://localhost:3000/api/posts/:id"
+const textFromStorage = localStorage.getItem("token");
+const idFromStorage = localStorage.getItem("id");
+
+function PostDelete() {
+    const baseURL = "http://localhost:3000/api/posts/" + idFromStorage
     const requestOptions = {
-        method: 'DEL',
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
-            Params: 'id:4',
             Authorization: `Bearer ${textFromStorage}`
         },
 
@@ -17,4 +19,4 @@ function postDelete() {
         });
 }
 
-export default postDelete;
+export default PostDelete;

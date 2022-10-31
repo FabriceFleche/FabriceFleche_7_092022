@@ -16,7 +16,7 @@ function PostCreate(enteredName, enteredTitle, enteredContent) {
         .then((data) => {
             console.log(data)
             alert('Votre post a été créé')
-            //window.location = '../pages/MyPosts';
+            window.location = '../MyPosts';
         });
 }
 

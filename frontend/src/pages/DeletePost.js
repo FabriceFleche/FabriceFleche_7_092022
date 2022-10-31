@@ -1,19 +1,18 @@
 import React from 'react';
 import Banner from '../components/Banner';
-import PostChangeUser from '../components/changePost/PostChangeUser'
+import DelPost from '../components/deletePost/DelPost';
 import Navigation from '../components/Navigation';
 
 
-
-const ChangePostId = () => {
+const DeletePost = () => {
     return (
         <div>
             <Banner />
             <Navigation />
-            <h1>Modifier votre post</h1>
-            <PostChangeUser />
+            <h2>Voulez vous supprimer votre post ?</h2>
+            <DelPost />
         </div>
     );
 };
 
-export default ChangePostId;
+export default DeletePost;
