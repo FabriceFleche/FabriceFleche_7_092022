@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import userCreate from './UserCreate';
+import '../styles/components/authForm.css';
 
 const CreateForm = () => {
     const nameImput = useRef();
@@ -23,20 +24,20 @@ const CreateForm = () => {
 
     return (
         <form onSubmit={submitHandler}>
-            <div className='group'>
+            <div className='form'>
                 <label htmlFor='text'>Name</label>
                 <input type="text" id="text" ref={nameImput} required />
             </div>
-            <div className='group'>
+            <div className='form'>
                 <label htmlFor='email'>Email</label>
                 <input type="email" id="email" ref={emailImput} required />
             </div>
-            <div className='group'>
+            <div className='form'>
                 <label htmlFor='password'>Mot de passe</label>
                 <input type="password" id="password" ref={passwordImput} required />
             </div>
 
-            <div className='group'>
+            <div className='formButton'>
                 <button>Connexion</button>
             </div>
         </form>

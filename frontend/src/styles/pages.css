@@ -1,0 +1,38 @@
+/* -----------------PAGE CONNECTION -------------------*/
+/* * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Lato;
+}
+
+li {
+    list-style-type: none;
+} */
+
+/* body {
+    background-color: #FFD7D7;
+} */
+
+form {
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+
+.connectionTitle {
+    color: #FD2D01;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.connectionIdent {
+    display: flex;
+    justify-content: center;
+    color: #4E5166
+}
+
+.connectionCreateUser {
+    padding-left: 5%;
+}

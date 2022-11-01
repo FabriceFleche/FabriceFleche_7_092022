@@ -1,0 +1,11 @@
+.form {
+
+    margin: 0 auto;
+    margin-bottom: 10%;
+}
+
+.formButton {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20%;
+}

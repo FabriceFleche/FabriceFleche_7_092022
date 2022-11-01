@@ -1,28 +1,30 @@
-$font-1: sans-serif;
+// $font-1: sans-serif;
 
-$color-1: #61dafb;
-$color-2: salmon;
-$color-3: #282c34;
-$white: rgb(243, 243, 243);
+// $color-1: #61dafb;
+// $color-2: salmon;
+// $color-3: #282c34;
+// $white: rgb(243, 243, 243);
 
 @mixin verticalCenter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Lato;
 }
 
 body {
-  background: $white;
-  font-family: $font-1;
-  // @include verticalCenter;
+    //background: $white;
+    //font-family: $font-1;
+    background-color: #FFD7D7;
+    @include verticalCenter;
 }
 
 li {
-  list-style-type: none;
+    list-style-type: none;
 }
