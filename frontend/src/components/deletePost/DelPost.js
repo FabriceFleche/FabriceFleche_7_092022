@@ -2,7 +2,6 @@ import PostDelete from "./PostDelete";
 
 const DelPost = () => {
     function buttonClickConfirmDelete() {
-        console.log("Ok")
         PostDelete()
     };
     function buttonClickExitDelete() {

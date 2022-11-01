@@ -4,20 +4,21 @@ const db = require("../middleware/dbConnection.js");
 
 // Controleur pour la création d'un post
 exports.createPost = (req, res, next) => {
-    const postObject = req.body;
-    const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null;
-    //delete postObject._id;
-    //delete postObject._userId;
-    console.log(postObject);
-    db.query(
-      'INSERT INTO  posts(user_id, names, title, content, imageUrl) VALUES (?,?,?,?,?)',
-      [postObject.userId, postObject.name, postObject.title, postObject.content, imageUrl],
-      function(err, results) {
-        if (results) {res.status(201).json({ message: 'Post enregistré' })
-        } else {res.status(400).json({ err })};
-      }
-    )
-};  
+  const postObject = req.body;
+  const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null;
+  //delete postObject._id;
+  //delete postObject._userId;
+  console.log(postObject);
+  db.query(
+    'INSERT INTO  posts(user_id, names, title, content, imageUrl) VALUES (?,?,?,?,?)',
+    [postObject.userId, postObject.name, postObject.title, postObject.content, imageUrl],
+    function (err, results) {
+      if (results) {
+        res.status(201).json({ message: 'Post enregistré' })
+      } else { res.status(400).json({ err }) };
+    }
+  )
+};
 
 // Controleur pour la modification d'un post  
 exports.modifyPost = (req, res, next) => {
@@ -26,11 +27,12 @@ exports.modifyPost = (req, res, next) => {
   const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null;
   db.query(
     "UPDATE posts SET title=?, content=? image=? WHERE user_id=?",
-        [postObject.title,postObject.content,imageUrl,id],
-            function(err, results) {
-              if (results) {res.status(201).json({ message: 'Post modifié !' })
-              } else {res.status(401).json({ message: 'Non autorisé' })};
-            }
+    [postObject.title, postObject.content, imageUrl, id],
+    function (err, results) {
+      if (results) {
+        res.status(201).json({ message: 'Post modifié !' })
+      } else { res.status(401).json({ message: 'Non autorisé' }) };
+    }
   )
 };
 
@@ -38,27 +40,41 @@ exports.modifyPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   const id = req.params.id;
   db.query(
-    "DELETE FROM posts WHERE user_id=?",
-      [id],
-      function(err, results) {
-        if (results) {
-          if (results.imageUrl != null) {
-            const filename = results.imageUrl.split('/images/')[1];
-            fs.unlink(`images/${filename}`, () => {res.status(201).json({ message: 'Post et image supprimés !'})})
-          } else {{res.status(400).json({ message: 'Post supprimé !'})}}
-        } else {res.status(401).json({ message: 'Non autorisé' })};
-      }  
+    "DELETE FROM posts WHERE id_post=?",
+    [id],
+    function (err, results) {
+      if (results) {
+        if (results.imageUrl != null) {
+          const filename = results.imageUrl.split('/images/')[1];
+          fs.unlink(`images/${filename}`, () => { res.status(201).json({ message: 'Post et image supprimés !' }) })
+        } else { { res.status(400).json({ message: 'Post supprimé !' }) } }
+      } else { res.status(401).json({ message: 'Non autorisé' }) };
+    }
+  )
+};
+
+// Controleur pour la selection des posts d'un user
+exports.getPostUser = (req, res, next) => {
+  db.query(
+    "SELECT * FROM posts WHERE user_id= ?",
+    [req.params.id],
+    function (err, results) {
+      if (results) {
+        res.status(200).json(results)
+      } else { res.status(404).json({ err }) };
+    }
   )
 };
 
 // Controleur pour la selection d'un post
 exports.getOnePost = (req, res, next) => {
   db.query(
-    "SELECT * FROM posts WHERE user_id= ?",
+    "SELECT * FROM posts WHERE id_post= ?",
     [req.params.id],
-    function(err, results) {
-      if (results) {res.status(200).json(results)
-      } else {res.status(404).json({ err })};
+    function (err, results) {
+      if (results) {
+        res.status(200).json(results)
+      } else { res.status(404).json({ err }) };
     }
   )
 };
@@ -67,9 +83,10 @@ exports.getOnePost = (req, res, next) => {
 exports.getAllPost = (req, res, next) => {
   db.query(
     "SELECT names,title,content FROM posts",
-    function(err, results) {
-      if (results) {res.status(200).json(results)
-      } else {res.status(404).json({ err })};
+    function (err, results) {
+      if (results) {
+        res.status(200).json(results)
+      } else { res.status(404).json({ err }) };
     }
   )
 };
@@ -101,10 +118,10 @@ exports.getAllPost = (req, res, next) => {
 //           .then(() => res.status(201).json({ message: 'Vous avez aimé ce post !'}))
 //           .catch((error) => {res.status(400).json({ error })});
 
-//       // L utilisateur annule son like    
+//       // L utilisateur annule son like
 //       } else if (post.usersLiked.includes(req.body.userId)) {
 //         Post.updateOne({ _id: req.params.id  },
-//           { 
+//           {
 //             $inc: {likes: -1},
 //             $pull: {usersLiked: req.body.userId}
 //           })

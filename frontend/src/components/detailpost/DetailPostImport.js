@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 const textFromStorage = localStorage.getItem("token");
-const idFromStorage = localStorage.getItem("id");
+const idPost = 3;
 
-const PostImport = () => {
+const DetailPostImport = () => {
     const [post, setPost] = useState([])
 
     const postFetch = () => {
-        const baseURL = "http://localhost:3000/api/posts/" + idFromStorage
+        const baseURL = "http://localhost:3000/api/posts/" + idPost
         const requestOptions = {
-            method: 'GET',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${textFromStorage}`
@@ -32,9 +32,6 @@ const PostImport = () => {
     function buttonClickDelete() {
         window.location = '../DeletePost'
     };
-    function buttonClickDetail() {
-        window.location = '../DetailPost/' + post.id_post
-    };
 
     return (
         <div>
@@ -45,7 +42,6 @@ const PostImport = () => {
                         <h2>{post.title}</h2>
                         <p>{post.content}</p>
                         <p>{post.id_post}</p>
-                        <button onClick={buttonClickDetail}>Détail du post</button>
                         <button onClick={buttonCLickModify}>Modifier</button>
                         <button onClick={buttonClickDelete}>Supprimer</button>
                     </div>
@@ -56,4 +52,4 @@ const PostImport = () => {
 
 }
 
-export default PostImport;
+export default DetailPostImport;

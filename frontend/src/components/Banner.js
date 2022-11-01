@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../assets/icon-left-font-monochrome-black.svg'
+import '../styles/components/banner.css';
 
 const Banner = () => {
     return (

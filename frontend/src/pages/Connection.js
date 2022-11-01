@@ -7,12 +7,12 @@ import '../styles/connection.css';
 const Connection = () => {
     return (
         <div>
-            <p><Banner /></p>
+            <Banner />
             <h1>Bienvenue sur le réseau social de votre entreprise</h1>
             <h2>veuillez saisir votre identifiant et votre mot de passe</h2>
 
 
-            <p><AuthForm /></p>
+            <AuthForm />
             <p>
                 <NavLink to="/CreateAccount">
                     Créer un compte

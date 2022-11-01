@@ -1,8 +1,8 @@
 const textFromStorage = localStorage.getItem("token");
-const idFromStorage = localStorage.getItem("id");
+//const idFromStorage = localStorage.getItem("id");
 
 function PostDelete() {
-    const baseURL = "http://localhost:3000/api/posts/" + idFromStorage
+    const baseURL = "http://localhost:3000/api/posts/" + 9
     const requestOptions = {
         method: 'DELETE',
         headers: {
@@ -14,7 +14,6 @@ function PostDelete() {
     fetch(baseURL, requestOptions)
         .then(response => response.json())
         .then((data) => {
-            console.log(data)
             window.location = '../home';
         });
 }
