@@ -1,18 +1,22 @@
 import React from 'react';
 import Banner from '../components/Banner';
+import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
-//import Posts from '../components/Posts';
 import PostsImport from '../components/PostsImport';
+import '../styles/pages.css';
 
 const Home = () => {
     return (
         <div>
             <Banner />
             <Navigation />
-            <h1>Publications du personnel</h1>
+            <h2 className='publications'>Ici vous visualisez l'ensemble des publications du personnel</h2>
             <PostsImport />
-
+            <Footer />
         </div>
+
+
+
     );
 };
 

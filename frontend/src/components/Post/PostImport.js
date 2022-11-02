@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import '../../styles/components/postsImport.css';
 
 const textFromStorage = localStorage.getItem("token");
 const idFromStorage = localStorage.getItem("id");
@@ -32,22 +33,24 @@ const PostImport = () => {
     function buttonClickDelete() {
         window.location = '../DeletePost'
     };
-    function buttonClickDetail() {
-        window.location = '../DetailPost/' + post.id_post
-    };
+    // function buttonClickDetail() {
+    //     window.location = '../DetailPost/' + post.id_post
+    // };
 
     return (
         <div>
             {post.map((post, index) => {
                 return (
-                    <div key={index}>
-                        <h2>Post de {post.names}</h2>
-                        <h2>{post.title}</h2>
-                        <p>{post.content}</p>
-                        <p>{post.id_post}</p>
-                        <button onClick={buttonClickDetail}>Détail du post</button>
-                        <button onClick={buttonCLickModify}>Modifier</button>
-                        <button onClick={buttonClickDelete}>Supprimer</button>
+                    <div className="posts" key={index}>
+                        <h4 className="posts_name">Post de {post.names}</h4>
+                        <h4 className="posts_title">{post.title}</h4>
+                        <p className="posts_content">{post.content}</p>
+                        {/* <p>{post.id_post}</p> */}
+                        <div className="posts_button">
+                            {/* <button className="posts_button_click" onClick={buttonClickDetail}>Détail du post</button> */}
+                            <button className="posts_button_click" onClick={buttonCLickModify}>Modifier</button>
+                            <button className="posts_button_click" onClick={buttonClickDelete}>Supprimer</button>
+                        </div>
                     </div>
                 );
             })}

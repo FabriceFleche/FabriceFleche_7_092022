@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import PostCreate from "./PostCreate";
+import '../styles/components/createPost.css';
 
 const CreatePost = () => {
     const nameImput = useRef();
@@ -22,22 +23,22 @@ const CreatePost = () => {
     }
 
     return (
-        <form onSubmit={submitHandlerBis}>
+        <form className="formCreatepost" onSubmit={submitHandlerBis}>
             <div className='group'>
-                <label htmlFor='text'>Name</label>
-                <input type="text" id="name" ref={nameImput} required />
+                <label htmlFor='text'>Pseudo</label>
+                <input className="input" type="text" id="name" ref={nameImput} required />
             </div>
             <div className='group'>
-                <label htmlFor='text'>Title</label>
-                <input type="text" id="title" ref={titleImput} required />
+                <label htmlFor='text'>Titre</label>
+                <input className="input" type="text" id="title" ref={titleImput} required />
             </div>
             <div className='group'>
-                <label htmlFor='text'>Content</label>
-                <input type="text" id="content" ref={contentImput} required />
+                <label htmlFor='text'>Commentaire...</label>
+                <textarea className="inputContent" type="text" id="content" ref={contentImput} required />
             </div>
 
-            <div className='group'>
-                <button>Créé un post</button>
+            <div className='group_button'>
+                <button className="formCreatepost_button">Créer le post</button>
             </div>
         </form>
     )

@@ -1,0 +1,43 @@
+.formCreatepost {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 2%;
+    background-color: #EB797B;
+    margin-top: 30px;
+    border: 2px solid;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.group {
+    margin: 5%;
+}
+
+.input {
+    margin: 5px;
+    width: 100%;
+}
+
+.inputContent {
+    margin: 5px;
+    width: 100%;
+    display: block;
+}
+
+.group_button {
+    display: flex;
+    justify-content: center;
+    margin: 4%;
+
+}
+
+.formCreatepost_button {
+    display: flex;
+    padding: 5px;
+    background-color: #4E5166;
+    color: white;
+    border-radius: 10px;
+    padding: 4%;
+    font-weight: bold;
+}

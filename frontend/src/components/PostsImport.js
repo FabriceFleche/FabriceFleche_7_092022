@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
+import '../styles/components/postsImport.css';
 
 const textFromStorage = localStorage.getItem("token");
-console.log(textFromStorage);
-
 
 const PostsImport = () => {
     const [posts, setPosts] = useState([])
@@ -26,15 +25,15 @@ const PostsImport = () => {
     useEffect(() => {
         postsFetch()
     }, [])
-    console.log(posts);
+
     return (
         <div>
             {posts.map((posts, index) => {
                 return (
-                    <div key={index}>
-                        <h2>Post de {posts.names}</h2>
-                        <h2>{posts.title}</h2>
-                        <p>{posts.content}</p>
+                    <div className="posts" key={index}>
+                        <h4 className="posts_name">Post de {posts.names}</h4>
+                        <h4 className="posts_title">{posts.title}</h4>
+                        <p className="posts_content">{posts.content}</p>
                     </div>
                 );
             })}
