@@ -8,11 +8,12 @@ function userLogin(enteredEmail, enteredPassword) {
     fetch(baseURL, requestOptions)
         .then(response => response.json())
         .then((data) => {
-            console.log(data)
             const token = data.token
             const id = data.userId
+            const admin = data.isAdmin
             localStorage.setItem("token", token);
             localStorage.setItem("id", id);
+            localStorage.setItem("admin", admin)
             window.location = '../home';
         });
 }

@@ -31,3 +31,9 @@ form {
     color: black;
     margin-bottom: 5%;
 }
+
+/* ---------------Page Admin ---------------------------------*/
+
+.noAdmin {
+    color: #FD2D01;
+}

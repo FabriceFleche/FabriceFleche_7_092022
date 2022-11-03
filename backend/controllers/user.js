@@ -32,7 +32,7 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
     const email = req.body.email;
     db.query(
-        "SELECT user_id, password FROM user WHERE email= ?",
+        "SELECT user_id, password, isAdmin FROM user WHERE email= ?",
         [email],
         function (err, results) {
 
@@ -43,6 +43,7 @@ exports.login = (req, res, next) => {
                     } else {
                         res.status(200).json({
                             userId: results[0].user_id,
+                            isAdmin: results[0].isAdmin,
                             token: jwt.sign(
                                 { userId: results[0].user_id },
                                 process.env.token,

@@ -27,15 +27,15 @@ const PostImport = () => {
         postFetch()
     }, [])
 
-    function buttonCLickModify() {
-        window.location = '../ChangePostId'
+    function buttonCLickModify(post) {
+        window.location = '../ChangePostId' + post.id_post
     };
-    function buttonClickDelete() {
-        window.location = '../DeletePost'
+    function buttonClickDelete(post) {
+        window.location = '../DeletePost' + post.id_post
     };
-    // function buttonClickDetail() {
-    //     window.location = '../DetailPost/' + post.id_post
-    // };
+    function buttonClickDetail(post) {
+        window.location = '../DetailPost/' + post.id_post
+    };
 
     return (
         <div>
@@ -45,11 +45,10 @@ const PostImport = () => {
                         <h4 className="posts_name">Post de {post.names}</h4>
                         <h4 className="posts_title">{post.title}</h4>
                         <p className="posts_content">{post.content}</p>
-                        {/* <p>{post.id_post}</p> */}
                         <div className="posts_button">
-                            {/* <button className="posts_button_click" onClick={buttonClickDetail}>Détail du post</button> */}
-                            <button className="posts_button_click" onClick={buttonCLickModify}>Modifier</button>
-                            <button className="posts_button_click" onClick={buttonClickDelete}>Supprimer</button>
+                            <button className="posts_button_click" onClick={() => buttonClickDetail(post)}>Détail du post</button>
+                            <button className="posts_button_click" onClick={() => buttonCLickModify(post)}>Modifier</button>
+                            <button className="posts_button_click" onClick={() => buttonClickDelete(post)}>Supprimer</button>
                         </div>
                     </div>
                 );
