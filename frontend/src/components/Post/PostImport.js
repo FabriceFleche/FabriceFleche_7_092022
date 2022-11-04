@@ -20,7 +20,6 @@ const PostImport = () => {
             .then(response => { return response.json() })
             .then((data) => { setPost(data) })
             .catch((err) => console.log(err));
-
     }
 
     useEffect(() => {
@@ -28,14 +27,14 @@ const PostImport = () => {
     }, [])
 
     function buttonCLickModify(post) {
-        window.location = '../ChangePostId' + post.id_post
+        window.location = '../ChangePostId?id=' + post.id_post
     };
     function buttonClickDelete(post) {
-        window.location = '../DeletePost' + post.id_post
+        window.location = '../DeletePost?id=' + post.id_post
     };
-    function buttonClickDetail(post) {
-        window.location = '../DetailPost/' + post.id_post
-    };
+    // function buttonClickDetail(post) {
+    //     window.location = '../DetailPost/' + post.id_post
+    // };
 
     return (
         <div>
@@ -46,7 +45,7 @@ const PostImport = () => {
                         <h4 className="posts_title">{post.title}</h4>
                         <p className="posts_content">{post.content}</p>
                         <div className="posts_button">
-                            <button className="posts_button_click" onClick={() => buttonClickDetail(post)}>Détail du post</button>
+                            {/* <button className="posts_button_click" onClick={() => buttonClickDetail(post)}>Détail du post</button> */}
                             <button className="posts_button_click" onClick={() => buttonCLickModify(post)}>Modifier</button>
                             <button className="posts_button_click" onClick={() => buttonClickDelete(post)}>Supprimer</button>
                         </div>
@@ -55,7 +54,6 @@ const PostImport = () => {
             })}
         </div>
     )
-
 }
 
 export default PostImport;

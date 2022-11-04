@@ -1,8 +1,15 @@
 const textFromStorage = localStorage.getItem("token");
-//const idFromStorage = localStorage.getItem("id");
+
+//Recuperation de l id du post
+let idPost = window.location.href;
+let url = new URL(idPost);
+let refId = url.searchParams.get("id");
+console.log(refId);
+// Recuperation de l url du post selectione
+const urlPost = "http://localhost:3000/api/posts/" + refId
 
 function PostDelete() {
-    const baseURL = "http://localhost:3000/api/posts/" + 9
+    const baseURL = urlPost
     const requestOptions = {
         method: 'DELETE',
         headers: {
@@ -14,7 +21,8 @@ function PostDelete() {
     fetch(baseURL, requestOptions)
         .then(response => response.json())
         .then((data) => {
-            window.location = '../home';
+            console.log(data);
+            window.location = '../myPosts';
         });
 }
 

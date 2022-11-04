@@ -1,5 +1,5 @@
 import { useRef } from "react";
-//import PostCreate from "./PostCreate";
+import PostChange from "./PostChange";
 
 const PostChangeUser = () => {
     const nameImput = useRef();
@@ -11,29 +11,27 @@ const PostChangeUser = () => {
         event.preventDefault()
 
         // Permet de stocker les données saisies dans name, email et password
-        // const enteredName = nameImput.current.value;
-        // const enteredTitle = titleImput.current.value;
-        // const enteredContent = contentImput.current.value;
-        // PostCreate(enteredName, enteredTitle, enteredContent);
+        const enteredName = nameImput.current.value;
+        const enteredTitle = titleImput.current.value;
+        const enteredContent = contentImput.current.value;
+        PostChange(enteredName, enteredTitle, enteredContent);
     }
 
     return (
         <form onSubmit={submitHandlerTer}>
             <div className='group'>
                 <label htmlFor='text'>Name</label>
-                <input type="text" id="name" ref={nameImput} required />
+                <input type="text" id="name" value="test2" ref={nameImput} required />
             </div>
             <div className='group'>
                 <label htmlFor='text'>Title</label>
-                <input type="text" id="title" ref={titleImput} required />
+                <input type="text" id="title" value="test2" ref={titleImput} required />
             </div>
             <div className='group'>
                 <label htmlFor='text'>Content</label>
-                <input type="text" id="content" ref={contentImput} required />
+                <input type="text" id="content" value="test2" ref={contentImput} required />
             </div>
-
             <div className='group'>
-                {/* Lancer fonction fetch qui modifie la BDD */}
                 <button>Modifier le post</button>
             </div>
         </form>

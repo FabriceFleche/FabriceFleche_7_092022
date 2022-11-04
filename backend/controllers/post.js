@@ -24,10 +24,11 @@ exports.createPost = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {
   const postObject = req.body;
   const id = req.params.id;
+  //const id = req.params.id;
   const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null;
   db.query(
-    "UPDATE posts SET title=?, content=? image=? WHERE user_id=?",
-    [postObject.title, postObject.content, imageUrl, id],
+    "UPDATE posts SET names=?, title=?, content=?, imageUrl=? WHERE id_post=?",
+    [postObject.name, postObject.title, postObject.content, imageUrl, id],
     function (err, results) {
       if (results) {
         res.status(201).json({ message: 'Post modifié !' })
