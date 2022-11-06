@@ -46,3 +46,20 @@
     background-color: #E5F1FA;
     margin: 1%;
 }
+
+.posts_dislike {
+    margin: 1%;
+    border-radius: 20px;
+    opacity: 1;
+}
+
+.posts_like {
+    margin: 1%;
+    border-radius: 20px;
+    opacity: 1;
+}
+
+.posts_like:active {
+    opacity: 0;
+
+}

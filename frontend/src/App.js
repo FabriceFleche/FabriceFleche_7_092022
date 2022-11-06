@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Error from './components/error/error';
 import Admin from './pages/Admin';
 import ChangePostId from './pages/ChangePostId';
 import Connection from './pages/Connection';
@@ -25,7 +26,7 @@ const App = () => {
         <Route path='/admin' element={<Admin />} />
 
         {/* path "*" fonctionne si l url correspond a rien de declarer */}
-        <Route path='*' element={<Connection />} />
+        <Route path='*' element={<Error />} />
       </Routes>
     </BrowserRouter>
   );

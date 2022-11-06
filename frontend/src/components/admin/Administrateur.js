@@ -15,9 +15,9 @@ const textFromStorage = localStorage.getItem("token");
 // }
 
 const Administrateur = () => {
-    const [admin, setAdmin] = useState([])
+    const [post, setPost] = useState([])
 
-    const postsFetch = () => {
+    const postFetch = () => {
         const baseURL = "http://localhost:3000/api/posts/"
         const requestOptions = {
             method: 'GET',
@@ -28,32 +28,32 @@ const Administrateur = () => {
         };
         fetch(baseURL, requestOptions)
             .then(response => { return response.json() })
-            .then((data) => { setAdmin(data) })
+            .then((data) => { setPost(data) })
             .catch((err) => console.log(err));
     }
 
     useEffect(() => {
-        postsFetch()
+        postFetch()
     }, [])
 
-    function buttonCLickModify(posts) {
-        window.location = '../ChangePostId' + posts.id_post
+    function buttonCLickModify(post) {
+        window.location = '../ChangePostId?id=' + post.id_post
     };
-    function buttonClickDelete(posts) {
-        window.location = '../DeletePost' + posts.id_post
+    function buttonClickDelete(post) {
+        window.location = '../DeletePost?id=' + post.id_post
     };
 
     return (
         <div>
-            {admin.map((posts, index) => {
+            {post.map((post, index) => {
                 return (
                     <div className="posts" key={index}>
-                        <h4 className="posts_name">Post de {posts.names}</h4>
-                        <h4 className="posts_title">{posts.title}</h4>
-                        <p className="posts_content">{posts.content}</p>
+                        <h4 className="posts_name">Post de {post.names}</h4>
+                        <h4 className="posts_title">{post.title}</h4>
+                        <p className="posts_content">{post.content}</p>
                         <div className="posts_button">
-                            <button className="posts_button_click" onClick={() => buttonCLickModify(posts)}>Modifier</button>
-                            <button className="posts_button_click" onClick={() => buttonClickDelete(posts)}>Supprimer</button>
+                            <button className="posts_button_click" onClick={() => buttonCLickModify(post)}>Modifier</button>
+                            <button className="posts_button_click" onClick={() => buttonClickDelete(post)}>Supprimer</button>
                         </div>
                     </div>
                 );

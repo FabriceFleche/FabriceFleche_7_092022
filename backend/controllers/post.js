@@ -6,6 +6,7 @@ const db = require("../middleware/dbConnection.js");
 exports.createPost = (req, res, next) => {
   const postObject = req.body;
   const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null;
+  //const imageUrl = "../../images/carteElec.jpg";
   //delete postObject._id;
   //delete postObject._userId;
   console.log(postObject);
@@ -83,7 +84,7 @@ exports.getOnePost = (req, res, next) => {
 // Controleur pour la récupération de toute les posts
 exports.getAllPost = (req, res, next) => {
   db.query(
-    "SELECT names,title,content FROM posts",
+    "SELECT * FROM posts",
     function (err, results) {
       if (results) {
         res.status(200).json(results)
