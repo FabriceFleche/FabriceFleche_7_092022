@@ -14,14 +14,15 @@ const PostPut = () => {
     const [editContent, setEditContent] = useState("");
 
     const handleEdit = () => {
+        console.log(post[0]);
         const data = {
-            name: post.names,
-            title: post.title,
-            content: editContent ? editContent : post.content,
-            imageUrl: "URL"
+            name: post[0].names,
+            title: post[0].title,
+            content: editContent ? editContent : post[0].content,
+            imageUrl: "URL",
+            id_post: post[0].id_post
         }
-        let idPost = post.id_post
-        const urlPost = "http://localhost:3000/api/posts/" + idPost
+        const urlPost = "http://localhost:3000/api/posts/"
         const baseURL = urlPost
         const requestOptions = {
             method: 'PUT',
@@ -29,13 +30,14 @@ const PostPut = () => {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${textFromStorage}`
             },
-            body: JSON.stringify({ data })
+            body: JSON.stringify(data)
         };
         fetch(baseURL, requestOptions)
             .then(response => response.json())
             .then((data) => {
                 console.log(data)
-                setIsEditing(false);
+                setIsEditing(false)
+                window.location = '../../myPosts'
             });
     }
 

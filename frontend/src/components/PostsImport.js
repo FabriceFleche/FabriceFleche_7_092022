@@ -35,6 +35,48 @@ const PostsImport = () => {
         postsFetch()
     }, [])
 
+    const likePost = () => {
+        const baseURL = "http://localhost:3000/api/like/"
+        const like = 1
+        const data = {
+            likes: like,
+            id_post: posts[0].id_post
+        }
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${textFromStorage}`
+            },
+            body: JSON.stringify(data)
+        };
+        fetch(baseURL, requestOptions)
+            .then(response => { return response.json() })
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err));
+    }
+
+    const disLikePost = () => {
+        const baseURL = "http://localhost:3000/api/like/"
+        const like = -1
+        const data = {
+            likes: like,
+            id_post: posts[0].id_post
+        }
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${textFromStorage}`
+            },
+            body: JSON.stringify(data)
+        };
+        fetch(baseURL, requestOptions)
+            .then(response => { return response.json() })
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err));
+    }
+
     return (
         <div>
             {posts.map((posts, index) => {
@@ -44,8 +86,8 @@ const PostsImport = () => {
                         <h4 className="posts_title">{posts.title}</h4>
                         <p className="posts_content">{posts.content}</p>
                         <img className="posts_img" src={posts.imageUrl} alt="Post Img" />
-                        <button className="posts_dislike">Vous aimez ce post {elementHeartBlack}</button>
-                        <button className="posts_like">Pour aimer ce post, cliquer ici {elementLikeWhite}</button>
+                        <button className="posts_dislike" onClick={() => likePost()}>Vous aimez ce post {elementHeartBlack}</button>
+                        <button className="posts_like" onClick={() => disLikePost()}>Pour aimer ce post, cliquer ici {elementLikeWhite}</button>
                     </div>
                 );
             })}

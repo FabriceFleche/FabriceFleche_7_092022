@@ -17,12 +17,9 @@ routerPost.get('/:id', auth, postCtrl.getPostUser);
 routerPost.patch('/:id', auth, postCtrl.getOnePost);
 
 // Creation de la route pour la modification d un post avec verif du token
-routerPost.put('/:id', auth, multer, postCtrl.modifyPost);
+routerPost.put('/', auth, multer, postCtrl.modifyPost);
 
 // Creation de la route pour le suppression d un post avec verif du token
 routerPost.delete('/:id', auth, postCtrl.deletePost);
-
-// Creation de la route pour donner son avis sur un post avec verif du token
-//routerPost.post('/:id/like', auth, postCtrl.postLike);
 
 module.exports = routerPost;
