@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import '../../styles/components/postsImport.css';
 
 const textFromStorage = localStorage.getItem("token");
-const idFromStorage = localStorage.getItem("id");
 
-const PostImport = () => {
+//Recuperation de l id du post
+let idPost = window.location.href;
+let url = new URL(idPost);
+let refId = url.searchParams.get("id");
+
+const PostPut = () => {
     const [post, setPost] = useState([])
     const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState("");
@@ -16,7 +20,8 @@ const PostImport = () => {
             content: editContent ? editContent : post.content,
             imageUrl: "URL"
         }
-        const urlPost = "http://localhost:3000/api/posts/" + post.id_post
+        let idPost = post.id_post
+        const urlPost = "http://localhost:3000/api/posts/" + idPost
         const baseURL = urlPost
         const requestOptions = {
             method: 'PUT',
@@ -35,9 +40,9 @@ const PostImport = () => {
     }
 
     const postFetch = () => {
-        const baseURL = "http://localhost:3000/api/posts/" + idFromStorage
+        const baseURL = "http://localhost:3000/api/posts/" + refId
         const requestOptions = {
-            method: 'GET',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${textFromStorage}`
@@ -53,15 +58,6 @@ const PostImport = () => {
         postFetch()
     }, [])
 
-    function buttonCLickModify(post) {
-        window.location = '../ChangePostId?id=' + post.id_post
-    };
-    function buttonClickDelete(post) {
-        window.location = '../DeletePost?id=' + post.id_post
-    };
-    // function buttonClickDetail(post) {
-    //     window.location = '../DetailPost/' + post.id_post
-    // };
 
     return (
         <div>
@@ -76,14 +72,12 @@ const PostImport = () => {
                         }
 
                         <div className="posts_button">
-                            {/* <button className="posts_button_click" onClick={() => buttonClickDetail(post)}>Détail du post</button> */}
-                            <button className="posts_button_click" onClick={() => buttonCLickModify(post)}>Modifier</button>
-                            {/* {
+
+                            {
                                 isEditing ? <button className="posts_button_click" onClick={() => handleEdit()}>Valider</button> :
                                     <button className="posts_button_click" onClick={() => setIsEditing(true)}>Modifier</button>
-                            } */}
+                            }
 
-                            <button className="posts_button_click" onClick={() => buttonClickDelete(post)}>Supprimer</button>
                         </div>
                     </div>
                 );
@@ -92,4 +86,4 @@ const PostImport = () => {
     )
 }
 
-export default PostImport;
+export default PostPut;

@@ -1,8 +1,8 @@
 import React from 'react';
 import Banner from '../components/Banner';
 import Navigation from '../components/Navigation';
-import CreatePost from '../components/CreatePost';
 import Footer from '../components/Footer';
+import CreatePost from '../components/CreatePost';
 
 
 const CreatePostId = () => {

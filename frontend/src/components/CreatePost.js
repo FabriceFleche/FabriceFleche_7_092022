@@ -6,7 +6,7 @@ const CreatePost = () => {
     const nameImput = useRef();
     const titleImput = useRef();
     const contentImput = useRef();
-    const imgImput = useRef();
+
 
     // Permet de ne pas effacer les données saisies dans email et password lors du clic sur connecter s'il y a une erreur
     const submitHandlerBis = (event) => {
@@ -16,8 +16,8 @@ const CreatePost = () => {
         const enteredName = nameImput.current.value;
         const enteredTitle = titleImput.current.value;
         const enteredContent = contentImput.current.value;
-        const enteredImage = imgImput.current.value;
-        PostCreate(enteredName, enteredTitle, enteredContent, enteredImage);
+
+        PostCreate(enteredName, enteredTitle, enteredContent);
 
         // Pour vider les champs après clic connecter si Ok
         //emailImput.current.value="";
@@ -39,7 +39,7 @@ const CreatePost = () => {
                 <textarea className="inputContent" type="text" id="content" ref={contentImput} required />
             </div>
             <div>
-                <input type="file" action="http://localhost:3000/controllers/images/" ref={imgImput} />
+                {/* <input type="file" value={selectedFile} /> */}
             </div>
             <div className='group_button'>
                 <button className="formCreatepost_button">Créer le post</button>
