@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import PostCreate from "./PostCreate";
 import '../styles/components/createPost.css';
 
@@ -6,7 +6,7 @@ const CreatePost = () => {
     const nameImput = useRef();
     const titleImput = useRef();
     const contentImput = useRef();
-
+    const [selectedFile, setSelectedFile] = useState(null);
 
     // Permet de ne pas effacer les données saisies dans email et password lors du clic sur connecter s'il y a une erreur
     const submitHandlerBis = (event) => {
@@ -18,6 +18,8 @@ const CreatePost = () => {
         const enteredContent = contentImput.current.value;
 
         PostCreate(enteredName, enteredTitle, enteredContent);
+
+
 
         // Pour vider les champs après clic connecter si Ok
         //emailImput.current.value="";
@@ -39,7 +41,7 @@ const CreatePost = () => {
                 <textarea className="inputContent" type="text" id="content" ref={contentImput} required />
             </div>
             <div>
-                {/* <input type="file" value={selectedFile} /> */}
+                <input type="file" value={selectedFile} onChange={(e) => setSelectedFile(e.target.files[0])} />
             </div>
             <div className='group_button'>
                 <button className="formCreatepost_button">Créer le post</button>

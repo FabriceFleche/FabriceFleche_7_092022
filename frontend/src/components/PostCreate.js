@@ -13,7 +13,7 @@ function PostCreate(enteredName, enteredTitle, enteredContent, selectedFile) {
     const requestOptions = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+
             Authorization: `Bearer ${textFromStorage}`
         },
         body: formData

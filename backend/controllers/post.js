@@ -11,8 +11,8 @@ exports.createPost = (req, res, next) => {
   //delete postObject._userId;
   console.log(postObject);
   db.query(
-    'INSERT INTO  posts(user_id, names, title, content, imageUrl) VALUES (?,?,?,?,?)',
-    [postObject.userId, postObject.name, postObject.title, postObject.content, imageUrl],
+    'INSERT INTO  posts(user_id, names, title, content, imageUrl, likes) VALUES (?,?,?,?,?,?)',
+    [postObject.userId, postObject.name, postObject.title, postObject.content, imageUrl, 0],
     function (err, results) {
       if (results) {
         res.status(201).json({ message: 'Post enregistré' })

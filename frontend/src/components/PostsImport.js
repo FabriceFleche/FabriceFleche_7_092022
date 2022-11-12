@@ -86,8 +86,9 @@ const PostsImport = () => {
                         <h4 className="posts_title">{posts.title}</h4>
                         <p className="posts_content">{posts.content}</p>
                         <img className="posts_img" src={posts.imageUrl} alt="Post Img" />
-                        <button className="posts_dislike" onClick={() => likePost()}>Vous aimez ce post {elementHeartBlack}</button>
-                        <button className="posts_like" onClick={() => disLikePost()}>Pour aimer ce post, cliquer ici {elementLikeWhite}</button>
+                        <em>Ce post est aimé par {posts.likes} personne-s</em>
+                        <button className="posts_dislike" onClick={() => disLikePost()}>Vous aimez déjà ce post {elementHeartBlack}</button>
+                        <button className="posts_like" onClick={() => likePost()}>Pour aimer ce post, cliquer ici {elementLikeWhite}</button>
                     </div>
                 );
             })}
