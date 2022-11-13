@@ -1,19 +1,20 @@
 const textFromStorage = localStorage.getItem("token");
 const idFromStorage = localStorage.getItem("id");
 
-function PostCreate(enteredName, enteredTitle, enteredContent, selectedFile) {
+function PostCreate(enteredName, enteredTitle, enteredContent, enteredFile) {
     const formData = new FormData();
+    //console.log(file)
     formData.append("userId", idFromStorage)
     formData.append("name", enteredName)
     formData.append("title", enteredTitle)
     formData.append("content", enteredContent)
-    formData.append("image", selectedFile)
+    formData.append("image", enteredFile)
 
     const baseURL = "http://localhost:3000/api/posts/"
     const requestOptions = {
         method: 'POST',
         headers: {
-
+            'Accept': 'multipart/form-data',
             Authorization: `Bearer ${textFromStorage}`
         },
         body: formData

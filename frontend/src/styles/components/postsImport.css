@@ -63,3 +63,10 @@
     opacity: 0;
 
 }
+
+@media all and (max-width: 991px) {
+    .posts {
+        background-color: whitesmoke;
+
+    }
+}

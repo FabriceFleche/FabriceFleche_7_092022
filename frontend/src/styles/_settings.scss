@@ -6,9 +6,11 @@
 // $white: rgb(243, 243, 243);
 
 @mixin verticalCenter {
-    display: flex;
+    // display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 1000px;
+    margin: auto !important;
 }
 
 * {
@@ -21,6 +23,7 @@
 body {
     //background: $white;
     //font-family: $font-1;
+    //width: 100%;
     background-color: #FFD7D7;
     @include verticalCenter;
 }
@@ -28,3 +31,5 @@ body {
 li {
     list-style-type: none;
 }
+
+@media all and (max-width: 991px) {}
