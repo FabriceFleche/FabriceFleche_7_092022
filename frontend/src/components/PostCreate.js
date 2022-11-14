@@ -3,7 +3,7 @@ const idFromStorage = localStorage.getItem("id");
 
 function PostCreate(enteredName, enteredTitle, enteredContent, enteredFile) {
     const formData = new FormData();
-    //console.log(file)
+    console.log(enteredFile)
     formData.append("userId", idFromStorage)
     formData.append("name", enteredName)
     formData.append("title", enteredTitle)

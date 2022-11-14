@@ -5,14 +5,13 @@ const db = require("../middleware/dbConnection.js");
 // Controleur pour la création d'un post
 exports.createPost = (req, res, next) => {
   const postObject = req.body;
-  const image = req.body.filename;
-  //const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null;
-  //const imageUrl = "../../images/carteElec.jpg";
+  //const image = req.file.filename;
+  const imageUrl = req.file.filename ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null;
   //delete postObject._id;
   //delete postObject._userId;
   db.query(
     'INSERT INTO  posts(user_id, names, title, content, imageUrl, likes) VALUES (?,?,?,?,?,?)',
-    [postObject.userId, postObject.name, postObject.title, postObject.content, image, 0],
+    [postObject.userId, postObject.name, postObject.title, postObject.content, imageUrl, 0],
     function (err, results) {
       //imageUrl = `${req.protocol}://${req.get('host')}/images/${postObject.image}`
       if (results) {
