@@ -5,15 +5,12 @@ const db = require("../middleware/dbConnection.js");
 // Controleur pour la création d'un post
 exports.createPost = (req, res, next) => {
   const postObject = req.body;
-  //const image = req.file.filename;
   const imageUrl = req.file.filename ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null;
-  //delete postObject._id;
-  //delete postObject._userId;
+
   db.query(
     'INSERT INTO  posts(user_id, names, title, content, imageUrl, likes) VALUES (?,?,?,?,?,?)',
     [postObject.userId, postObject.name, postObject.title, postObject.content, imageUrl, 0],
     function (err, results) {
-      //imageUrl = `${req.protocol}://${req.get('host')}/images/${postObject.image}`
       if (results) {
         res.status(201).json({ message: 'Post enregistré' })
       } else { res.status(400).json({ err }) };

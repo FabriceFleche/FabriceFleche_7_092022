@@ -17,18 +17,9 @@ const CreatePost = () => {
         const enteredTitle = titleImput.current.value;
         const enteredContent = contentImput.current.value;
         const enteredFile = fileImput.current.files[0];
-        console.log(enteredFile)
-        //const enteredFile = fileImput.current.value;
 
         PostCreate(enteredName, enteredTitle, enteredContent, enteredFile);
     }
-    // const imageHandler = (event) => {
-    //     event.preventDefault();
-    //     const file = event.target.files[0];
-    //     console.log(file)
-    //     PostCreate(file)
-    // }
-
 
     return (
         <form className="formCreatepost" onSubmit={submitHandlerBis}>
