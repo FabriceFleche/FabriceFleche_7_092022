@@ -59,9 +59,6 @@ const PostImport = () => {
     function buttonClickDelete(post) {
         window.location = '../DeletePost?id=' + post.id_post
     };
-    // function buttonClickDetail(post) {
-    //     window.location = '../DetailPost/' + post.id_post
-    // };
 
     return (
         <div>
@@ -74,9 +71,10 @@ const PostImport = () => {
                             isEditing ? <textarea defaultValue={post.content} onChange={(e) => setEditContent(e.target.value)} ></textarea> :
                                 <p className="posts_content">{post.content}</p>
                         }
+                        <img className="posts_img" src={post.imageUrl} alt="Post Img" />
 
                         <div className="posts_button">
-                            {/* <button className="posts_button_click" onClick={() => buttonClickDetail(post)}>Détail du post</button> */}
+
                             <button className="posts_button_click" onClick={() => buttonCLickModify(post)}>Modifier</button>
                             {/* {
                                 isEditing ? <button className="posts_button_click" onClick={() => handleEdit()}>Valider</button> :

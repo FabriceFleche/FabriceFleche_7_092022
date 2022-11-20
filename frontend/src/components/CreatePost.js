@@ -3,7 +3,7 @@ import PostCreate from "./PostCreate";
 import '../styles/components/createPost.css';
 
 const CreatePost = () => {
-    const nameImput = useRef();
+    //const nameImput = useRef();
     const titleImput = useRef();
     const contentImput = useRef();
     const fileImput = useRef();
@@ -13,20 +13,20 @@ const CreatePost = () => {
         event.preventDefault()
 
         // Permet de stocker les données saisies dans name, email, password et image
-        const enteredName = nameImput.current.value;
+        //const enteredName = nameImput.current.value;
         const enteredTitle = titleImput.current.value;
         const enteredContent = contentImput.current.value;
         const enteredFile = fileImput.current.files[0];
 
-        PostCreate(enteredName, enteredTitle, enteredContent, enteredFile);
+        PostCreate(enteredTitle, enteredContent, enteredFile);
     }
 
     return (
         <form className="formCreatepost" onSubmit={submitHandlerBis}>
-            <div className='group'>
+            {/* <div className='group'>
                 <label htmlFor='text'>Pseudo</label>
                 <input className="input" type="text" id="name" ref={nameImput} required />
-            </div>
+            </div> */}
             <div className='group'>
                 <label htmlFor='text'>Titre</label>
                 <input className="input" type="text" id="title" ref={titleImput} required />

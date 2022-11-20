@@ -10,12 +10,15 @@ function userLogin(enteredEmail, enteredPassword) {
         .then((data) => {
             const token = data.token
             const id = data.userId
+            const name = data.name
             const admin = data.isAdmin
             localStorage.setItem("token", token);
             localStorage.setItem("id", id);
+            localStorage.setItem("name", name);
             localStorage.setItem("admin", admin)
             window.location = '../home';
-        });
+        })
+    //.catch(function (err) { return err.status(500).json({ err }), alert("erreur") })
 }
 
 export default userLogin;

@@ -14,6 +14,7 @@ const elementLikeWhite = <FontAwesomeIcon icon={faThumbsUp} />
 
 const PostsImport = () => {
     const [posts, setPosts] = useState([])
+    //const [liked, setLiked] = useState(false)
 
     const postsFetch = () => {
         const baseURL = "http://localhost:3000/api/posts/"
@@ -35,6 +36,7 @@ const PostsImport = () => {
     }, [])
 
     const likePost = (postId) => {
+
         const baseURL = "http://localhost:3000/api/like/"
         const like = 1
         const data = {
@@ -51,11 +53,17 @@ const PostsImport = () => {
         };
         fetch(baseURL, requestOptions)
             .then(response => { return response.json() })
-            .then((data) => console.log(data))
+            .then((data) => {
+                console.log(data)
+                //setLiked(true)
+                window.location = '../home'
+            })
             .catch((err) => console.log(err));
     }
 
+
     const disLikePost = (postId) => {
+
         const baseURL = "http://localhost:3000/api/like/"
         const like = -1
         const data = {
@@ -72,7 +80,11 @@ const PostsImport = () => {
         };
         fetch(baseURL, requestOptions)
             .then(response => { return response.json() })
-            .then((data) => console.log(data))
+            .then((data) => {
+                console.log(data)
+                //setLiked(false)
+                window.location = '../home'
+            })
             .catch((err) => console.log(err));
     }
 
@@ -86,8 +98,9 @@ const PostsImport = () => {
                         <p className="posts_content">{posts.content}</p>
                         <img className="posts_img" src={posts.imageUrl} alt="Post Img" />
                         <em>Ce post est aimé par {posts.likes} personne-s</em>
-                        <button className="posts_dislike" onClick={() => disLikePost(posts.id_post)}>Vous aimez déjà ce post {elementHeartBlack}</button>
-                        <button className="posts_like" onClick={() => likePost(posts.id_post)}>Pour aimer ce post, cliquer ici {elementLikeWhite}</button>
+                        {<button className="posts_dislike" onClick={() => { disLikePost(posts.id_post) }}>Vous aimez déjà ce post {elementHeartBlack}</button>}
+                        {<button className="posts_like" style={{ backgroundColor: 'white' }} onClick={() => likePost(posts.id_post)}>Pour aimer ce post, cliquer ici {elementLikeWhite}</button>}
+                        {/* {!liked && <button className="posts_like" style={{ backgroundColor: 'white' }} onClick={() => likePost(posts.id_post)}>Pour aimer ce post, cliquer ici {elementLikeWhite}</button>} */}
                     </div>
                 );
             })}

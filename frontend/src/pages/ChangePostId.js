@@ -11,7 +11,7 @@ const ChangePostId = () => {
         <div>
             <Banner />
             <Navigation />
-            <h1>Modifier votre post</h1>
+            <h1>Vous allez modifier votre post !</h1>
             {/* <PostChangeUser /> */}
             <PostPut />
         </div>

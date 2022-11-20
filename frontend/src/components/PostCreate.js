@@ -1,11 +1,12 @@
 const textFromStorage = localStorage.getItem("token");
 const idFromStorage = localStorage.getItem("id");
+const nameFromStorage = localStorage.getItem("name");
 
-function PostCreate(enteredName, enteredTitle, enteredContent, enteredFile) {
+function PostCreate(enteredTitle, enteredContent, enteredFile) {
     const formData = new FormData();
-    console.log(enteredFile)
+
     formData.append("userId", idFromStorage)
-    formData.append("name", enteredName)
+    formData.append("name", nameFromStorage)
     formData.append("title", enteredTitle)
     formData.append("content", enteredContent)
     formData.append("image", enteredFile)
@@ -18,7 +19,7 @@ function PostCreate(enteredName, enteredTitle, enteredContent, enteredFile) {
             Authorization: `Bearer ${textFromStorage}`
         },
         body: formData
-        // body: JSON.stringify({ userId: idFromStorage, name: enteredName, title: enteredTitle, content: enteredContent, imageUrl: enteredImage })
+
     };
     fetch(baseURL, requestOptions)
         .then(response => response.json())

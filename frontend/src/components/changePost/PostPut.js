@@ -12,6 +12,7 @@ const PostPut = () => {
     const [post, setPost] = useState([])
     const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState("");
+    const [editImage, setEditImage] = useState();
 
     const handleEdit = () => {
         console.log(post[0]);
@@ -19,7 +20,6 @@ const PostPut = () => {
             name: post[0].names,
             title: post[0].title,
             content: editContent ? editContent : post[0].content,
-            imageUrl: "URL",
             id_post: post[0].id_post
         }
         const urlPost = "http://localhost:3000/api/posts/"
@@ -39,6 +39,10 @@ const PostPut = () => {
                 setIsEditing(false)
                 window.location = '../../myPosts'
             });
+    }
+
+    const returned = () => {
+        window.location = '../MyPosts'
     }
 
     const postFetch = () => {
@@ -72,14 +76,13 @@ const PostPut = () => {
                             isEditing ? <textarea defaultValue={post.content} onChange={(e) => setEditContent(e.target.value)} ></textarea> :
                                 <p className="posts_content">{post.content}</p>
                         }
-
+                        <img className="posts_img" src={post.imageUrl} alt="Post Img" />
                         <div className="posts_button">
-
                             {
                                 isEditing ? <button className="posts_button_click" onClick={() => handleEdit()}>Valider</button> :
                                     <button className="posts_button_click" onClick={() => setIsEditing(true)}>Modifier</button>
                             }
-
+                            <button className="posts_button_click" onClick={() => returned()}>Retour</button>
                         </div>
                     </div>
                 );
