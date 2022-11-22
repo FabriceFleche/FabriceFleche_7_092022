@@ -37,7 +37,8 @@ exports.login = (req, res, next) => {
 
         function (error, results) {
             if (results[0].emailExist == 0) {
-                console.log('Paire identifiant/mot de passe incorrecte')
+                res.status(400).json({ Message: "Paire identifiant/mot de passe incorrecte" })
+
             } else {
                 db.query(
                     "SELECT user_id, name, password, isAdmin FROM user WHERE email= ?",
@@ -46,7 +47,8 @@ exports.login = (req, res, next) => {
                         bcrypt.compare(req.body.password, results[0].password)
                             .then(valid => {
                                 if (!valid) {
-                                    console.log('Paire identifiant/mot de passe incorrecte')
+                                    res.status(400).json({ Message: "Paire identifiant/mot de passe incorrecte" })
+
                                 } else {
                                     res.status(200).json({
                                         userId: results[0].user_id,

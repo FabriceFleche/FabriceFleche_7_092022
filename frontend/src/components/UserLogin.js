@@ -8,6 +8,9 @@ function userLogin(enteredEmail, enteredPassword) {
     fetch(baseURL, requestOptions)
         .then(response => response.json())
         .then((data) => {
+            if (data.Message !== undefined) {
+                return alert(data.Message)
+            }
             const token = data.token
             const id = data.userId
             const name = data.name
@@ -16,9 +19,9 @@ function userLogin(enteredEmail, enteredPassword) {
             localStorage.setItem("id", id);
             localStorage.setItem("name", name);
             localStorage.setItem("admin", admin)
-            window.location = '../home';
+            //window.location = '../home';
         })
-    //.catch(function (err) { return err.status(500).json({ err }), alert("erreur") })
+        .catch(function (err) { return err.status(500).json({ err }) })
 }
 
 export default userLogin;

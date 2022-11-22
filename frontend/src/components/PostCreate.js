@@ -26,7 +26,7 @@ function PostCreate(enteredTitle, enteredContent, enteredFile) {
         .then((data) => {
             console.log(data)
             alert('Votre post a été créé')
-            window.location = '../MyPosts';
+            //window.location = '../MyPosts';
         });
 }
 

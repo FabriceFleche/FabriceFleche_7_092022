@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import '../../styles/components/postsImport.css';
 
 const textFromStorage = localStorage.getItem("token");
@@ -13,13 +13,17 @@ const PostPut = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState("");
     const [editImage, setEditImage] = useState();
+    const fileImput = useRef();
+    //const enteredFile = fileImput.current.files[0];
+    //if (enteredFile !== undefined) { const image = enteredFile } else { const image = post[0].imageUrl };
 
     const handleEdit = () => {
-        console.log(post[0]);
+
         const data = {
             name: post[0].names,
             title: post[0].title,
             content: editContent ? editContent : post[0].content,
+            //image: image,
             id_post: post[0].id_post
         }
         const urlPost = "http://localhost:3000/api/posts/"
@@ -76,6 +80,9 @@ const PostPut = () => {
                             isEditing ? <textarea defaultValue={post.content} onChange={(e) => setEditContent(e.target.value)} ></textarea> :
                                 <p className="posts_content">{post.content}</p>
                         }
+                        <div>
+                            <input type="file" name="image" accept="image/*" multiple={false} ref={fileImput} />
+                        </div>
                         <img className="posts_img" src={post.imageUrl} alt="Post Img" />
                         <div className="posts_button">
                             {

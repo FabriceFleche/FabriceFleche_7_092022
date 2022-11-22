@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import { useRef } from "react";
 import userLogin from './UserLogin';
 import '../styles/components/authForm.css';
@@ -5,7 +6,7 @@ import '../styles/components/authForm.css';
 const AuthForm = () => {
     const emailImput = useRef();
     const passwordImput = useRef();
-
+    let navigate = useNavigate();
     // Permet de ne pas effacer les données saisies dans email et password lors du clic sur connecter s'il y a une erreur
     const submitHandler = (event) => {
         event.preventDefault()
@@ -14,7 +15,7 @@ const AuthForm = () => {
         const enteredEmail = emailImput.current.value;
         const enteredPassword = passwordImput.current.value;
         userLogin(enteredEmail, enteredPassword);
-
+        navigate('../home')
         // Pour vider les champs après clic connecter si Ok
         //emailImput.current.value="";
         //passwordImput.current.value="";

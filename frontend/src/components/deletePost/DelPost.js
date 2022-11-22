@@ -1,11 +1,15 @@
+import { useNavigate } from 'react-router';
 import PostDelete from "./PostDelete";
 
 const DelPost = () => {
+    let navigate = useNavigate();
     function buttonClickConfirmDelete() {
         PostDelete()
+        navigate('../MyPosts')
     };
     function buttonClickExitDelete() {
-        window.location = '../MyPosts'
+        navigate('../MyPosts')
+        //window.location = '../MyPosts'
     };
 
     return (
