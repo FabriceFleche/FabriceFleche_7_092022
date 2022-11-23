@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from 'react-router';
 import '../../styles/components/postsImport.css';
 
 const textFromStorage = localStorage.getItem("token");
@@ -12,41 +13,41 @@ const PostPut = () => {
     const [post, setPost] = useState([])
     const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState("");
-    const [editImage, setEditImage] = useState();
+    //const [editImage, setEditImage] = useState();
     const fileImput = useRef();
-    //const enteredFile = fileImput.current.files[0];
-    //if (enteredFile !== undefined) { const image = enteredFile } else { const image = post[0].imageUrl };
-
+    let navigate = useNavigate();
     const handleEdit = () => {
-
-        const data = {
-            name: post[0].names,
-            title: post[0].title,
-            content: editContent ? editContent : post[0].content,
-            //image: image,
-            id_post: post[0].id_post
-        }
+        const enteredFile = fileImput.current.files[0];
+        let image = post[0].imageUrl;
+        if (enteredFile !== undefined) { image = enteredFile } else { image = post[0].imageUrl };
+        const formData = new FormData();
+        formData.append("title", post[0].title)
+        formData.append("content", editContent ? editContent : post[0].content)
+        formData.append("image", image)
+        formData.append("id_post", post[0].id_post)
         const urlPost = "http://localhost:3000/api/posts/"
         const baseURL = urlPost
         const requestOptions = {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/json',
+                'Accept': 'multipart/form-data',
                 Authorization: `Bearer ${textFromStorage}`
             },
-            body: JSON.stringify(data)
+            body: formData
         };
         fetch(baseURL, requestOptions)
             .then(response => response.json())
             .then((data) => {
                 console.log(data)
                 setIsEditing(false)
-                window.location = '../../myPosts'
+                navigate('../MyPosts')
+                //window.location = '../../myPosts'
             });
     }
 
     const returned = () => {
-        window.location = '../MyPosts'
+        navigate('../MyPosts')
     }
 
     const postFetch = () => {
