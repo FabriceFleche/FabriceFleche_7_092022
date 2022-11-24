@@ -17,7 +17,7 @@ routerPost.get('/:id', auth, postCtrl.getPostUser);
 routerPost.patch('/:id', auth, postCtrl.getOnePost);
 
 // Creation de la route pour la modification d un post avec verif du token
-routerPost.put('/', auth, multer, postCtrl.modifyPost);
+routerPost.patch('/', auth, multer, postCtrl.modifyPost);
 
 // Creation de la route pour le suppression d un post avec verif du token
 routerPost.delete('/:id', auth, postCtrl.deletePost);

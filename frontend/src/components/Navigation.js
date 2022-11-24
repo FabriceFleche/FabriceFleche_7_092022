@@ -3,6 +3,10 @@ import { NavLink } from 'react-router-dom';
 import '../styles/components/navigation.css';
 
 const Navigation = () => {
+    const linkMyPost = () => {
+        window.location = "/myPosts"
+    }
+
     return (
         <div>
             <div className="navigation">
@@ -10,8 +14,8 @@ const Navigation = () => {
                     <NavLink to="/home">
                         <li className='navigation_ul_li'>Tous les posts</li>
                     </NavLink>
-                    <NavLink to="/myPosts">
-                        <li className='navigation_ul_li'>Mes posts</li>
+                    <NavLink>
+                        <li className='navigation_ul_li' onClick={() => linkMyPost()}>Mes posts</li>
                     </NavLink>
                     <NavLink to="/createPost">
                         <li className='navigation_ul_li'>Créer un nouveau post</li>

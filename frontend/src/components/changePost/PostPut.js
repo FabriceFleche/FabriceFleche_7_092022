@@ -13,24 +13,23 @@ const PostPut = () => {
     const [post, setPost] = useState([])
     const [isEditing, setIsEditing] = useState(false);
     const [editContent, setEditContent] = useState("");
-    //const [editImage, setEditImage] = useState();
     const fileImput = useRef();
     let navigate = useNavigate();
+
     const handleEdit = () => {
         const enteredFile = fileImput.current.files[0];
         let image = post[0].imageUrl;
-        if (enteredFile !== undefined) { image = enteredFile } else { image = post[0].imageUrl };
         const formData = new FormData();
         formData.append("title", post[0].title)
         formData.append("content", editContent ? editContent : post[0].content)
+        if (enteredFile !== undefined) { image = enteredFile } else { image = post[0].imageUrl };
         formData.append("image", image)
         formData.append("id_post", post[0].id_post)
         const urlPost = "http://localhost:3000/api/posts/"
         const baseURL = urlPost
         const requestOptions = {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
-                // 'Content-Type': 'application/json',
                 'Accept': 'multipart/form-data',
                 Authorization: `Bearer ${textFromStorage}`
             },
@@ -82,7 +81,7 @@ const PostPut = () => {
                                 <p className="posts_content">{post.content}</p>
                         }
                         <div>
-                            <input type="file" name="image" accept="image/*" multiple={false} ref={fileImput} />
+                            {isEditing ? <input type="file" name="image" accept="image/*" multiple={false} ref={fileImput} /> : ""}
                         </div>
                         <img className="posts_img" src={post.imageUrl} alt="Post Img" />
                         <div className="posts_button">

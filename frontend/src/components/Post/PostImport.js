@@ -8,33 +8,6 @@ const idFromStorage = localStorage.getItem("id");
 const PostImport = () => {
     const [post, setPost] = useState([])
     let navigate = useNavigate();
-    //const [isEditing, setIsEditing] = useState(false);
-    //const [editContent, setEditContent] = useState("");
-
-    // const handleEdit = () => {
-    //     const data = {
-    //         name: post.names,
-    //         title: post.title,
-    //         content: editContent ? editContent : post.content,
-    //         imageUrl: "URL"
-    //     }
-    //     const urlPost = "http://localhost:3000/api/posts/" + post.id_post
-    //     const baseURL = urlPost
-    //     const requestOptions = {
-    //         method: 'PUT',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             Authorization: `Bearer ${textFromStorage}`
-    //         },
-    //         body: JSON.stringify({ data })
-    //     };
-    //     fetch(baseURL, requestOptions)
-    //         .then(response => response.json())
-    //         .then((data) => {
-    //             console.log(data)
-    //             setIsEditing(false);
-    //         });
-    // }
 
     const postFetch = () => {
         const baseURL = "http://localhost:3000/api/posts/" + idFromStorage
@@ -56,8 +29,8 @@ const PostImport = () => {
     }, [])
 
     function buttonCLickModify(post) {
-        navigate('../ChangePostId?id=' + post.id_post)
-        //window.location = '../ChangePostId?id=' + post.id_post
+        //navigate('../ChangePostId?id=' + post.id_post)
+        window.location = '../ChangePostId?id=' + post.id_post
     };
     function buttonClickDelete(post) {
         navigate('../DeletePost?id=' + post.id_post)
@@ -71,21 +44,12 @@ const PostImport = () => {
                     <div className="posts" key={index}>
                         <h4 className="posts_name">Post de {post.names}</h4>
                         <h4 className="posts_title">{post.title}</h4>
-                        {/* {
-                            isEditing ? <textarea defaultValue={post.content} onChange={(e) => setEditContent(e.target.value)} ></textarea> :
-                                <p className="posts_content">{post.content}</p>
-                        } */}
+
                         <p className="posts_content">{post.content}</p>
                         <img className="posts_img" src={post.imageUrl} alt="Post Img" />
 
                         <div className="posts_button">
-
                             <button className="posts_button_click" onClick={() => buttonCLickModify(post)}>Modifier</button>
-                            {/* {
-                                isEditing ? <button className="posts_button_click" onClick={() => handleEdit()}>Valider</button> :
-                                    <button className="posts_button_click" onClick={() => setIsEditing(true)}>Modifier</button>
-                            } */}
-
                             <button className="posts_button_click" onClick={() => buttonClickDelete(post)}>Supprimer</button>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router';
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { validEmail, validPassword } from '../components/regex/Regex';
 import userCreate from './UserCreate';
 import '../styles/components/authForm.css';
 
@@ -8,19 +9,33 @@ const CreateForm = () => {
     const emailImput = useRef();
     const passwordImput = useRef();
     let navigate = useNavigate();
-    // Permet de ne pas effacer les données saisies dans email et password lors du clic sur connecter s'il y a une erreur
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [emailErr, setEmailErr] = useState(false);
+    const [pwdError, setPwdError] = useState(false);
+
+    const validate = () => {
+        if (!validEmail.test(email)) {
+            setEmailErr(true)
+        } else { setEmailErr(false) }
+        if (!validPassword.test(password)) {
+            setPwdError(true)
+        } else { setPwdError(false) }
+    }
+
     const submitHandler = (event) => {
         event.preventDefault()
-        navigate('../')
-        // Permet de stocker les données saisies dans name, email et password
-        const enteredName = nameImput.current.value;
-        const enteredEmail = emailImput.current.value;
-        const enteredPassword = passwordImput.current.value;
-        userCreate(enteredName, enteredEmail, enteredPassword);
-
-        // Pour vider les champs après clic connecter si Ok
-        //emailImput.current.value="";
-        //passwordImput.current.value="";
+        console.log(emailErr)
+        if (emailErr !== true && pwdError !== true) {
+            navigate('../')
+            // Permet de stocker les données saisies dans name, email et password
+            const enteredName = nameImput.current.value;
+            const enteredEmail = emailImput.current.value;
+            const enteredPassword = passwordImput.current.value;
+            userCreate(enteredName, enteredEmail, enteredPassword);
+        } else {
+            alert("Vérifier la saisie de votre email et/ou de votre mot de passe pour respecter les consignes")
+        }
     }
 
     return (
@@ -31,15 +46,19 @@ const CreateForm = () => {
             </div>
             <div className='form'>
                 <label htmlFor='email'>Email</label>
-                <input type="email" id="email" ref={emailImput} required />
+                <input type="email" id="email" value={email} ref={emailImput} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div className='form'>
                 <label htmlFor='password'>Mot de passe</label>
-                <input type="password" id="password" ref={passwordImput} required />
+                <input type="password" id="password" value={password} ref={passwordImput} onChange={(e) => setPassword(e.target.value)} required />
             </div>
-
+            <p>Votre mot de passe doit comporter :
+                -au moins 1 caractère alphabétique minuscule
+                -au moins 1 caractère alphabétique majuscule
+                -au moins 1 caractère numérique
+                - doit comporter 6 caractères ou plus </p>
             <div className='formButton'>
-                <button>Connexion</button>
+                <button onClick={validate}>Créer votre compte</button>
             </div>
         </form>
     )

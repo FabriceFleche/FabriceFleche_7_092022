@@ -22,7 +22,7 @@ exports.createPost = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {
   const postObject = req.body;
   //const id = req.params.id;
-  const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null;
+  const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : req.body.image;
   db.query(
     "UPDATE posts SET title=?, content=?, imageUrl=? WHERE id_post=?",
     [postObject.title, postObject.content, imageUrl, postObject.id_post],
