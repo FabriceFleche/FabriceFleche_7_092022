@@ -18,9 +18,10 @@ exports.like = (req, res, next) => {
 
 exports.likeUser = (req, res, next) => {
   const postObject = req.body;
+  console.log(postObject);
   db.query(
     "INSERT INTO userslikes (id_post, user_id, liked) VALUES (?,?,?)",
-    [postObject.id_post, postObject.userId, true],
+    [postObject.id_post, postObject.userId, postObject.liked],
     function (err, results) {
       if (results) {
         res.status(201).json({ message: 'Vous aimez maintenant ce post !' })

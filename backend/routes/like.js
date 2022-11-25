@@ -4,7 +4,7 @@ const likeCtrl = require('../controllers/like');
 const auth = require('../middleware/auth');
 
 routerlike.post('/', auth, likeCtrl.like);
-routerlike.put('/', auth, likeCtrl.likeUser);
+routerlike.post('/likeUser', auth, likeCtrl.likeUser);
 
 //router.get('/', auth, likeCtrl.getLikes);
 

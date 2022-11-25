@@ -7,16 +7,6 @@ const userRoutes = require('./routes/user');
 const likeRoutes = require('./routes/like');
 require('dotenv').config();
 
-
-/*db.query(
-  'INSERT INTO  user(email, password) VALUES (?,?)',
-  ['Fabrice', 'Test'],
-  function(err, results) {
-    console.log(err)
-    console.log(results);
-  }
-);*/
-
 // Accès au corps de la requête de Json en JS
 app.use(express.json());
 
