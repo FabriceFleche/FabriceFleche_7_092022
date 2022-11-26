@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# P7 - Créez un réseau social d’entreprise
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projet 7 de la formation de Développeur web d'OpenClassrooms ! La mission consiste à construire un réseau social interne pour les employés de Groupomania.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Installez l'application de Groupomania
 
-### `npm start`
+### Backend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Le backend a été crée avec Node.js, Express.js et MySQL comme base de données.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Installation :
+Dans le terminal de VSCODE, situez-vous dans le dossier "/back".
+Taper "npm install" pour installer toutes les dépendances du backend.
 
-### `npm test`
+Development server :
+Taper "nodemon" pour avoir accès au serveur de développement. L'application va se recharger automatiquement si vous modifiez un fichier source.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
 
-### `npm run build`
+Le frontend a été crée avec React.js
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Installation
+Dans le dossier "/front", taper "npm install" pour installer toutes les dépendances du frontend.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Development server
+Taper "npm start" pour avoir accès au serveur de développement. L'application va se recharger automatiquement si vous modifiez un fichier source.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Si le navigateur ne s'ouvre pas automatiquement, allez à :
 
-### `npm run eject`
+http://localhost:3000/ ou http://localhost:3001/
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Droits Admin
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Pour tester les droits d'admin, changez la valeur sur le champ admin dans le tableau "user", de 0 à 1.

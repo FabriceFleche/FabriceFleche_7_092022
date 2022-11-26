@@ -19,7 +19,7 @@ function userLogin(enteredEmail, enteredPassword) {
             localStorage.setItem("id", id);
             localStorage.setItem("name", name);
             localStorage.setItem("admin", admin)
-            //window.location = '../home';
+            window.location = '../home';
         })
         .catch(function (err) { return err.status(500).json({ err }) })
 }

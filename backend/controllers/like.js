@@ -16,9 +16,9 @@ exports.like = (req, res, next) => {
   )
 };
 
+//Controleur pour l archivage des likes aimés par les users (table userlikes)
 exports.likeUser = (req, res, next) => {
   const postObject = req.body;
-  console.log(postObject);
   db.query(
     "INSERT INTO userslikes (id_post, user_id, liked) VALUES (?,?,?)",
     [postObject.id_post, postObject.userId, postObject.liked],
@@ -30,3 +30,28 @@ exports.likeUser = (req, res, next) => {
   )
 };
 
+// Controleur pour la récupération de toute les likes (table userslikes)
+exports.getLikes = (req, res, next) => {
+  db.query(
+    "SELECT * FROM userslikes ",
+    function (err, results) {
+      if (results) {
+        res.status(200).json(results)
+      } else { res.status(404).json({ err }) };
+    }
+  )
+};
+
+// Controleur pour la suppression d'un like user (table userslikes) 
+exports.deleteLike = (req, res, next) => {
+  const postObject = req.body;
+  db.query(
+    "DELETE FROM userslikes WHERE id_post=? && user_id=?",
+    [postObject.id_post, postObject.userId],
+    function (err, results) {
+      if (results) {
+        res.status(200).json(results)
+      } else { res.status(404).json({ err }) };
+    }
+  )
+};
