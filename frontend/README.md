@@ -5,6 +5,23 @@ Projet 7 de la formation de Développeur web d'OpenClassrooms ! La mission consi
 
 ## Installez l'application de Groupomania
 
+### Base de donnée
+
+#### Se connecter à MySQL :
+
+mysql -u root -p  (remplacer root par votre nom d'utilisateur, puis saisir le mot de passe)
+
+#### Dans MySQL : Créer une nouvelle BDD :
+
+CREATE DATABASE nom_de_la_base; (Remplacer "nom_de_la_base" par le nom souhaité)
+
+#### Dans MySQL : Ajouter les tables à la nouvelle base grace au fichier "Fleche_Fabrice_2_bdd_092022.sql" :
+
+mysql -u root -p nom_de_la_base < import_file .sqlmysql -u USERNAME -p DB_NAME < Fleche_Fabrice_2_bdd_092022.sql
+
+Il vous demandera le mot de passe. Entrez le mot de passe et il commencera à importer les données du fichier SQL.
+
+
 ### Backend
 
 Le backend a été crée avec Node.js, Express.js et MySQL comme base de données.
