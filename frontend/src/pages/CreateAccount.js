@@ -12,9 +12,9 @@ const CreateAccount = () => {
             <CreateForm />
             <p className='form_regex_title'>Votre mot de passe doit comporter :</p>
             <p className='form_regex_content'> - au moins 1 caractère alphabétique minuscule</p>
-            <p className='form_regex_content'>- au moins 1 caractère alphabétique majuscule</p>
+            <p className='form_regex_content'> - au moins 1 caractère alphabétique majuscule</p>
             <p className='form_regex_content'> - au moins 1 caractère numérique</p>
-            <p className='form_regex_content'>- doit comporter 6 caractères ou plus </p>
+            <p className='form_regex_content'> - doit comporter 6 caractères ou plus </p>
         </div>
     );
 };

@@ -1,6 +1,12 @@
 .post_content {
-    display: flex;
-    justify-content: center;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin: 5%;
+
+}
+
+.posts_button_click_one {
+    background-color: rgb(165, 213, 159);
+}
+
+.posts_button_click_two {
+    background-color: #EB797B;
 }

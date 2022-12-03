@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router';
 import PostDelete from "./PostDelete";
+import '../../styles/components/delPost.css';
 
 const DelPost = () => {
     let navigate = useNavigate();
@@ -14,8 +15,8 @@ const DelPost = () => {
 
     return (
         <div className='group'>
-            <button onClick={buttonClickConfirmDelete}>Supprimer le post</button>
-            <button onClick={buttonClickExitDelete}>Annuler la suppression</button>
+            <button className='group_button group_buttonOne' onClick={buttonClickConfirmDelete}>Supprimer le post</button>
+            <button className='group_button group_buttonTwo' onClick={buttonClickExitDelete}>Annuler la suppression</button>
         </div>
     )
 }

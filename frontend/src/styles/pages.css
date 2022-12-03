@@ -37,6 +37,11 @@ form {
     justify-content: space-around;
 }
 
+.connectionCreateUser {
+    margin-left: 12%;
+    margin-top: 5%;
+}
+
 @media all and (max-width: 991px) {
     .pagePosts {
         display: flex;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Banner from '../components/Banner';
-//import PostChangeUser from '../components/changePost/PostChangeUser'
+import Footer from '../components/Footer';
 import PostPut from '../components/changePost/PostPut';
 import Navigation from '../components/Navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,8 +14,8 @@ const ChangePostId = () => {
             <Banner />
             <Navigation />
             <h1 className='publications'><pre>{elementWarning}    Vous allez modifier votre post !</pre></h1>
-            {/* <PostChangeUser /> */}
             <PostPut />
+            <Footer />
         </div>
     );
 };

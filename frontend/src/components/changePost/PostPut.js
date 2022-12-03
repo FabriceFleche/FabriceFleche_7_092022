@@ -91,10 +91,10 @@ const PostPut = () => {
                         </div>
                         <div className="posts_button">
                             {
-                                isEditing ? <button className="posts_button_click" onClick={() => handleEdit()}>Valider</button> :
-                                    <button className="posts_button_click" onClick={() => setIsEditing(true)}>Modifier</button>
+                                isEditing ? <button className="posts_button_click posts_button_click_one" onClick={() => handleEdit()}>Valider</button> :
+                                    <button className="posts_button_click posts_button_click_two" onClick={() => setIsEditing(true)}>Modifier</button>
                             }
-                            <button className="posts_button_click" onClick={() => returned()}>Retour</button>
+                            <button className="posts_button_click posts_button_click_one" onClick={() => returned()}>Retour</button>
                         </div>
                     </div>
                 );
