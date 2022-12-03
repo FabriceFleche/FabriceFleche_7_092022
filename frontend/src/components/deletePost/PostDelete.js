@@ -19,10 +19,10 @@ function PostDelete() {
     };
     fetch(baseURL, requestOptions)
         .then(response => response.json())
-    // .then((data) => {
-    //     console.log(data);
-    //     //window.location = '../myPosts';
-    // });
+        .then((data) => {
+            console.log(data);
+            window.location = '../myPosts';
+        });
 }
 
 export default PostDelete;

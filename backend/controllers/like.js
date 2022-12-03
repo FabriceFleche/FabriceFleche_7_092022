@@ -55,3 +55,15 @@ exports.deleteLike = (req, res, next) => {
     }
   )
 };
+
+//Controleur pour test avec gestion like user
+// exports.getUserLike = (req, res, next) => {
+//   db.query(
+//     "SELECT * FROM posts INNER JOIN userslikes ON posts.id_post = userslikes.id_post AND posts.user_id = userslikes.user_id",
+//     function (err, data) {
+//       if (data) {
+//         res.status(200).json(data)
+//       } else { res.status(404).json({ err }) };
+//     }
+//   )
+// }

@@ -22,4 +22,7 @@ routerPost.patch('/', auth, multer, postCtrl.modifyPost);
 // Creation de la route pour le suppression d un post avec verif du token
 routerPost.delete('/:id', auth, postCtrl.deletePost);
 
+// Creation de la route pour la recuperation des likes de l'user avec verif du token
+routerPost.get('/getLikeUser/:id', auth, postCtrl.getLikeUser);
+
 module.exports = routerPost;

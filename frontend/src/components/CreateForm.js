@@ -52,11 +52,6 @@ const CreateForm = () => {
                 <label htmlFor='password'>Mot de passe</label>
                 <input type="password" id="password" value={password} ref={passwordImput} onChange={(e) => setPassword(e.target.value)} required />
             </div>
-            <p>Votre mot de passe doit comporter :
-                -au moins 1 caractère alphabétique minuscule
-                -au moins 1 caractère alphabétique majuscule
-                -au moins 1 caractère numérique
-                - doit comporter 6 caractères ou plus </p>
             <div className='formButton'>
                 <button onClick={validate}>Créer votre compte</button>
             </div>

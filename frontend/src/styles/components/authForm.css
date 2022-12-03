@@ -1,5 +1,5 @@
 .form {
-
+    width: 50%;
     margin: 0 auto;
     margin-bottom: 10%;
 }
@@ -8,4 +8,21 @@
     display: flex;
     justify-content: center;
     padding-bottom: 20%;
+}
+
+.form_regex_title {
+    margin-left: 20%;
+    margin-bottom: 2%;
+    font-weight: bold;
+}
+
+.form_regex_content {
+    margin-left: 25%;
+    margin-bottom: 1%;
+}
+
+
+.form_regex {
+    width: 100%;
+    margin-left: 20%;
 }

@@ -1,6 +1,6 @@
 //import { useNavigate } from 'react-router';
 import { useRef } from "react";
-import userLogin from './UserLogin';
+import UserLogin from './UserLogin';
 import '../styles/components/authForm.css';
 
 const AuthForm = () => {
@@ -14,8 +14,9 @@ const AuthForm = () => {
         // Permet de stocker les données saisies dans email et password
         const enteredEmail = emailImput.current.value;
         const enteredPassword = passwordImput.current.value;
-        userLogin(enteredEmail, enteredPassword);
+        UserLogin(enteredEmail, enteredPassword);
         //navigate('../home')
+
         // Pour vider les champs après clic connecter si Ok
         //emailImput.current.value="";
         //passwordImput.current.value="";

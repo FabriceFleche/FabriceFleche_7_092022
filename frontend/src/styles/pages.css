@@ -3,7 +3,7 @@
 form {
     width: 200px;
     margin: 0 auto;
-    margin-top: 150px;
+    margin-top: 10%;
 }
 
 .connectionTitle {
@@ -30,6 +30,18 @@ form {
     justify-content: center;
     color: black;
     margin-bottom: 5%;
+}
+
+.pagePosts {
+    display: flex;
+    justify-content: space-around;
+}
+
+@media all and (max-width: 991px) {
+    .pagePosts {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 /* ---------------Page Admin ---------------------------------*/

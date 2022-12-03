@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from 'react-router';
 import '../../styles/components/postsImport.css';
+import '../../styles/components/postPut.css';
 
 const textFromStorage = localStorage.getItem("token");
 
@@ -70,20 +71,24 @@ const PostPut = () => {
 
 
     return (
-        <div>
+        <div className="pagePosts">
             {post.map((post, index) => {
                 return (
                     <div className="posts" key={index}>
                         <h4 className="posts_name">Post de {post.names}</h4>
                         <h4 className="posts_title">{post.title}</h4>
-                        {
-                            isEditing ? <textarea defaultValue={post.content} onChange={(e) => setEditContent(e.target.value)} ></textarea> :
-                                <p className="posts_content">{post.content}</p>
-                        }
-                        <div>
+                        <div className="post_content">
+                            {
+                                isEditing ? <textarea defaultValue={post.content} onChange={(e) => setEditContent(e.target.value)} ></textarea> :
+                                    <p className="posts_content">{post.content}</p>
+                            }
+                        </div>
+                        <div className="post_img">
                             {isEditing ? <input type="file" name="image" accept="image/*" multiple={false} ref={fileImput} /> : ""}
                         </div>
-                        <img className="posts_img" src={post.imageUrl} alt="Post Img" />
+                        <div className="post_img">
+                            <img className="posts_img" src={post.imageUrl} alt="" />
+                        </div>
                         <div className="posts_button">
                             {
                                 isEditing ? <button className="posts_button_click" onClick={() => handleEdit()}>Valider</button> :

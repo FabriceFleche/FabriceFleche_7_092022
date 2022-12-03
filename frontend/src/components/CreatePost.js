@@ -34,10 +34,10 @@ const CreatePost = () => {
                 <input className="input" type="text" id="title" ref={titleImput} required />
             </div>
             <div className='group'>
-                <label htmlFor='text'>Commentaire...</label>
+                <label htmlFor='text'>Commentaire</label>
                 <textarea className="inputContent" type="text" id="content" ref={contentImput} required />
             </div>
-            <div>
+            <div className='group'>
                 <input type="file" name="image" accept="image/*" multiple={false} ref={fileImput} />
             </div>
             <div className='group_button'>

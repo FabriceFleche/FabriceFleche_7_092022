@@ -9,6 +9,8 @@
     padding-bottom: 5%;
     border-top: 2px solid black;
     border-bottom: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 6px 3px 3px rgba(49, 94, 178, 0.303);
 }
 
 .navigation_ul_li {

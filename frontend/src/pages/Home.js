@@ -10,7 +10,7 @@ const Home = () => {
         <div>
             <Banner />
             <Navigation />
-            <h2 className='publications'>Ici vous visualisez l'ensemble des publications du personnel</h2>
+            <h2 className='publications'>Vous visualisez l'ensemble des publications du personnel</h2>
             <PostsImport />
             <Footer />
         </div>

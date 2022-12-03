@@ -1,7 +1,6 @@
 .footer_ul {
     display: flex;
     justify-content: space-around;
-
     background-color: #4E5166;
     text-decoration: none;
     margin-top: 5%;
@@ -9,6 +8,8 @@
     padding-top: 2%;
     padding-bottom: 2%;
     border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 6px 3px 3px rgba(49, 94, 178, 0.303);
 
 }
 
