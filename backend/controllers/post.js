@@ -53,18 +53,34 @@ exports.modifyPost = (req, res, next) => {
 // Controleur pour la suppression d'un post 
 exports.deletePost = (req, res, next) => {
   const id = req.params.id;
+  function deletePost() {
+
+    db.query(
+      "DELETE FROM posts WHERE id_post=?",
+      [id]
+    ), (err, result) => {
+
+      res.status(400).json({ message: 'Post supprimé !' });
+
+    }
+
+  }
   db.query(
     "SELECT imageUrl FROM posts WHERE id_post=?",
     [id],
     function (err, results) {
-      if (results != (NULL)) {
-        const filename = results.split('/images/');
-        fs.unlink(`images/${filename}`, () => { res.status(201).json({ message: 'Post et image supprimés !' }) })
-      } else { { res.status(400).json({ message: 'Post supprimé !' }) } }
-      db.query(
-        "DELETE FROM posts WHERE id_post=?",
-        [id]
-      )
+      if (results.length !== 0) {
+        const filename = results[0].imageUrl.split('/images/').pop();
+
+        fs.unlink(`images/${filename}`, () => {
+          deletePost();
+        })
+      } else {
+
+        deletePost();
+
+      }
+
     }
   )
 }

@@ -177,6 +177,7 @@ const PostsImport = () => {
                 return (
                     <div className="posts" key={index}>
                         <h4 className="posts_name">Post de {posts.names}</h4>
+                        <h4 className="date">Posté le </h4>
                         <h4 className="posts_title">{posts.title}</h4>
                         <p className="posts_content">{posts.content}</p>
                         <div className="post_img">
