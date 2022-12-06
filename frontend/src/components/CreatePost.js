@@ -8,7 +8,7 @@ const CreatePost = () => {
     const titleImput = useRef();
     const contentImput = useRef();
     const fileImput = useRef();
-    let navigate = useNavigate();
+    //let navigate = useNavigate();
     // Permet de ne pas effacer les données saisies dans email et password lors du clic sur connecter s'il y a une erreur
     const submitHandlerBis = (event) => {
         event.preventDefault()
@@ -20,15 +20,11 @@ const CreatePost = () => {
         const enteredFile = fileImput.current.files[0];
 
         PostCreate(enteredTitle, enteredContent, enteredFile);
-        navigate('../MyPosts')
+        //navigate('../MyPosts')
     }
 
     return (
         <form className="formCreatepost" onSubmit={submitHandlerBis}>
-            {/* <div className='group'>
-                <label htmlFor='text'>Pseudo</label>
-                <input className="input" type="text" id="name" ref={nameImput} required />
-            </div> */}
             <div className='group'>
                 <label htmlFor='text'>Titre</label>
                 <input className="input" type="text" id="title" ref={titleImput} required />

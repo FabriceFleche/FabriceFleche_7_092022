@@ -171,27 +171,40 @@ const PostsImport = () => {
         } else { alert("Vous n'avez pas aimé ce post !") }
     }
 
+    const dateFormater = (date) => {
+        let newDate = new Date(date).toLocaleDateString("fr-FR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric"
+        });
+        return newDate;
+    }
+
     return (
         <div className="pagePosts">
-            {posts.map((posts, index) => {
-                return (
-                    <div className="posts" key={index}>
-                        <h4 className="posts_name">Post de {posts.names}</h4>
-                        <h4 className="date">Posté le </h4>
-                        <h4 className="posts_title">{posts.title}</h4>
-                        <p className="posts_content">{posts.content}</p>
-                        <div className="post_img">
-                            <img className="posts_img" src={posts.imageUrl} alt="" />
+            {posts
+                .sort((a, b) => b.date - a.date)
+                .map((posts, index) => {
+                    return (
+                        <div className="posts" key={index}>
+                            <h4 className="posts_name">Post de {posts.names}</h4>
+                            <h4 className="date">Posté le {dateFormater(posts.date)}</h4>
+                            <h4 className="posts_title">{posts.title}</h4>
+                            <p className="posts_content">{posts.content}</p>
+                            <div className="post_img">
+                                <img className="posts_img" src={posts.imageUrl} alt="" />
+                            </div>
+                            <em className="posts_numberLike">Ce post est aimé par {posts.likes} personne-s</em>
+                            <div className="posts_btn_like">
+                                {<button className="posts_dislike" onClick={() => { disLikePost(posts.id_post) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>}
+                                {<button className="posts_like" onClick={() => likePost(posts.id_post)}>Pour aimer ce post {elementLikeWhite}</button>}
+                            </div>
+                            {/* {!liked && <button className="posts_like" style={{ backgroundColor: 'white' }} onClick={() => likePost(posts.id_post)}>Pour aimer ce post, cliquer ici {elementLikeWhite}</button>} */}
                         </div>
-                        <em className="posts_numberLike">Ce post est aimé par {posts.likes} personne-s</em>
-                        <div className="posts_btn_like">
-                            {<button className="posts_dislike" onClick={() => { disLikePost(posts.id_post) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>}
-                            {<button className="posts_like" onClick={() => likePost(posts.id_post)}>Pour aimer ce post {elementLikeWhite}</button>}
-                        </div>
-                        {/* {!liked && <button className="posts_like" style={{ backgroundColor: 'white' }} onClick={() => likePost(posts.id_post)}>Pour aimer ce post, cliquer ici {elementLikeWhite}</button>} */}
-                    </div>
-                );
-            })}
+                    );
+                })}
         </div>
     )
 }

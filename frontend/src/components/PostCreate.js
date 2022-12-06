@@ -1,10 +1,12 @@
 const textFromStorage = localStorage.getItem("token");
 const idFromStorage = localStorage.getItem("id");
 const nameFromStorage = localStorage.getItem("name");
+const now = new Date();
+const date = now.getTime();
 
 function PostCreate(enteredTitle, enteredContent, enteredFile) {
     const formData = new FormData();
-    console.log(enteredFile)
+    formData.append("date", date)
     formData.append("userId", idFromStorage)
     formData.append("name", nameFromStorage)
     formData.append("title", enteredTitle)
@@ -26,7 +28,7 @@ function PostCreate(enteredTitle, enteredContent, enteredFile) {
         .then((data) => {
             console.log(data)
             alert('Votre post a été créé')
-            //window.location = '../MyPosts';
+            window.location = '../MyPosts';
         });
 }
 

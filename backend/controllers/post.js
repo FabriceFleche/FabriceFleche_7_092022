@@ -7,8 +7,8 @@ exports.createPost = (req, res, next) => {
   const postObject = req.body;
   const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null;
   db.query(
-    'INSERT INTO  posts(user_id, names, title, content, imageUrl, likes) VALUES (?,?,?,?,?,?)',
-    [postObject.userId, postObject.name, postObject.title, postObject.content, imageUrl, 0],
+    'INSERT INTO  posts(user_id, names, title, content, imageUrl, date, likes) VALUES (?,?,?,?,?,?,?)',
+    [postObject.userId, postObject.name, postObject.title, postObject.content, imageUrl, postObject.date, 0],
     function (err, results) {
       if (results) {
         res.status(201).json({ message: 'Post enregistré' })
@@ -32,23 +32,6 @@ exports.modifyPost = (req, res, next) => {
     }
   )
 };
-
-// Controleur pour la suppression d'un post 
-// exports.deletePost = (req, res, next) => {
-//   const id = req.params.id;
-//   db.query(
-//     "DELETE FROM posts WHERE id_post=?",
-//     [id],
-//     function (err, results) {
-//       if (results) {
-//         if (results.imageUrl != null) {
-//           const filename = results.imageUrl.split('/images/')[1];
-//           fs.unlink(`images/${filename}`, () => { res.status(201).json({ message: 'Post et image supprimés !' }) })
-//         } else { { res.status(400).json({ message: 'Post supprimé !' }) } }
-//       } else { res.status(401).json({ message: 'Non autorisé' }) };
-//     }
-//   )
-// };
 
 // Controleur pour la suppression d'un post 
 exports.deletePost = (req, res, next) => {
