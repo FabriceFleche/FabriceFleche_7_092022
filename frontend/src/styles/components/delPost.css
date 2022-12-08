@@ -28,3 +28,9 @@
 .group_buttonTwo {
     background-color: rgb(165, 213, 159);
 }
+
+@media all and (max-width: 991px) {
+    .group_button {
+        width: 100%;
+    }
+}

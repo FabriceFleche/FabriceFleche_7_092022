@@ -16,3 +16,16 @@
 .navigation_ul_li {
     color: white;
 }
+
+@media all and (max-width: 991px) {
+    .navigation_ul {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .navigation_ul_li {
+        text-align: center;
+        font-size: small;
+        margin-bottom: 1%;
+    }
+}

@@ -29,6 +29,8 @@
 }
 
 .posts_content {
+    width: 100%;
+    word-wrap: break-word;
     padding-left: 5px;
     color: black;
     padding-top: 3%;
@@ -101,6 +103,10 @@
 @media all and (max-width: 991px) {
     .posts {
         background-color: whitesmoke;
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+
 
     }
 }

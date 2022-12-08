@@ -17,3 +17,15 @@
     color: white;
     font-size: small;
 }
+
+@media all and (max-width: 991px) {
+    .footer_ul {
+        flex-direction: column;
+    }
+
+    .footer_ul_li {
+        text-align: center;
+        font-size: small;
+        margin-bottom: 1%;
+    }
+}

@@ -3,17 +3,6 @@ import '../../styles/components/postsImport.css';
 
 const textFromStorage = localStorage.getItem("token");
 
-//if (1 == 1) { Administrateur() } else { alert("ca fonctionne") };
-// function testNum() {
-
-//     if (1 == 0) {
-//         Administrateur();
-//     } else {
-//         alert("ca fonctionne");
-//     }
-
-// }
-
 const Administrateur = () => {
     const [post, setPost] = useState([])
 
@@ -44,7 +33,7 @@ const Administrateur = () => {
     };
 
     return (
-        <div>
+        <div className="pagePosts">
             {post.map((post, index) => {
                 return (
                     <div className="posts" key={index}>

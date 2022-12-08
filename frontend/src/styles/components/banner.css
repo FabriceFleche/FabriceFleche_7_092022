@@ -2,3 +2,9 @@
 
     margin: 40px;
 }
+
+@media all and (max-width: 991px) {
+    .groupomania-banner img {
+        width: 90%;
+    }
+}
