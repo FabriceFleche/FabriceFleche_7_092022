@@ -1,6 +1,7 @@
 .groupomania-banner {
 
     margin: 40px;
+    text-align: center;
 }
 
 @media all and (max-width: 991px) {

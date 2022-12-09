@@ -18,7 +18,13 @@
     font-size: small;
 }
 
-@media all and (max-width: 991px) {
+@media all and (min-width: 768px) and (max-width: 991px) {
+    .footer_ul {
+        flex-direction: row;
+    }
+}
+
+@media all and (max-width: 768px) {
     .footer_ul {
         flex-direction: column;
     }

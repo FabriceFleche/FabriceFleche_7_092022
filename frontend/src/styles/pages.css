@@ -11,12 +11,14 @@ form {
     margin-bottom: 5%;
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .connectionIdent {
     display: flex;
     justify-content: center;
-    color: #4E5166
+    color: #4E5166;
+    text-align: center;
 }
 
 .connectionCreateUser {
@@ -43,7 +45,23 @@ form {
     margin-top: 5%;
 }
 
-@media all and (max-width: 991px) {
+.date {
+    font-size: small;
+}
+
+@media all and (min-width: 768px) and (max-width: 991px) {
+    .pagePosts {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .publications {
+        text-align: center;
+    }
+}
+
+@media all and (max-width: 768px) {
     .pagePosts {
         display: flex;
         flex-direction: column;

@@ -17,7 +17,7 @@ function UserNoAdmin(props) {
 
 function TestAdmin() {
     //const isLoggedIn = props.isLoggedIn;
-    if (admin > 0) {
+    if (admin === "77") {
         return <UserAdmin />;
     }
     return <UserNoAdmin />;
