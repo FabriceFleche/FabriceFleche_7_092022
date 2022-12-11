@@ -2,7 +2,7 @@ import React from 'react';
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
-import PostsImport from '../components/PostsImport';
+import PostsImport from '../components/posts/PostsImport';
 import '../styles/pages.css';
 
 const Home = () => {

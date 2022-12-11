@@ -1,6 +1,7 @@
 .post_content {
     margin: 5%;
-
+    display: flex;
+    justify-content: center;
 }
 
 .posts_button_click_one {

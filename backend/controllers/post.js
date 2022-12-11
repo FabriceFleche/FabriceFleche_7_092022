@@ -106,19 +106,33 @@ exports.getAllPost = (req, res, next) => {
   )
 };
 
-
 // Controleur pour la récupération de toute les posts (test avec gestion like user)
-exports.getLikeUser = (req, res, next) => {
+let arrayLike = []
+exports.getLikeUser = (req, result, next) => {
   const user = req.params.id
   db.query(
     "SELECT id_post FROM userslikes WHERE user_id=?",
     [user],
     function (err, results) {
-      if (results) {
-
-        res.status(200).json(results)
-      } else { res.status(404).json({ err }) };
-
+      results.map((userlike) => {
+        console.log(userlike.id_post)
+        db.query(
+          "SELECT * FROM posts",
+          function (err, res) {
+            //console.log(res)
+            for (var postlike of res) {
+              if (postlike.id_post == userlike.id_post) {
+                postlike.likeUser = "like"
+              } else { postlike.likeUser = "dislike" };
+              //console.log(postlike.id_post, postlike.likeUser);
+              arrayLike.push(postlike)
+              //console.log(arrayLike)
+            }
+          }
+        )
+      })
+      console.log(arrayLike)
+      result.status(200).json(arrayLike)
     }
   )
 }

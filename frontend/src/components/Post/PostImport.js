@@ -29,8 +29,8 @@ const PostImport = () => {
     }, [])
 
     function buttonCLickModify(post) {
-        //navigate('../ChangePostId?id=' + post.id_post)
-        window.location = '../ChangePostId?id=' + post.id_post
+        navigate('../ChangePostId?id=' + post.id_post)
+        //window.location = '../ChangePostId?id=' + post.id_post
     };
     function buttonClickDelete(post) {
         //navigate('../DeletePost?id=' + post.id_post)

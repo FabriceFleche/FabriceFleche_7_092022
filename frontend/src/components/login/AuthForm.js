@@ -1,7 +1,7 @@
 //import { useNavigate } from 'react-router';
 import { useRef } from "react";
 import UserLogin from './UserLogin';
-import '../styles/components/authForm.css';
+import '../../styles/components/authForm.css';
 
 const AuthForm = () => {
     const emailImput = useRef();

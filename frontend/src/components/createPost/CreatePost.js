@@ -1,10 +1,9 @@
-import { useNavigate } from 'react-router';
+//import { useNavigate } from 'react-router';
 import { useRef } from "react";
 import PostCreate from "./PostCreate";
-import '../styles/components/createPost.css';
+import '../../styles/components/createPost.css';
 
 const CreatePost = () => {
-    //const nameImput = useRef();
     const titleImput = useRef();
     const contentImput = useRef();
     const fileImput = useRef();
@@ -14,7 +13,6 @@ const CreatePost = () => {
         event.preventDefault()
 
         // Permet de stocker les données saisies dans name, email, password et image
-        //const enteredName = nameImput.current.value;
         const enteredTitle = titleImput.current.value;
         const enteredContent = contentImput.current.value;
         const enteredFile = fileImput.current.files[0];
@@ -36,7 +34,7 @@ const CreatePost = () => {
             <div className='group'>
                 <input type="file" name="image" accept="image/*" multiple={false} ref={fileImput} />
             </div>
-            <div className='group_button'>
+            <div className='group_button_create'>
                 <button className="formCreatepost_button">Créer le post</button>
             </div>
         </form>

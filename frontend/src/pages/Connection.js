@@ -1,6 +1,6 @@
 import React from 'react';
 import Banner from '../components/Banner';
-import AuthForm from '../components/AuthForm';
+import AuthForm from '../components/login/AuthForm';
 import { NavLink } from 'react-router-dom';
 import '../styles/pages.css';
 

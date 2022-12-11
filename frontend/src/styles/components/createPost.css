@@ -25,7 +25,7 @@
     display: block;
 }
 
-.group_button {
+.group_button_create {
     display: flex;
     justify-content: center;
     margin: 4%;

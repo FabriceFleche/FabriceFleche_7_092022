@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import '../styles/components/postsImport.css';
+import '../../styles/components/postsImport.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-//import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { faThumbsDown } from '@fortawesome/free-regular-svg-icons'
 
@@ -11,7 +10,6 @@ const textFromStorage = localStorage.getItem("token");
 const idFromStorage = localStorage.getItem("id");
 
 // Importation des icones like
-//const elementHeartBlack = <FontAwesomeIcon icon={faHeart} />
 const elementLikeWhite = <FontAwesomeIcon icon={faThumbsUp} />
 const elementDislikeWhite = <FontAwesomeIcon icon={faThumbsDown} />
 
@@ -46,34 +44,33 @@ const PostsImport = () => {
         };
         fetch(baseURLLike, requestOptionsLike)
             .then(response => { return response.json() })
-            .then((data) => { setUserLike(data) })
+            .then((result) => { setUserLike(result) })
             .catch((err) => console.log(err));
     }
-
 
     // Vérification des likes post / user
-    const getLike = () => {
-        const baseURLVerif = "http://localhost:3000/api/like/"
-        const requestOptionsVerif = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${textFromStorage}`
-            }
-        };
-        fetch(baseURLVerif, requestOptionsVerif)
-            .then(response => { return response.json() })
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err));
+    // const getLike = () => {
+    //     const baseURLVerif = "http://localhost:3000/api/like/"
+    //     const requestOptionsVerif = {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             Authorization: `Bearer ${textFromStorage}`
+    //         }
+    //     };
+    //     fetch(baseURLVerif, requestOptionsVerif)
+    //         .then(response => { return response.json() })
+    //     //.then((data) => console.log(data))
+    //     //.catch((err) => console.log(err));
 
-    }
+    // }
 
     useEffect(() => {
         postsFetch()
-        getLike()
+        //getLike()
     }, [])
 
-    console.log(userLike)
+    //console.log(userLike)
     const likePost = (postId) => {
         const result = userLike.filter(userLik => postId === userLik);
         console.log(result)
@@ -97,7 +94,7 @@ const PostsImport = () => {
                 .then((data) => {
                     console.log(data)
                     //setLiked(true)
-                    //window.location = '../home'
+                    window.location = '../home'
                 })
                 .catch((err) => console.log(err));
 
@@ -146,7 +143,7 @@ const PostsImport = () => {
                 .then((data) => {
                     console.log(data)
                     //setLiked(false)
-                    //window.location = '../home'
+                    window.location = '../home'
                 })
                 .catch((err) => console.log(err));
 
@@ -181,7 +178,7 @@ const PostsImport = () => {
         });
         return newDate;
     }
-
+    console.log(userLike)
     return (
         <div className="pagePosts">
             {posts

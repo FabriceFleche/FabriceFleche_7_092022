@@ -25,8 +25,7 @@ function PostCreate(enteredTitle, enteredContent, enteredFile) {
     };
     fetch(baseURL, requestOptions)
         .then(response => response.json())
-        .then((data) => {
-            console.log(data)
+        .then(() => {
             alert('Votre post a été créé')
             window.location = '../MyPosts';
         });

@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const db = require("../middleware/dbConnection.js");
 require('dotenv').config();
 
-
 // Controleur pour la creation du compte utilisateur
 exports.signup = (req, res, next) => {
     bcrypt
@@ -28,7 +27,7 @@ exports.signup = (req, res, next) => {
         .catch(error => { res.status(500).json({ error }) });
 };
 
-// // Controleur pour la connexion de l'utilisateur
+// Controleur pour la connexion de l'utilisateur
 exports.login = (req, res, next) => {
     const email = req.body.email;
     db.query(
@@ -71,38 +70,6 @@ exports.login = (req, res, next) => {
         }
     )
 };
-
-// Controleur pour la connexion de l'utilisateur
-// exports.login = (req, res, next) => {
-//     const email = req.body.email;
-//     db.query(
-//         "SELECT user_id, name, password, isAdmin FROM user WHERE email= ?",
-//         [email],
-//         function (error, results) {
-//             bcrypt.compare(req.body.password, results[0].password)
-//                 .then(valid => {
-//                     if (!valid) {
-//                         res.status(401).json({ message: 'Paire identifiant/mot de passe incorrecte' })
-//                     } else {
-//                         res.status(200).json({
-//                             userId: results[0].user_id,
-//                             isAdmin: results[0].isAdmin,
-//                             name: results[0].name,
-//                             token: jwt.sign(
-//                                 { userId: results[0].user_id },
-//                                 process.env.token,
-//                                 { expiresIn: '24h' }
-//                             )
-//                         })
-//                     };
-//                 })
-//                 .catch(error => {
-//                     res.status(500).json({ error });
-//                 });
-//         }
-//     )
-// }
-
 
 // Controleur pour la recuperation du nom de l'utilisateur lors de la creation d un post
 exports.name = (req, res, next) => {

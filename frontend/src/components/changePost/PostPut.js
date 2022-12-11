@@ -38,8 +38,7 @@ const PostPut = () => {
         };
         fetch(baseURL, requestOptions)
             .then(response => response.json())
-            .then((data) => {
-                console.log(data)
+            .then(() => {
                 setIsEditing(false)
                 navigate('../MyPosts')
                 //window.location = '../../myPosts'

@@ -39,4 +39,5 @@ http://localhost:3000/ ou http://localhost:3001/
 
 
 D) Droits Admin
-Pour tester les droits administrateur, changez la valeur du champ "admin" dans le tableau "user", de 0 à 77.
+Pour tester les droits administrateur, changez la valeur du champ "admin" dans le tableau "user" de la BDD, de 0 à 77.
+Pour visualiser le mode "administrateur", vous devez cliquer sur "admin" dans le "footer"

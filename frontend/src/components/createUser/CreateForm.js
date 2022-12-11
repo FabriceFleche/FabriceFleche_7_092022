@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router';
 import { useRef, useState } from "react";
-import { validEmail, validPassword } from '../components/regex/Regex';
+import { validEmail, validPassword } from '../regex/Regex';
 import userCreate from './UserCreate';
-import '../styles/components/authForm.css';
+import '../../styles/components/authForm.css';
 
 const CreateForm = () => {
     const nameImput = useRef();

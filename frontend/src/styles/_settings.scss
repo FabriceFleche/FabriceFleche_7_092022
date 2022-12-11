@@ -1,14 +1,4 @@
-// $font-1: sans-serif;
-
-// $color-1: #61dafb;
-// $color-2: salmon;
-// $color-3: #282c34;
-// $white: rgb(243, 243, 243);
-
 @mixin verticalCenter {
-    // display: flex;
-    justify-content: center;
-    align-items: center;
     max-width: 1000px;
     margin: auto !important;
 }
@@ -18,12 +8,10 @@
     margin: 0;
     box-sizing: border-box;
     font-family: Lato;
+    text-decoration: none;
 }
 
 body {
-    //background: $white;
-    //font-family: $font-1;
-    //width: 100%;
     background-color: #FFD7D7;
     @include verticalCenter;
 }
@@ -32,4 +20,8 @@ li {
     list-style-type: none;
 }
 
-@media all and (max-width: 991px) {}
+textarea {
+    align-items: center;
+    width: 80%;
+    height: 90px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Banner from '../components/Banner';
-import CreateForm from '../components/CreateForm';
+import CreateForm from '../components/createUser/CreateForm';
 import '../styles/pages.css';
 import '../styles/components/authForm.css';
 
