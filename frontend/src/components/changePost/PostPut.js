@@ -40,8 +40,8 @@ const PostPut = () => {
             .then(response => response.json())
             .then(() => {
                 setIsEditing(false)
-                navigate('../MyPosts')
-                //window.location = '../../myPosts'
+                //navigate('../MyPosts')
+                window.location = '../../myPosts'
             });
     }
 

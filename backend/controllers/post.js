@@ -106,36 +106,92 @@ exports.getAllPost = (req, res, next) => {
   )
 };
 
-// Controleur pour la récupération de toute les posts (test avec gestion like user)
-let arrayLike = []
+// Controleur pour la récupération de tous les posts (test avec gestion like user)
+let arrayOfpostsLiked = []
 exports.getLikeUser = (req, result, next) => {
   const user = req.params.id
   db.query(
     "SELECT id_post FROM userslikes WHERE user_id=?",
     [user],
     function (err, results) {
-      results.map((userlike) => {
-        console.log(userlike.id_post)
-        db.query(
-          "SELECT * FROM posts",
-          function (err, res) {
-            //console.log(res)
-            for (var postlike of res) {
-              if (postlike.id_post == userlike.id_post) {
-                postlike.likeUser = "like"
-              } else { postlike.likeUser = "dislike" };
-              //console.log(postlike.id_post, postlike.likeUser);
-              arrayLike.push(postlike)
-              //console.log(arrayLike)
-            }
-          }
-        )
+      results.map((like) => {
+        arrayOfpostsLiked = []
+        arrayOfpostsLiked.push(like.id_post);
       })
-      console.log(arrayLike)
-      result.status(200).json(arrayLike)
+      console.log(arrayOfpostsLiked)
+    }
+  )
+  db.query(
+    "SELECT * FROM posts",
+    function (err, res) {
+      res = res.map((post) => {
+        if (arrayOfpostsLiked.includes(post.id_post) === true) {
+          post.isLiked = true;
+        } else {
+          post.isLiked = false;
+        }
+        return post
+      })
+      //console.log(res)
+      result.status(200).json(res)
     }
   )
 }
+
+
+//       db.query(
+//         "SELECT * FROM posts",
+//         function (err, res) {
+//           res = res.map((post) => {
+//             if (arrayOfpostsLiked.includes(post.id_post) === true) {
+//               post.isLiked = true;
+//             } else {
+//               post.isLiked = false;
+//               //console.log(post)
+//             }
+//             return post;
+//           })
+//           result.status(200).json(res)
+//         }
+//       )
+//     }
+//   )
+// }
+      //results.map((userlike) => {
+      //console.log(userlike.id_post)
+//       db.query(
+//         "SELECT * FROM posts",
+//         function (err, res) {
+//           res = res.map((post) => {
+//             if (results.id_post.includes(post.id_post) === true) {
+//               post.isLiked = true;
+//             } else {
+//               post.isLiked = false;
+//             }
+//             console.log(res)
+//             //return post;
+
+//             //res.status(200).json(post)
+//           });
+
+//           //console.log(res)
+//           // for (var postlike of res) {
+//           //   if (postlike.id_post === userlike.id_post) {
+//           //     postlike.likeUser = "like"
+//           //   } else { postlike.likeUser = "dislike" };
+//           //   //console.log(postlike.id_post, postlike.likeUser);
+//           //   arrayLike.push(postlike)
+//           //   //console.log(arrayLike)
+//           // }
+//           //console.log(arrayLike.length)
+//         }
+
+//       )
+//       //console.log(post);
+//     }
+//     //console.log(arrayLike.length)
+//   )
+// }
 
 
 //Controleur pour la gestion du like / user

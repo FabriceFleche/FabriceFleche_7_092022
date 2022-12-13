@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { faThumbsDown } from '@fortawesome/free-regular-svg-icons'
 
-
 // Récupération du token
 const textFromStorage = localStorage.getItem("token");
 const idFromStorage = localStorage.getItem("id");
@@ -15,7 +14,6 @@ const elementDislikeWhite = <FontAwesomeIcon icon={faThumbsDown} />
 
 const PostsImport = () => {
     const [posts, setPosts] = useState([])
-    //const [liked, setLiked] = useState([])
     const [userLike, setUserLike] = useState([])
 
     // Recuperation de tous les posts
@@ -48,29 +46,10 @@ const PostsImport = () => {
             .catch((err) => console.log(err));
     }
 
-    // Vérification des likes post / user
-    // const getLike = () => {
-    //     const baseURLVerif = "http://localhost:3000/api/like/"
-    //     const requestOptionsVerif = {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             Authorization: `Bearer ${textFromStorage}`
-    //         }
-    //     };
-    //     fetch(baseURLVerif, requestOptionsVerif)
-    //         .then(response => { return response.json() })
-    //     //.then((data) => console.log(data))
-    //     //.catch((err) => console.log(err));
-
-    // }
-
     useEffect(() => {
         postsFetch()
-        //getLike()
     }, [])
 
-    //console.log(userLike)
     const likePost = (postId) => {
         const result = userLike.filter(userLik => postId === userLik);
         console.log(result)
@@ -93,7 +72,6 @@ const PostsImport = () => {
                 .then(response => { return response.json() })
                 .then((data) => {
                     console.log(data)
-                    //setLiked(true)
                     window.location = '../home'
                 })
                 .catch((err) => console.log(err));
@@ -142,7 +120,6 @@ const PostsImport = () => {
                 .then(response => { return response.json() })
                 .then((data) => {
                     console.log(data)
-                    //setLiked(false)
                     window.location = '../home'
                 })
                 .catch((err) => console.log(err));
@@ -168,6 +145,24 @@ const PostsImport = () => {
         } else { alert("Vous n'avez pas aimé ce post !") }
     }
 
+    // Gestion de l'affichage des boutons like/dislike
+
+    function DisLike(props) {
+        return <button className="posts_dislike" onClick={() => { disLikePost(posts.id_post) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>
+    }
+
+    function Like(props) {
+        return <button className="posts_like" onClick={() => likePost(posts.id_post)}>Pour aimer ce post {elementLikeWhite}</button>
+    }
+
+    function ValidLike(props) {
+        const isLike = props.isLike;
+        if (isLike) {
+            return <DisLike />;
+        }
+        return <Like />;
+    }
+
     const dateFormater = (date) => {
         let newDate = new Date(date).toLocaleDateString("fr-FR", {
             year: "numeric",
@@ -181,7 +176,8 @@ const PostsImport = () => {
     console.log(userLike)
     return (
         <div className="pagePosts">
-            {posts
+            {userLike
+                /* {posts */
                 .sort((a, b) => b.date - a.date)
                 .map((posts, index) => {
                     return (
@@ -195,8 +191,9 @@ const PostsImport = () => {
                             </div>
                             <em className="posts_numberLike">Ce post est aimé par {posts.likes} personne-s</em>
                             <div className="posts_btn_like">
-                                {<button className="posts_dislike" onClick={() => { disLikePost(posts.id_post) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>}
-                                {<button className="posts_like" onClick={() => likePost(posts.id_post)}>Pour aimer ce post {elementLikeWhite}</button>}
+                                <ValidLike isLike={posts.isLiked} />
+                                {/* {<button className="posts_dislike" onClick={() => { disLikePost(posts.id_post) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>} */}
+                                {/* {<button className="posts_like" onClick={() => likePost(posts.id_post)}>Pour aimer ce post {elementLikeWhite}</button>} */}
                             </div>
                             {/* {!liked && <button className="posts_like" style={{ backgroundColor: 'white' }} onClick={() => likePost(posts.id_post)}>Pour aimer ce post, cliquer ici {elementLikeWhite}</button>} */}
                         </div>
