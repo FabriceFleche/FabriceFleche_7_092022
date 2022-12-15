@@ -20,7 +20,6 @@ exports.createPost = (req, res, next) => {
 // Controleur pour la modification d'un post  
 exports.modifyPost = (req, res, next) => {
   const postObject = req.body;
-  //const id = req.params.id;
   const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : req.body.image;
   db.query(
     "UPDATE posts SET title=?, content=?, imageUrl=? WHERE id_post=?",
@@ -42,11 +41,8 @@ exports.deletePost = (req, res, next) => {
       "DELETE FROM posts WHERE id_post=?",
       [id]
     ), (err, result) => {
-
       res.status(400).json({ message: 'Post supprimé !' });
-
     }
-
   }
   db.query(
     "SELECT imageUrl FROM posts WHERE id_post=?",
@@ -54,16 +50,12 @@ exports.deletePost = (req, res, next) => {
     function (err, results) {
       if (results.length !== 0) {
         const filename = results[0].imageUrl.split('/images/').pop();
-
         fs.unlink(`images/${filename}`, () => {
           deletePost();
         })
       } else {
-
         deletePost();
-
       }
-
     }
   )
 }
@@ -110,15 +102,14 @@ exports.getAllPost = (req, res, next) => {
 let arrayOfpostsLiked = []
 exports.getLikeUser = (req, result, next) => {
   const user = req.params.id
+  arrayOfpostsLiked = []
   db.query(
     "SELECT id_post FROM userslikes WHERE user_id=?",
     [user],
     function (err, results) {
       results.map((like) => {
-        arrayOfpostsLiked = []
         arrayOfpostsLiked.push(like.id_post);
       })
-      console.log(arrayOfpostsLiked)
     }
   )
   db.query(
@@ -132,109 +123,7 @@ exports.getLikeUser = (req, result, next) => {
         }
         return post
       })
-      //console.log(res)
       result.status(200).json(res)
     }
   )
 }
-
-
-//       db.query(
-//         "SELECT * FROM posts",
-//         function (err, res) {
-//           res = res.map((post) => {
-//             if (arrayOfpostsLiked.includes(post.id_post) === true) {
-//               post.isLiked = true;
-//             } else {
-//               post.isLiked = false;
-//               //console.log(post)
-//             }
-//             return post;
-//           })
-//           result.status(200).json(res)
-//         }
-//       )
-//     }
-//   )
-// }
-      //results.map((userlike) => {
-      //console.log(userlike.id_post)
-//       db.query(
-//         "SELECT * FROM posts",
-//         function (err, res) {
-//           res = res.map((post) => {
-//             if (results.id_post.includes(post.id_post) === true) {
-//               post.isLiked = true;
-//             } else {
-//               post.isLiked = false;
-//             }
-//             console.log(res)
-//             //return post;
-
-//             //res.status(200).json(post)
-//           });
-
-//           //console.log(res)
-//           // for (var postlike of res) {
-//           //   if (postlike.id_post === userlike.id_post) {
-//           //     postlike.likeUser = "like"
-//           //   } else { postlike.likeUser = "dislike" };
-//           //   //console.log(postlike.id_post, postlike.likeUser);
-//           //   arrayLike.push(postlike)
-//           //   //console.log(arrayLike)
-//           // }
-//           //console.log(arrayLike.length)
-//         }
-
-//       )
-//       //console.log(post);
-//     }
-//     //console.log(arrayLike.length)
-//   )
-// }
-
-
-//Controleur pour la gestion du like / user
-// exports.postLike = (req, res, next) => {
-//   const postObject = req.body;
-
-//   db.query(
-//     "UPDATE posts SET likeUser=? WHERE id_post=?",
-//     [postObject.userId, postObject.id_post],
-//     function (err, results) {
-//       if (results) {
-//         res.status(201).json({ message: 'Like modifié !' })
-//       } else { res.status(401).json({ message: 'Non autorisé' }) };
-//     }
-//   )
-
-//   db.query(
-//     "SELECT * FROM posts WHERE user_id= ?",
-//     [req.params.id],
-//     function (err, results) {
-
-//       // L utilisateur aime le post
-//       if (!post.usersLiked.includes(req.body.userId) && req.body.like === 1) {
-//         Post.updateOne({ _id: req.params.id },
-//           {
-//             $inc: { likes: 1 },
-//             $push: { usersLiked: req.body.userId }
-//           })
-//           .then(() => res.status(201).json({ message: 'Vous avez aimé ce post !' }))
-//           .catch((error) => { res.status(400).json({ error }) });
-
-//         // L utilisateur annule son like
-//       } else if (post.usersLiked.includes(req.body.userId)) {
-//         Post.updateOne({ _id: req.params.id },
-//           {
-//             $inc: { likes: -1 },
-//             $pull: { usersLiked: req.body.userId }
-//           })
-//           .then(() => res.status(201).json({ message: "Le like de ce post a été annulé !" }))
-//           .catch((error) => { res.status(400).json({ error }) });
-//       }
-//     })
-//   //.catch((error) => { res.status(404).json({ error }) });
-
-// }
-

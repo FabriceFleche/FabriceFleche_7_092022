@@ -13,23 +13,23 @@ const elementLikeWhite = <FontAwesomeIcon icon={faThumbsUp} />
 const elementDislikeWhite = <FontAwesomeIcon icon={faThumbsDown} />
 
 const PostsImport = () => {
-    const [posts, setPosts] = useState([])
+    //const [posts, setPosts] = useState([])
     const [userLike, setUserLike] = useState([])
 
     // Recuperation de tous les posts
     const postsFetch = () => {
-        const baseURL = "http://localhost:3000/api/posts/"
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${textFromStorage}`
-            }
-        };
-        fetch(baseURL, requestOptions)
-            .then(response => { return response.json() })
-            .then((data) => { setPosts(data) })
-            .catch((err) => console.log(err));
+        //     const baseURL = "http://localhost:3000/api/posts/"
+        //     const requestOptions = {
+        //         method: 'GET',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             Authorization: `Bearer ${textFromStorage}`
+        //         }
+        //     };
+        //     fetch(baseURL, requestOptions)
+        //         .then(response => { return response.json() })
+        //         .then((data) => { setPosts(data) })
+        //         .catch((err) => console.log(err));
 
         // Recuperation des likes de l'user connecté
         const baseURLLike = "http://localhost:3000/api/posts/getLikeUser/" + idFromStorage
@@ -50,117 +50,112 @@ const PostsImport = () => {
         postsFetch()
     }, [])
 
-    const likePost = (postId) => {
-        const result = userLike.filter(userLik => postId === userLik);
-        console.log(result)
-        if (postId !== userLike) {
-            const baseURL = "http://localhost:3000/api/like/"
-            const like = 1
-            const data = {
-                likes: like,
-                id_post: postId
-            }
-            const requestOptions = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${textFromStorage}`
-                },
-                body: JSON.stringify(data)
-            };
-            fetch(baseURL, requestOptions)
-                .then(response => { return response.json() })
-                .then((data) => {
-                    console.log(data)
-                    window.location = '../home'
-                })
-                .catch((err) => console.log(err));
-
-            const baseURLLiked = "http://localhost:3000/api/like/likeUser"
-            const dataLike = {
-                id_post: postId,
-                userId: idFromStorage,
-                liked: 1
-            }
-            const requestOptionsLiked = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${textFromStorage}`
-                },
-                body: JSON.stringify(dataLike)
-
-            };
-            fetch(baseURLLiked, requestOptionsLiked)
-                .then(response => response.json())
-                .then((data) => {
-                    console.log(data)
-                });
-        } else { alert("Vous aimez deja ce post") }
-    }
-
-
-    const disLikePost = (postId) => {
-        if (1 == 1) {
-            const baseURL = "http://localhost:3000/api/like/"
-            const like = -1
-            const data = {
-                likes: like,
-                id_post: postId
-            }
-            const requestOptions = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${textFromStorage}`
-                },
-                body: JSON.stringify(data)
-            };
-            fetch(baseURL, requestOptions)
-                .then(response => { return response.json() })
-                .then((data) => {
-                    console.log(data)
-                    window.location = '../home'
-                })
-                .catch((err) => console.log(err));
-
-            const dataDislike = {
-                id_post: postId,
-                userId: idFromStorage,
-            }
-            const requestOptionsDisliked = {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${textFromStorage}`
-                },
-                body: JSON.stringify(dataDislike)
-
-            };
-            fetch(baseURL, requestOptionsDisliked)
-                .then(response => response.json())
-                .then((data) => {
-                    console.log(data)
-                });
-        } else { alert("Vous n'avez pas aimé ce post !") }
-    }
-
     // Gestion de l'affichage des boutons like/dislike
 
-    function DisLike(props) {
-        return <button className="posts_dislike" onClick={() => { disLikePost(posts.id_post) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>
-    }
+    // function DisLike(props) {
+    //     return <button className="posts_dislike" onClick={() => { disLikePost(userLike.id_post) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>
+    // }
 
-    function Like(props) {
-        return <button className="posts_like" onClick={() => likePost(posts.id_post)}>Pour aimer ce post {elementLikeWhite}</button>
-    }
+    // function Like(props) {
+    //     return <button className="posts_like" onClick={() => { likePost(userLike.id_post) }}>Pour aimer ce post {elementLikeWhite}</button>
+    // }
 
     function ValidLike(props) {
         const isLike = props.isLike;
+        const idPost = props.idPost;
+
         if (isLike) {
-            return <DisLike />;
+            //return <DisLike />;
+            return <button className="posts_dislike" onClick={() => { disLikePost(idPost) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>
         }
-        return <Like />;
+        //return <Like />;
+        return <button className="posts_like" onClick={() => { likePost(idPost) }}>Pour aimer ce post {elementLikeWhite}</button>
+    }
+
+    const likePost = (postId) => {
+        const baseURL = "http://localhost:3000/api/like/"
+        const like = 1
+        const data = {
+            likes: like,
+            id_post: postId
+        }
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${textFromStorage}`
+            },
+            body: JSON.stringify(data)
+        };
+        fetch(baseURL, requestOptions)
+            .then(response => { return response.json() })
+            .then((data) => {
+                console.log(data)
+                window.location = '../home'
+            })
+            .catch((err) => console.log(err));
+
+        const baseURLLiked = "http://localhost:3000/api/like/likeUser"
+        const dataLike = {
+            id_post: postId,
+            userId: idFromStorage,
+            liked: 1
+        }
+        const requestOptionsLiked = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${textFromStorage}`
+            },
+            body: JSON.stringify(dataLike)
+        };
+        fetch(baseURLLiked, requestOptionsLiked)
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data)
+            });
+    }
+
+    const disLikePost = (postId) => {
+        const baseURL = "http://localhost:3000/api/like/"
+        const like = -1
+        const data = {
+            likes: like,
+            id_post: postId
+        }
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${textFromStorage}`
+            },
+            body: JSON.stringify(data)
+        };
+        fetch(baseURL, requestOptions)
+            .then(response => { return response.json() })
+            .then((data) => {
+                console.log(data)
+                window.location = '../home'
+            })
+            .catch((err) => console.log(err));
+
+        const dataDislike = {
+            id_post: postId,
+            userId: idFromStorage,
+        }
+        const requestOptionsDisliked = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${textFromStorage}`
+            },
+            body: JSON.stringify(dataDislike)
+        };
+        fetch(baseURL, requestOptionsDisliked)
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data)
+            });
     }
 
     const dateFormater = (date) => {
@@ -173,7 +168,7 @@ const PostsImport = () => {
         });
         return newDate;
     }
-    console.log(userLike)
+    //console.log(userLike)
     return (
         <div className="pagePosts">
             {userLike
@@ -191,11 +186,10 @@ const PostsImport = () => {
                             </div>
                             <em className="posts_numberLike">Ce post est aimé par {posts.likes} personne-s</em>
                             <div className="posts_btn_like">
-                                <ValidLike isLike={posts.isLiked} />
+                                <ValidLike isLike={posts.isLiked} idPost={posts.id_post} />
                                 {/* {<button className="posts_dislike" onClick={() => { disLikePost(posts.id_post) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>} */}
                                 {/* {<button className="posts_like" onClick={() => likePost(posts.id_post)}>Pour aimer ce post {elementLikeWhite}</button>} */}
                             </div>
-                            {/* {!liked && <button className="posts_like" style={{ backgroundColor: 'white' }} onClick={() => likePost(posts.id_post)}>Pour aimer ce post, cliquer ici {elementLikeWhite}</button>} */}
                         </div>
                     );
                 })}

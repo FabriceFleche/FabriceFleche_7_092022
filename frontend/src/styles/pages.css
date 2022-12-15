@@ -47,6 +47,8 @@ form {
 
 .date {
     font-size: small;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 @media all and (min-width: 768px) and (max-width: 991px) {
