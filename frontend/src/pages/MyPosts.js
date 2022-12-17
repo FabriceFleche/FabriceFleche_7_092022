@@ -5,7 +5,6 @@ import PostImport from '../components/Post/PostImport';
 import Footer from '../components/Footer';
 import '../styles/pages.css';
 
-
 const MyPosts = () => {
     return (
         <div>

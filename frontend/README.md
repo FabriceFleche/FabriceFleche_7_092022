@@ -51,3 +51,4 @@ http://localhost:3000/ ou http://localhost:3001/
 #### Droits Admin
 
 Pour tester les droits d'admin, changez la valeur sur le champ admin dans le tableau "user", de 0 à 1.
+Pour visualiser le mode "administrateur", vous devez cliquer sur "admin" dans le "footer"

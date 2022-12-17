@@ -4,7 +4,6 @@ import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import CreatePost from '../components/createPost/CreatePost';
 
-
 const CreatePostId = () => {
     return (
         <div>

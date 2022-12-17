@@ -10,7 +10,7 @@ function userCreate(enteredName, enteredEmail, enteredPassword) {
         .then((data) => {
             console.log(data)
             alert('Votre compte à été créé, vous pouvez maintenant vous connecter avec votre email et votre mot de passe')
-            //window.location = '../Connection';
+
         });
 }
 

@@ -25,7 +25,7 @@ const CreateForm = () => {
 
     const submitHandler = (event) => {
         event.preventDefault()
-        console.log(emailErr)
+
         if (emailErr !== true && pwdError !== true) {
             navigate('../')
             // Permet de stocker les données saisies dans name, email et password

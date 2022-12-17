@@ -1,7 +1,4 @@
-//import { useNavigate } from 'react-router';
-
 function userLogin(enteredEmail, enteredPassword) {
-    //let navigate = useNavigate();
     const baseURL = "http://localhost:3000/api/auth/login"
     const requestOptions = {
         method: 'POST',
@@ -23,7 +20,6 @@ function userLogin(enteredEmail, enteredPassword) {
             localStorage.setItem("name", name);
             localStorage.setItem("admin", admin)
             window.location = '../home';
-            //navigate('../home')
         })
         .catch(function (err) { return err.status(500).json({ err }) })
 }

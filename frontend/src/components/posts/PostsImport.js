@@ -13,25 +13,10 @@ const elementLikeWhite = <FontAwesomeIcon icon={faThumbsUp} />
 const elementDislikeWhite = <FontAwesomeIcon icon={faThumbsDown} />
 
 const PostsImport = () => {
-    //const [posts, setPosts] = useState([])
     const [userLike, setUserLike] = useState([])
 
-    // Recuperation de tous les posts
+    // Recuperation de tous les posts avec les likes de l'user connecté
     const postsFetch = () => {
-        //     const baseURL = "http://localhost:3000/api/posts/"
-        //     const requestOptions = {
-        //         method: 'GET',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             Authorization: `Bearer ${textFromStorage}`
-        //         }
-        //     };
-        //     fetch(baseURL, requestOptions)
-        //         .then(response => { return response.json() })
-        //         .then((data) => { setPosts(data) })
-        //         .catch((err) => console.log(err));
-
-        // Recuperation des likes de l'user connecté
         const baseURLLike = "http://localhost:3000/api/posts/getLikeUser/" + idFromStorage
         const requestOptionsLike = {
             method: 'GET',
@@ -50,25 +35,13 @@ const PostsImport = () => {
         postsFetch()
     }, [])
 
-    // Gestion de l'affichage des boutons like/dislike
-
-    // function DisLike(props) {
-    //     return <button className="posts_dislike" onClick={() => { disLikePost(userLike.id_post) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>
-    // }
-
-    // function Like(props) {
-    //     return <button className="posts_like" onClick={() => { likePost(userLike.id_post) }}>Pour aimer ce post {elementLikeWhite}</button>
-    // }
-
     function ValidLike(props) {
         const isLike = props.isLike;
         const idPost = props.idPost;
 
         if (isLike) {
-            //return <DisLike />;
             return <button className="posts_dislike" onClick={() => { disLikePost(idPost) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>
         }
-        //return <Like />;
         return <button className="posts_like" onClick={() => { likePost(idPost) }}>Pour aimer ce post {elementLikeWhite}</button>
     }
 
@@ -168,11 +141,10 @@ const PostsImport = () => {
         });
         return newDate;
     }
-    //console.log(userLike)
+
     return (
         <div className="pagePosts">
             {userLike
-                /* {posts */
                 .sort((a, b) => b.date - a.date)
                 .map((posts, index) => {
                     return (
@@ -187,8 +159,6 @@ const PostsImport = () => {
                             <em className="posts_numberLike">Ce post est aimé par {posts.likes} personne-s</em>
                             <div className="posts_btn_like">
                                 <ValidLike isLike={posts.isLiked} idPost={posts.id_post} />
-                                {/* {<button className="posts_dislike" onClick={() => { disLikePost(posts.id_post) }}>Pour ne plus aimer ce post {elementDislikeWhite}</button>} */}
-                                {/* {<button className="posts_like" onClick={() => likePost(posts.id_post)}>Pour aimer ce post {elementLikeWhite}</button>} */}
                             </div>
                         </div>
                     );

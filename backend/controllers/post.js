@@ -40,15 +40,15 @@ exports.deletePost = (req, res, next) => {
     db.query(
       "DELETE FROM posts WHERE id_post=?",
       [id]
-    ), (err, result) => {
-      res.status(400).json({ message: 'Post supprimé !' });
+    ), (err, res) => {
+      res.status(201).json({ message: 'Post supprimé !' });
     }
   }
   db.query(
     "SELECT imageUrl FROM posts WHERE id_post=?",
     [id],
     function (err, results) {
-      if (results.length !== 0) {
+      if (results[0].imageUrl !== null) {
         const filename = results[0].imageUrl.split('/images/').pop();
         fs.unlink(`images/${filename}`, () => {
           deletePost();
@@ -98,7 +98,7 @@ exports.getAllPost = (req, res, next) => {
   )
 };
 
-// Controleur pour la récupération de tous les posts (test avec gestion like user)
+// Controleur pour la récupération de tous les posts avec gestion like user
 let arrayOfpostsLiked = []
 exports.getLikeUser = (req, result, next) => {
   const user = req.params.id

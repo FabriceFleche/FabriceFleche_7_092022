@@ -1,4 +1,3 @@
-//import { useNavigate } from 'react-router';
 import React, { useEffect, useState } from "react";
 import '../../styles/components/postsImport.css';
 
@@ -7,7 +6,6 @@ const idFromStorage = localStorage.getItem("id");
 
 const PostImport = () => {
     const [post, setPost] = useState([])
-    //let navigate = useNavigate();
 
     const postFetch = () => {
         const baseURL = "http://localhost:3000/api/posts/" + idFromStorage
@@ -29,11 +27,9 @@ const PostImport = () => {
     }, [])
 
     function buttonCLickModify(post) {
-        //navigate('../ChangePostId?id=' + post.id_post)
         window.location = '../ChangePostId?id=' + post.id_post
     };
     function buttonClickDelete(post) {
-        //navigate('../DeletePost?id=' + post.id_post)
         window.location = '../DeletePost?id=' + post.id_post
     };
 

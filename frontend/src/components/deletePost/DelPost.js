@@ -10,7 +10,6 @@ const DelPost = () => {
     };
     function buttonClickExitDelete() {
         navigate('../MyPosts')
-        //window.location = '../MyPosts'
     };
 
     return (

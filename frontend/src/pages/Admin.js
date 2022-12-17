@@ -16,7 +16,6 @@ function UserNoAdmin(props) {
 }
 
 function TestAdmin() {
-    //const isLoggedIn = props.isLoggedIn;
     if (admin === "77") {
         return <UserAdmin />;
     }
@@ -24,7 +23,6 @@ function TestAdmin() {
 }
 
 const Admin = () => {
-
     return (
         <div>
             <Banner />
@@ -34,9 +32,6 @@ const Admin = () => {
             <TestAdmin />,
             <Footer />
         </div>
-
-
-
     );
 };
 

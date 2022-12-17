@@ -11,7 +11,7 @@ exports.signup = (req, res, next) => {
             const name = req.body.name;
             const email = req.body.email;
             const password = hash;
-            console.log(password);
+
             db.query(
                 'INSERT INTO user(name, email, password, isAdmin) VALUES (?,?,?,?)',
                 [name, email, password, 0],
@@ -19,8 +19,6 @@ exports.signup = (req, res, next) => {
                     if (results) {
                         res.status(201).json({ message: 'Utilisateur créé !' })
                     } else { res.status(400).json({ err }) };
-                    console.log(err);
-                    console.log(results);
                 }
             );
         })

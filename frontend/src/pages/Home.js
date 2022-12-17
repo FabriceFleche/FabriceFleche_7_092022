@@ -14,9 +14,6 @@ const Home = () => {
             <PostsImport />
             <Footer />
         </div>
-
-
-
     );
 };
 
