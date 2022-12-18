@@ -7,10 +7,8 @@ function userCreate(enteredName, enteredEmail, enteredPassword) {
     };
     fetch(baseURL, requestOptions)
         .then(response => response.json())
-        .then((data) => {
-            console.log(data)
+        .then(() => {
             alert('Votre compte à été créé, vous pouvez maintenant vous connecter avec votre email et votre mot de passe')
-
         });
 }
 

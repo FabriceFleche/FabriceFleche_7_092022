@@ -7,7 +7,6 @@ form {
 }
 
 .connectionTitle {
-    color: #FD2D01;
     margin-bottom: 5%;
     display: flex;
     justify-content: center;
@@ -22,7 +21,7 @@ form {
 }
 
 .connectionCreateUser {
-    padding-left: 5%;
+    padding-left: 2%;
 }
 
 /* -----------------Page Home et MyPosts -------------------- */
@@ -80,4 +79,11 @@ form {
 .noAdmin {
     color: #FD2D01;
     text-align: center;
+}
+
+/* ---------------------Page CreateAccount ---------------- */
+
+.connectionReturn {
+    text-align: center;
+    margin-bottom: 5%;
 }

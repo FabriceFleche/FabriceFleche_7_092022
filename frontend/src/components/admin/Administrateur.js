@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-//import { useNavigate } from 'react-router';
 import '../../styles/components/postsImport.css';
 
 const textFromStorage = localStorage.getItem("token");
 
 const Administrateur = () => {
     const [post, setPost] = useState([])
-    //let navigate = useNavigate();
 
     const postFetch = () => {
         const baseURL = "http://localhost:3000/api/posts/"
@@ -28,11 +26,9 @@ const Administrateur = () => {
     }, [])
 
     function buttonCLickModify(post) {
-        //navigate('../ChangePostId?id=' + post.id_post)
         window.location = '../ChangePostId?id=' + post.id_post
     };
     function buttonClickDelete(post) {
-        //navigate('../DeletePost?id=' + post.id_post)
         window.location = '../DeletePost?id=' + post.id_post
     };
 
@@ -70,7 +66,6 @@ const Administrateur = () => {
                 })}
         </div>
     )
-
 }
 
 export default Administrateur;

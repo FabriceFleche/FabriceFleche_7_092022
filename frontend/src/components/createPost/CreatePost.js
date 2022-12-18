@@ -1,4 +1,3 @@
-//import { useNavigate } from 'react-router';
 import { useRef } from "react";
 import PostCreate from "./PostCreate";
 import '../../styles/components/createPost.css';
@@ -7,8 +6,7 @@ const CreatePost = () => {
     const titleImput = useRef();
     const contentImput = useRef();
     const fileImput = useRef();
-    //let navigate = useNavigate();
-    // Permet de ne pas effacer les données saisies dans email et password lors du clic sur connecter s'il y a une erreur
+
     const submitHandlerBis = (event) => {
         event.preventDefault()
 
@@ -18,7 +16,6 @@ const CreatePost = () => {
         const enteredFile = fileImput.current.files[0];
 
         PostCreate(enteredTitle, enteredContent, enteredFile);
-        //navigate('../MyPosts')
     }
 
     return (

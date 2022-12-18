@@ -25,13 +25,14 @@ const CreateForm = () => {
 
     const submitHandler = (event) => {
         event.preventDefault()
-
         if (emailErr !== true && pwdError !== true) {
             navigate('../')
+
             // Permet de stocker les données saisies dans name, email et password
             const enteredName = nameImput.current.value;
             const enteredEmail = emailImput.current.value;
             const enteredPassword = passwordImput.current.value;
+
             userCreate(enteredName, enteredEmail, enteredPassword);
         } else {
             alert("Vérifier la saisie de votre email et/ou de votre mot de passe pour respecter les consignes")

@@ -10,20 +10,20 @@ const Navigation = () => {
     return (
         <div>
             <div className="navigation">
-                <ul className='navigation_ul'>
+                <div className='navigation_ul'>
                     <NavLink to="/home">
-                        <li className='navigation_ul_li'>Tous les posts</li>
+                        <p className='navigation_ul_li'>Tous les posts</p>
                     </NavLink>
                     <NavLink>
-                        <li className='navigation_ul_li' onClick={() => linkMyPost()}>Mes posts</li>
+                        <p className='navigation_ul_li' onClick={() => linkMyPost()}>Mes posts</p>
                     </NavLink>
                     <NavLink to="/createPost">
-                        <li className='navigation_ul_li'>Créer un nouveau post</li>
+                        <p className='navigation_ul_li'>Créer un nouveau post</p>
                     </NavLink>
                     <NavLink to="/">
-                        <li className='navigation_ul_li'>Deconnection</li>
+                        <p className='navigation_ul_li'>Deconnection</p>
                     </NavLink>
-                </ul>
+                </div>
             </div>
         </div>
     );

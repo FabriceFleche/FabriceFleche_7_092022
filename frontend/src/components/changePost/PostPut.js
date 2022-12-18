@@ -24,8 +24,10 @@ const PostPut = () => {
         formData.append("title", post[0].title)
         formData.append("content", editContent ? editContent : post[0].content)
         if (enteredFile !== undefined) { image = enteredFile } else { image = post[0].imageUrl };
+        //const oldImage = post[0].imageUrl;
         formData.append("image", image)
         formData.append("id_post", post[0].id_post)
+        //formData.append("oldImage", oldImage)
         const urlPost = "http://localhost:3000/api/posts/"
         const baseURL = urlPost
         const requestOptions = {
@@ -40,7 +42,6 @@ const PostPut = () => {
             .then(response => response.json())
             .then(() => {
                 setIsEditing(false)
-                //navigate('../MyPosts')
                 window.location = '../../myPosts'
             });
     }

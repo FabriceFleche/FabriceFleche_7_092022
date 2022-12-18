@@ -4,7 +4,6 @@ const db = require("../middleware/dbConnection.js");
 //Controleur pour la gestion du compteur des likes
 exports.like = (req, res, next) => {
   const postObject = req.body;
-  //const id = req.params.id;
   db.query(
     "UPDATE posts SET likes = likes + ? WHERE id_post=?",
     [postObject.likes, postObject.id_post],

@@ -29,9 +29,7 @@ const AuthForm = () => {
                 <button>Connexion</button>
             </div>
         </form>
-
     )
-
 }
 
 export default AuthForm;

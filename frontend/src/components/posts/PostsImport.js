@@ -149,9 +149,9 @@ const PostsImport = () => {
                 .map((posts, index) => {
                     return (
                         <div className="posts" key={index}>
-                            <h4 className="posts_name">Post de {posts.names}</h4>
-                            <h4 className="date">Posté le {dateFormater(posts.date)}</h4>
-                            <h4 className="posts_title">{posts.title}</h4>
+                            <p className="posts_name">Post de {posts.names}</p>
+                            <p className="date">Posté le {dateFormater(posts.date)}</p>
+                            <p className="posts_title">{posts.title}</p>
                             <p className="posts_content">{posts.content}</p>
                             <div className="post_img">
                                 <img className="posts_img" src={posts.imageUrl} alt="" />

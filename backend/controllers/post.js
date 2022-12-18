@@ -17,7 +17,27 @@ exports.createPost = (req, res, next) => {
   )
 };
 
-// Controleur pour la modification d'un post  
+// Controleur pour la modification d'un post
+// exports.modifyPost = (req, res, next) => {
+//   const postObject = req.body;
+//   const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : req.body.image;
+//   db.query(
+//     "UPDATE posts SET title=?, content=?, imageUrl=? WHERE id_post=?",
+//     [postObject.title, postObject.content, imageUrl, postObject.id_post],
+//     function (err, results) {
+//       if (req.file !== null) {
+//         const filename = postObject.oldImage.split('/images/').pop();
+//         fs.unlink(`images/${filename}`, () => {
+//           results.status(201).json({ message: 'Post modifié !' });
+//         })
+//       } else {
+//         results.status(201).json({ message: 'Post modifié !' });
+//       }
+//     }
+//   )
+// };
+
+// Controleur pour la modification d'un post
 exports.modifyPost = (req, res, next) => {
   const postObject = req.body;
   const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : req.body.image;
@@ -36,7 +56,6 @@ exports.modifyPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   const id = req.params.id;
   function deletePost() {
-
     db.query(
       "DELETE FROM posts WHERE id_post=?",
       [id]

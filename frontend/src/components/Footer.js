@@ -5,14 +5,14 @@ import '../styles/components/footer.css';
 const Footer = () => {
     return (
         <div className="footer">
-            <ul className='footer_ul'>
-                <li className='footer_ul_li'>Groupomania</li>
-                <li className='footer_ul_li'>Politique de protection des données</li>
-                <li className='footer_ul_li'>Conditions générales d'utilisation</li>
+            <div className='footer_ul'>
+                <p className='footer_ul_li'>Groupomania</p>
+                <p className='footer_ul_li'>Politique de protection des données</p>
+                <p className='footer_ul_li'>Conditions générales d'utilisation</p>
                 <NavLink to="/admin">
-                    <li className='footer_ul_li'>Admin</li>
+                    <p className='footer_ul_li'>Admin</p>
                 </NavLink>
-            </ul>
+            </div>
         </div>
     );
 };

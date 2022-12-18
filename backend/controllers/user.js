@@ -31,11 +31,9 @@ exports.login = (req, res, next) => {
     db.query(
         "SELECT EXISTS(select * from user WHERE email= ?) AS emailExist",
         [email],
-
         function (error, results) {
             if (results[0].emailExist == 0) {
                 res.status(400).json({ Message: "Paire identifiant/mot de passe incorrecte" })
-
             } else {
                 db.query(
                     "SELECT user_id, name, password, isAdmin FROM user WHERE email= ?",
@@ -45,7 +43,6 @@ exports.login = (req, res, next) => {
                             .then(valid => {
                                 if (!valid) {
                                     res.status(400).json({ Message: "Paire identifiant/mot de passe incorrecte" })
-
                                 } else {
                                     res.status(200).json({
                                         userId: results[0].user_id,
