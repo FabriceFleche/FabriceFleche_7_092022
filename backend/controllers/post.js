@@ -18,6 +18,31 @@ exports.createPost = (req, res, next) => {
 };
 
 // Controleur pour la modification d'un post
+exports.modifyPost = (req, res, next) => {
+  const postObject = req.body;
+  const imageOld = postObject.oldImage;
+  const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : req.body.image;
+  db.query(
+    "UPDATE posts SET title=?, content=?, imageUrl=? WHERE id_post=?",
+    [postObject.title, postObject.content, imageUrl, postObject.id_post],
+    function (err, results) {
+      if (imageOld !== imageUrl) {
+        const filename = imageOld.split('/images/').pop();
+        fs.unlink(`images/${filename}`, () => {
+          if (results) {
+            res.status(201).json({ message: 'Post modifié !' })
+          } else { res.status(401).json({ message: 'Non autorisé' }) };
+        })
+      } else {
+        if (results) {
+          res.status(201).json({ message: 'Post modifié !' })
+        } else { res.status(401).json({ message: 'Non autorisé' }) };
+      }
+    }
+  )
+};
+
+// Controleur pour la modification d'un post
 // exports.modifyPost = (req, res, next) => {
 //   const postObject = req.body;
 //   const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : req.body.image;
@@ -25,32 +50,12 @@ exports.createPost = (req, res, next) => {
 //     "UPDATE posts SET title=?, content=?, imageUrl=? WHERE id_post=?",
 //     [postObject.title, postObject.content, imageUrl, postObject.id_post],
 //     function (err, results) {
-//       if (req.file !== null) {
-//         const filename = postObject.oldImage.split('/images/').pop();
-//         fs.unlink(`images/${filename}`, () => {
-//           results.status(201).json({ message: 'Post modifié !' });
-//         })
-//       } else {
-//         results.status(201).json({ message: 'Post modifié !' });
-//       }
+//       if (results) {
+//         res.status(201).json({ message: 'Post modifié !' })
+//       } else { res.status(401).json({ message: 'Non autorisé' }) };
 //     }
 //   )
 // };
-
-// Controleur pour la modification d'un post
-exports.modifyPost = (req, res, next) => {
-  const postObject = req.body;
-  const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : req.body.image;
-  db.query(
-    "UPDATE posts SET title=?, content=?, imageUrl=? WHERE id_post=?",
-    [postObject.title, postObject.content, imageUrl, postObject.id_post],
-    function (err, results) {
-      if (results) {
-        res.status(201).json({ message: 'Post modifié !' })
-      } else { res.status(401).json({ message: 'Non autorisé' }) };
-    }
-  )
-};
 
 // Controleur pour la suppression d'un post 
 exports.deletePost = (req, res, next) => {
