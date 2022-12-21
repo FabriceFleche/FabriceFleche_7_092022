@@ -21,15 +21,16 @@ const CreatePost = () => {
     return (
         <form className="formCreatepost" onSubmit={submitHandlerBis}>
             <div className='group'>
-                <label htmlFor='text'>Titre</label>
+                <label htmlFor='title'>Titre</label>
                 <input className="input" type="text" id="title" ref={titleImput} required />
             </div>
             <div className='group'>
-                <label htmlFor='text'>Commentaire</label>
+                <label htmlFor='content'>Commentaire</label>
                 <textarea className="inputContent" type="text" id="content" ref={contentImput} required />
             </div>
             <div className='group'>
-                <input type="file" name="image" accept="image/*" multiple={false} ref={fileImput} />
+                <label htmlFor='image'>Photo</label>
+                <input type="file" name="image" id="image" accept="image/*" multiple={false} ref={fileImput} />
             </div>
             <div className='group_button_create'>
                 <button className="formCreatepost_button">Créer le post</button>

@@ -62,8 +62,7 @@ const PostsImport = () => {
         };
         fetch(baseURL, requestOptions)
             .then(response => { return response.json() })
-            .then((data) => {
-                console.log(data)
+            .then(() => {
                 window.location = '../home'
             })
             .catch((err) => console.log(err));
@@ -84,9 +83,6 @@ const PostsImport = () => {
         };
         fetch(baseURLLiked, requestOptionsLiked)
             .then(response => response.json())
-            .then((data) => {
-                console.log(data)
-            });
     }
 
     const disLikePost = (postId) => {
@@ -106,8 +102,7 @@ const PostsImport = () => {
         };
         fetch(baseURL, requestOptions)
             .then(response => { return response.json() })
-            .then((data) => {
-                console.log(data)
+            .then(() => {
                 window.location = '../home'
             })
             .catch((err) => console.log(err));
@@ -125,10 +120,7 @@ const PostsImport = () => {
             body: JSON.stringify(dataDislike)
         };
         fetch(baseURL, requestOptionsDisliked)
-            .then(response => response.json())
-            .then((data) => {
-                console.log(data)
-            });
+            .then(response => response.json());
     }
 
     const dateFormater = (date) => {
