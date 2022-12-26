@@ -42,20 +42,6 @@ exports.modifyPost = (req, res, next) => {
   )
 };
 
-// Controleur pour la modification d'un post
-// exports.modifyPost = (req, res, next) => {
-//   const postObject = req.body;
-//   const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : req.body.image;
-//   db.query(
-//     "UPDATE posts SET title=?, content=?, imageUrl=? WHERE id_post=?",
-//     [postObject.title, postObject.content, imageUrl, postObject.id_post],
-//     function (err, results) {
-//       if (results) {
-//         res.status(201).json({ message: 'Post modifié !' })
-//       } else { res.status(401).json({ message: 'Non autorisé' }) };
-//     }
-//   )
-// };
 
 // Controleur pour la suppression d'un post 
 exports.deletePost = (req, res, next) => {
@@ -65,7 +51,9 @@ exports.deletePost = (req, res, next) => {
       "DELETE FROM posts WHERE id_post=?",
       [id]
     ), (err, res) => {
-      res.status(201).json({ message: 'Post supprimé !' });
+      if (res) {
+        res.status(201).json({ message: 'Post supprimé !' })
+      } else { res.status(401).json({ err }) };
     }
   }
   db.query(
@@ -147,7 +135,9 @@ exports.getLikeUser = (req, result, next) => {
         }
         return post
       })
-      result.status(200).json(res)
+      if (result) {
+        result.status(200).json(res)
+      } else { result.status(401).json({ err }) };
     }
   )
 }

@@ -7,6 +7,11 @@ const Navigation = () => {
         window.location = "/myPosts"
     }
 
+    const token = "0"
+    const Deconnection = () => {
+        localStorage.setItem("token", token)
+    }
+
     return (
         <div>
             <div className="navigation">
@@ -21,7 +26,7 @@ const Navigation = () => {
                         <p className='navigation_ul_li'>Créer un nouveau post</p>
                     </NavLink>
                     <NavLink to="/">
-                        <p className='navigation_ul_li'>Deconnection</p>
+                        <p className='navigation_ul_li' onClick={() => Deconnection()}>Deconnection</p>
                     </NavLink>
                 </div>
             </div>
