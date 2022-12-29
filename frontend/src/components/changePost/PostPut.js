@@ -4,6 +4,8 @@ import '../../styles/components/postsImport.css';
 import '../../styles/components/postPut.css';
 
 const textFromStorage = localStorage.getItem("token");
+const idFromStorage = localStorage.getItem("id");
+const adminFromStorage = localStorage.getItem("admin");
 
 //Recuperation de l id du post
 let idPost = window.location.href;
@@ -28,6 +30,8 @@ const PostPut = () => {
         formData.append("image", image)
         formData.append("id_post", post[0].id_post)
         formData.append("oldImage", oldImage)
+        formData.append("idUser", idFromStorage)
+        formData.append("admin", adminFromStorage)
         const urlPost = "http://localhost:3000/api/posts/"
         const baseURL = urlPost
         const requestOptions = {
@@ -40,6 +44,7 @@ const PostPut = () => {
         };
         fetch(baseURL, requestOptions)
             .then(response => response.json())
+            .then(data => console.log(data.message))
             .then(() => {
                 setIsEditing(false)
                 window.location = '../../myPosts'
@@ -51,9 +56,9 @@ const PostPut = () => {
     }
 
     const postFetch = () => {
-        const baseURL = "http://localhost:3000/api/posts/" + refId
+        const baseURL = "http://localhost:3000/api/posts/post/" + refId
         const requestOptions = {
-            method: 'PATCH',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${textFromStorage}`

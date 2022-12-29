@@ -1,4 +1,6 @@
 const textFromStorage = localStorage.getItem("token");
+const idFromStorage = localStorage.getItem("id");
+const adminFromStorage = localStorage.getItem("admin");
 
 //Recuperation de l id du post
 let idPost = window.location.href;
@@ -16,12 +18,12 @@ function PostDelete() {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${textFromStorage}`
         },
+        body: JSON.stringify({ idUser: idFromStorage, admin: adminFromStorage })
     };
     fetch(baseURL, requestOptions)
         .then(response => response.json())
-        .then(() => {
-            window.location = '../myPosts';
-        });
+        .then(data => console.log(data.message))
+        .then(() => { window.location = '../myPosts' });
 }
 
 export default PostDelete;

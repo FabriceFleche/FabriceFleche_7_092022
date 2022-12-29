@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { faThumbsDown } from '@fortawesome/free-regular-svg-icons'
 
-// Récupération du token
+// Récupération du token et de l ID de l'user
 const textFromStorage = localStorage.getItem("token");
 const idFromStorage = localStorage.getItem("id");
 

@@ -18,7 +18,7 @@ exports.signup = (req, res, next) => {
                 function (err, results) {
                     if (results) {
                         res.status(201).json({ message: 'Utilisateur créé !' })
-                    } else { res.status(400).json({ err }) };
+                    } else { res.status(404).json({ err }) };
                 }
             );
         })
@@ -33,7 +33,7 @@ exports.login = (req, res, next) => {
         [email],
         function (error, results) {
             if (results[0].emailExist == 0) {
-                res.status(400).json({ Message: "Paire identifiant/mot de passe incorrecte" })
+                res.status(401).json({ Message: "Paire identifiant/mot de passe incorrecte" })
             } else {
                 db.query(
                     "SELECT user_id, name, password, isAdmin FROM user WHERE email= ?",
@@ -42,7 +42,7 @@ exports.login = (req, res, next) => {
                         bcrypt.compare(req.body.password, results[0].password)
                             .then(valid => {
                                 if (!valid) {
-                                    res.status(400).json({ Message: "Paire identifiant/mot de passe incorrecte" })
+                                    res.status(401).json({ Message: "Paire identifiant/mot de passe incorrecte" })
                                 } else {
                                     res.status(200).json({
                                         userId: results[0].user_id,
@@ -67,15 +67,15 @@ exports.login = (req, res, next) => {
 };
 
 // Controleur pour la recuperation du nom de l'utilisateur lors de la creation d un post
-exports.name = (req, res, next) => {
-    const user_id = req.body.id;
-    db.query(
-        "SELECT name FROM user WHERE user_id= ?",
-        [user_id],
-        function (err, results) {
-            if (results) {
-                res.status(200).json(results)
-            } else { res.status(404).json({ err }) };
-        }
-    )
-};
+// exports.name = (req, res, next) => {
+//     const user_id = req.body.id;
+//     db.query(
+//         "SELECT name FROM user WHERE user_id= ?",
+//         [user_id],
+//         function (err, results) {
+//             if (results) {
+//                 res.status(200).json(results)
+//             } else { res.status(404).json({ err }) };
+//         }
+//     )
+// };

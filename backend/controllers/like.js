@@ -9,8 +9,8 @@ exports.like = (req, res, next) => {
     [postObject.likes, postObject.id_post],
     function (err, results) {
       if (results) {
-        res.status(201).json({ message: 'Like modifié !' })
-      } else { res.status(401).json({ message: 'Non autorisé' }) };
+        res.status(200).json({ message: 'Like modifié !' })
+      } else { res.status(404).json({ err }) };
     }
   )
 };
@@ -23,13 +23,13 @@ exports.likeUser = (req, res, next) => {
     [postObject.id_post, postObject.userId, postObject.liked],
     function (err, results) {
       if (results) {
-        res.status(201).json({ message: 'Vous aimez maintenant ce post !' })
-      } else { res.status(401).json({ message: 'Non autorisé' }) };
+        res.status(200).json({ message: 'Vous aimez maintenant ce post !' })
+      } else { res.status(404).json({ err }) };
     }
   )
 };
 
-// Controleur pour la récupération de toute les likes (table userslikes)
+// Controleur pour la récupération de tous les likes (table userslikes)
 exports.getLikes = (req, res, next) => {
   db.query(
     "SELECT * FROM userslikes ",

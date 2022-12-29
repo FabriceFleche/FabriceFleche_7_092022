@@ -11,8 +11,8 @@ exports.createPost = (req, res, next) => {
     [postObject.userId, postObject.name, postObject.title, postObject.content, imageUrl, postObject.date, 0],
     function (err, results) {
       if (results) {
-        res.status(201).json({ message: 'Post enregistré' })
-      } else { res.status(400).json({ err }) };
+        res.status(200).json({ message: 'Post enregistré' })
+      } else { res.status(404).json({ err }) };
     }
   )
 };
@@ -22,52 +22,67 @@ exports.modifyPost = (req, res, next) => {
   const postObject = req.body;
   const imageOld = postObject.oldImage;
   const imageUrl = req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : req.body.image;
-  db.query(
-    "UPDATE posts SET title=?, content=?, imageUrl=? WHERE id_post=?",
-    [postObject.title, postObject.content, imageUrl, postObject.id_post],
-    function (err, results) {
-      if (imageOld !== imageUrl) {
-        const filename = imageOld.split('/images/').pop();
-        fs.unlink(`images/${filename}`, () => {
+  function modifPost() {
+    db.query(
+      "UPDATE posts SET title=?, content=?, imageUrl=? WHERE id_post=?",
+      [postObject.title, postObject.content, imageUrl, postObject.id_post],
+      function (err, results) {
+        if (imageOld !== imageUrl) {
+          const filename = imageOld.split('/images/').pop();
+          fs.unlink(`images/${filename}`, () => {
+            if (results) {
+              res.status(200).json({ message: 'Post modifié !' })
+            } else { res.status(401).json({ message: 'Non autorisé' }) };
+          })
+        } else {
           if (results) {
-            res.status(201).json({ message: 'Post modifié !' })
+            res.status(200).json({ message: 'Post modifié !' })
           } else { res.status(401).json({ message: 'Non autorisé' }) };
-        })
-      } else {
-        if (results) {
-          res.status(201).json({ message: 'Post modifié !' })
-        } else { res.status(401).json({ message: 'Non autorisé' }) };
+        }
       }
+    )
+  }
+  db.query(
+    "SELECT * FROM posts WHERE id_post=?",
+    [postObject.id_post],
+    function (err, results) {
+      if (results[0].user_id.toString() !== postObject.idUser && Number(postObject.admin) !== 77) {
+        return res.status(401).json({ message: 'Vous n etes pas autorisé a effectuer cette action' })
+      }
+      else modifPost()
     }
   )
 };
 
-
 // Controleur pour la suppression d'un post 
 exports.deletePost = (req, res, next) => {
   const id = req.params.id;
+  const idUser = req.body.idUser;
+  const admin = req.body.admin;
   function deletePost() {
     db.query(
       "DELETE FROM posts WHERE id_post=?",
       [id]
     ), (err, res) => {
       if (res) {
-        res.status(201).json({ message: 'Post supprimé !' })
-      } else { res.status(401).json({ err }) };
+        res.status(200).json({ message: 'Post supprimé !' })
+      } else { res.status(404).json({ err }) };
     }
   }
   db.query(
-    "SELECT imageUrl FROM posts WHERE id_post=?",
+    "SELECT * FROM posts WHERE id_post=?",
     [id],
     function (err, results) {
+      if (results[0].user_id.toString() !== idUser && Number(admin) !== 77) {
+        return res.status(401).json({ message: 'Vous n etes pas autorisé a effectuer cette action' })
+      }
       if (results[0].imageUrl !== null) {
         const filename = results[0].imageUrl.split('/images/').pop();
-        fs.unlink(`images/${filename}`, () => {
+        return fs.unlink(`images/${filename}`, () => {
           deletePost();
         })
-      } else {
-        deletePost();
       }
+      return deletePost();
     }
   )
 }
@@ -98,7 +113,7 @@ exports.getOnePost = (req, res, next) => {
   )
 };
 
-//Controleur pour la récupération de toute les posts
+//Controleur pour la récupération de tous les posts
 exports.getAllPost = (req, res, next) => {
   db.query(
     "SELECT * FROM posts",
@@ -137,7 +152,7 @@ exports.getLikeUser = (req, result, next) => {
       })
       if (result) {
         result.status(200).json(res)
-      } else { result.status(401).json({ err }) };
+      } else { result.status(404).json({ err }) };
     }
   )
 }

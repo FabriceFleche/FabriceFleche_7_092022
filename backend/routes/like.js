@@ -3,7 +3,7 @@ const routerlike = express.Router();
 const likeCtrl = require('../controllers/like');
 const auth = require('../middleware/auth');
 
-// Creation de la route pour la recuperation du nombre des likes par posts avec vérification du token
+// Creation de la route pour le stockage du nombre des likes par posts avec vérification du token
 routerlike.post('/', auth, likeCtrl.like);
 
 // Creation de la route pour le stockage dans la table userslikes du like d'un user avec vérification du token

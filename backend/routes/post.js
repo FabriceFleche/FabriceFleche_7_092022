@@ -14,7 +14,7 @@ routerPost.post('/', auth, multer, postCtrl.createPost);
 routerPost.get('/:id', auth, postCtrl.getPostUser);
 
 // Creation de la route pour la récupération du post selectionne avec verif du token
-routerPost.patch('/:id', auth, postCtrl.getOnePost);
+routerPost.get('/post/:id', auth, postCtrl.getOnePost);
 
 // Creation de la route pour la modification d un post avec verif du token
 routerPost.patch('/', auth, multer, postCtrl.modifyPost);
