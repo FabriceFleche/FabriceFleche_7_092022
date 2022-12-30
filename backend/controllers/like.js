@@ -7,10 +7,10 @@ exports.like = (req, res, next) => {
   db.query(
     "UPDATE posts SET likes = likes + ? WHERE id_post=?",
     [postObject.likes, postObject.id_post],
-    function (err, results) {
-      if (results) {
-        res.status(200).json({ message: 'Like modifié !' })
-      } else { res.status(404).json({ err }) };
+    function (err) {
+      if (err) {
+        res.status(404).json({ err })
+      } else { res.status(200).json({ message: 'Like modifié !' }) };
     }
   )
 };
@@ -21,10 +21,10 @@ exports.likeUser = (req, res, next) => {
   db.query(
     "INSERT INTO userslikes (id_post, user_id, liked) VALUES (?,?,?)",
     [postObject.id_post, postObject.userId, postObject.liked],
-    function (err, results) {
-      if (results) {
-        res.status(200).json({ message: 'Vous aimez maintenant ce post !' })
-      } else { res.status(404).json({ err }) };
+    function (err) {
+      if (err) {
+        res.status(404).json({ err })
+      } else { res.status(200).json({ message: 'Vous aimez maintenant ce post !' }) };
     }
   )
 };
@@ -34,9 +34,9 @@ exports.getLikes = (req, res, next) => {
   db.query(
     "SELECT * FROM userslikes ",
     function (err, results) {
-      if (results) {
-        res.status(200).json(results)
-      } else { res.status(404).json({ err }) };
+      if (err) {
+        res.status(404).json({ err })
+      } else { res.status(200).json(results) };
     }
   )
 };
@@ -48,9 +48,9 @@ exports.deleteLike = (req, res, next) => {
     "DELETE FROM userslikes WHERE id_post=? && user_id=?",
     [postObject.id_post, postObject.userId],
     function (err, results) {
-      if (results) {
-        res.status(200).json(results)
-      } else { res.status(404).json({ err }) };
+      if (err) {
+        res.status(404).json({ err })
+      } else { res.status(200).json(results) };
     }
   )
 };

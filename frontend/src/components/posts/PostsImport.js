@@ -50,7 +50,8 @@ const PostsImport = () => {
         const like = 1
         const data = {
             likes: like,
-            id_post: postId
+            id_post: postId,
+            userId: idFromStorage
         }
         const requestOptions = {
             method: 'POST',
@@ -83,6 +84,7 @@ const PostsImport = () => {
         };
         fetch(baseURLLiked, requestOptionsLiked)
             .then(response => response.json())
+            .catch((err) => console.log(err));
     }
 
     const disLikePost = (postId) => {
@@ -120,7 +122,8 @@ const PostsImport = () => {
             body: JSON.stringify(dataDislike)
         };
         fetch(baseURL, requestOptionsDisliked)
-            .then(response => response.json());
+            .then(response => response.json())
+            .catch((err) => console.log(err));
     }
 
     const dateFormater = (date) => {

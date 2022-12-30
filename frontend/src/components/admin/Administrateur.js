@@ -17,7 +17,11 @@ const Administrateur = () => {
         };
         fetch(baseURL, requestOptions)
             .then(response => { return response.json() })
-            .then((data) => { setPost(data) })
+            .then((data) => {
+                if (data.lenght !== 0) {
+                    setPost(data)
+                }
+            })
             .catch((err) => console.log(err));
     }
 

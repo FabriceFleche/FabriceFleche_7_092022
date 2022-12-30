@@ -11,7 +11,7 @@ exports.createPost = (req, res, next) => {
     [postObject.userId, postObject.name, postObject.title, postObject.content, imageUrl, postObject.date, 0],
     function (err, results) {
       if (results) {
-        res.status(200).json({ message: 'Post enregistré' })
+        res.status(201).json({ message: 'Post enregistré' })
       } else { res.status(404).json({ err }) };
     }
   )
@@ -31,13 +31,13 @@ exports.modifyPost = (req, res, next) => {
           const filename = imageOld.split('/images/').pop();
           fs.unlink(`images/${filename}`, () => {
             if (results) {
-              res.status(200).json({ message: 'Post modifié !' })
-            } else { res.status(401).json({ message: 'Non autorisé' }) };
+              res.status(200).json({ results })
+            } else { res.status(404).json({ message: 'Erreur' }) };
           })
         } else {
           if (results) {
-            res.status(200).json({ message: 'Post modifié !' })
-          } else { res.status(401).json({ message: 'Non autorisé' }) };
+            res.status(200).json({ results })
+          } else { res.status(404).json({ message: 'Erreur' }) };
         }
       }
     )
@@ -65,8 +65,8 @@ exports.deletePost = (req, res, next) => {
       [id]
     ), (err, res) => {
       if (res) {
-        res.status(200).json({ message: 'Post supprimé !' })
-      } else { res.status(404).json({ err }) };
+        res.status(200).json({ res })
+      } else { res.status(404).json({ message: 'Erreur' }) };
     }
   }
   db.query(
@@ -106,9 +106,9 @@ exports.getOnePost = (req, res, next) => {
     "SELECT * FROM posts WHERE id_post= ?",
     [req.params.id],
     function (err, results) {
-      if (results) {
-        res.status(200).json(results)
-      } else { res.status(404).json({ err }) };
+      if (err) {
+        res.status(404).json({ err })
+      } else { res.status(200).json(results) };
     }
   )
 };
@@ -118,9 +118,9 @@ exports.getAllPost = (req, res, next) => {
   db.query(
     "SELECT * FROM posts",
     function (err, results) {
-      if (results) {
-        res.status(200).json(results)
-      } else { res.status(404).json({ err }) };
+      if (err) {
+        res.status(404).json({ err })
+      } else { res.status(200).json(results) };
     }
   )
 };

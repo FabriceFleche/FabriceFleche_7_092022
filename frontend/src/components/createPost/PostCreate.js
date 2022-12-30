@@ -25,10 +25,13 @@ function PostCreate(enteredTitle, enteredContent, enteredFile) {
     };
     fetch(baseURL, requestOptions)
         .then(response => response.json())
-        .then(() => {
-            alert('Votre post a été créé')
-            window.location = '../MyPosts';
-        });
+        .then((data) => {
+            if (data.message !== undefined) {
+                alert(data.message)
+                window.location = '../MyPosts';
+            }
+        })
+        .catch((err) => console.log(err));
 }
 
 export default PostCreate;

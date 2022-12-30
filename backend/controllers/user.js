@@ -65,17 +65,3 @@ exports.login = (req, res, next) => {
         }
     )
 };
-
-// Controleur pour la recuperation du nom de l'utilisateur lors de la creation d un post
-// exports.name = (req, res, next) => {
-//     const user_id = req.body.id;
-//     db.query(
-//         "SELECT name FROM user WHERE user_id= ?",
-//         [user_id],
-//         function (err, results) {
-//             if (results) {
-//                 res.status(200).json(results)
-//             } else { res.status(404).json({ err }) };
-//         }
-//     )
-// };

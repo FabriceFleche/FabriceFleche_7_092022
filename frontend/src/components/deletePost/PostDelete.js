@@ -22,8 +22,12 @@ function PostDelete() {
     };
     fetch(baseURL, requestOptions)
         .then(response => response.json())
-        .then(data => console.log(data.message))
-        .then(() => { window.location = '../myPosts' });
+        .then((data) => {
+            if (data.message === undefined) {
+                window.location = '../myPosts'
+            }
+        })
+        .catch((err) => console.log(err.message));
 }
 
 export default PostDelete;

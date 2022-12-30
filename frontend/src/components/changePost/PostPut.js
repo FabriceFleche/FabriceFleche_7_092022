@@ -44,11 +44,12 @@ const PostPut = () => {
         };
         fetch(baseURL, requestOptions)
             .then(response => response.json())
-            .then(data => console.log(data.message))
-            .then(() => {
-                setIsEditing(false)
-                window.location = '../../myPosts'
-            });
+            .then((data) => {
+                if (data.message === undefined) {
+                    setIsEditing(false)
+                    window.location = '../../myPosts'
+                } else { console.log(data.message) }
+            })
     }
 
     const returned = () => {
@@ -66,7 +67,11 @@ const PostPut = () => {
         };
         fetch(baseURL, requestOptions)
             .then(response => { return response.json() })
-            .then((data) => { setPost(data) })
+            .then((data) => {
+                if (data.lenght !== 0) {
+                    setPost(data)
+                }
+            })
             .catch((err) => console.log(err));
     }
 
